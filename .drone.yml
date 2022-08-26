@@ -13,4 +13,4 @@ trigger:
     - dev
     - main
   event:
-    - pull_request
+    - push
