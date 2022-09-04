@@ -5,12 +5,15 @@ steps:
 - name: build&publish
   image: mcr.microsoft.com/dotnet/sdk:6.0
   commands:
+  - echo "$NUGET_API_KEY"
   - echo 'start pack'
   - dotnet pack --output nupkgs
   - echo 'start push'
   - sh ./push.sh
   - echo 'end'
-
+  environment:
+    NUGET_API_KEY: 
+      from_secret: NUGET_API_KEY
 
 trigger:
   branch:
