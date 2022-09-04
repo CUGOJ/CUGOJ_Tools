@@ -12,7 +12,8 @@ steps:
   - sh ./push.sh
   - echo 'end'
   environment:
-    NUGET_API_KEY: ${NUGET_API_KEY}
+    NUGET_API_KEY: 
+      from_secret: NUGET_API_KEY
 
 trigger:
   branch:
