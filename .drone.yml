@@ -1,15 +1,19 @@
 kind: pipeline
-name: test
+name: CUGOJ_Tools_Publish
 
 steps:
-- name: test
+- name: build&publish
   image: mcr.microsoft.com/dotnet/sdk:6.0
   commands:
-  - echo 'hello drone_dev_zhaoxiao!'
+  - echo 'start pack'
+  - dotnet pack --output nupkgs
+  - echo 'start push'
+  - sh ./push.sh
+  - echo 'end'
+
 
 trigger:
   branch:
-    - master
     - dev
     - main
   event:
