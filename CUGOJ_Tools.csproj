@@ -5,8 +5,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <PackageId>CUGOJ_Tools</PackageId>
-    <Verison>1.0.2</Verison>
-    <PackageVersion>1.0.2</PackageVersion>
+    <Verison>1.0.3</Verison>
+    <PackageVersion>1.0.3</PackageVersion>
     <Authors>zhaoxiao,zhutianze</Authors>
     <Company>CUG</Company>
   </PropertyGroup>
@@ -20,6 +20,7 @@
     <PackageReference Include="Serilog.Sinks.Console" Version="4.0.1" />
     <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
     <PackageReference Include="Serilog.Sinks.Loki" Version="3.0.0" />
+    <PackageReference Include="ServiceStack.Redis" Version="6.3.0" />
   </ItemGroup>
 
 </Project>
