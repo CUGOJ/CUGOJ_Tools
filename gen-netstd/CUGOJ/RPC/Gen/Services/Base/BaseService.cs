@@ -50,6 +50,8 @@ namespace CUGOJ.RPC.Gen.Services.Base
 
       global::System.Threading.Tasks.Task<global::CUGOJ.RPC.Gen.Services.Base.GetProblemListResponse> GetProblemList(global::CUGOJ.RPC.Gen.Services.Base.GetProblemListRequest req, CancellationToken cancellationToken = default);
 
+      global::System.Threading.Tasks.Task<global::CUGOJ.RPC.Gen.Services.Base.GetContestProblemResponse> GetContestProblem(global::CUGOJ.RPC.Gen.Services.Base.GetContestProblemRequest req, CancellationToken cancellationToken = default);
+
       global::System.Threading.Tasks.Task<global::CUGOJ.RPC.Gen.Services.Base.SaveContestInfoResponse> SaveContestInfo(global::CUGOJ.RPC.Gen.Services.Base.SaveContestInfoRequest req, CancellationToken cancellationToken = default);
 
       global::System.Threading.Tasks.Task<global::CUGOJ.RPC.Gen.Services.Base.MulGetContestInfoResponse> MulGetContestInfo(global::CUGOJ.RPC.Gen.Services.Base.MulGetContestInfoRequest req, CancellationToken cancellationToken = default);
@@ -79,11 +81,11 @@ namespace CUGOJ.RPC.Gen.Services.Base
       {
         await OutputProtocol.WriteMessageBeginAsync(new TMessage("Ping", TMessageType.Call, SeqId), cancellationToken);
         
-        var tmp122 = new InternalStructs.Ping_args() {
+        var tmp136 = new InternalStructs.Ping_args() {
           Req = req,
         };
         
-        await tmp122.WriteAsync(OutputProtocol, cancellationToken);
+        await tmp136.WriteAsync(OutputProtocol, cancellationToken);
         await OutputProtocol.WriteMessageEndAsync(cancellationToken);
         await OutputProtocol.Transport.FlushAsync(cancellationToken);
       }
@@ -91,20 +93,20 @@ namespace CUGOJ.RPC.Gen.Services.Base
       public async global::System.Threading.Tasks.Task<global::CUGOJ.RPC.Gen.Base.PingResponse> recv_Ping(CancellationToken cancellationToken = default)
       {
         
-        var tmp123 = await InputProtocol.ReadMessageBeginAsync(cancellationToken);
-        if (tmp123.Type == TMessageType.Exception)
+        var tmp137 = await InputProtocol.ReadMessageBeginAsync(cancellationToken);
+        if (tmp137.Type == TMessageType.Exception)
         {
-          var tmp124 = await TApplicationException.ReadAsync(InputProtocol, cancellationToken);
+          var tmp138 = await TApplicationException.ReadAsync(InputProtocol, cancellationToken);
           await InputProtocol.ReadMessageEndAsync(cancellationToken);
-          throw tmp124;
+          throw tmp138;
         }
 
-        var tmp125 = new InternalStructs.Ping_result();
-        await tmp125.ReadAsync(InputProtocol, cancellationToken);
+        var tmp139 = new InternalStructs.Ping_result();
+        await tmp139.ReadAsync(InputProtocol, cancellationToken);
         await InputProtocol.ReadMessageEndAsync(cancellationToken);
-        if (tmp125.__isset.success)
+        if (tmp139.__isset.success)
         {
-          return tmp125.Success;
+          return tmp139.Success;
         }
         throw new TApplicationException(TApplicationException.ExceptionType.MissingResult, "Ping failed: unknown result");
       }
@@ -119,11 +121,11 @@ namespace CUGOJ.RPC.Gen.Services.Base
       {
         await OutputProtocol.WriteMessageBeginAsync(new TMessage("SaveUserInfo", TMessageType.Call, SeqId), cancellationToken);
         
-        var tmp126 = new InternalStructs.SaveUserInfo_args() {
+        var tmp140 = new InternalStructs.SaveUserInfo_args() {
           Req = req,
         };
         
-        await tmp126.WriteAsync(OutputProtocol, cancellationToken);
+        await tmp140.WriteAsync(OutputProtocol, cancellationToken);
         await OutputProtocol.WriteMessageEndAsync(cancellationToken);
         await OutputProtocol.Transport.FlushAsync(cancellationToken);
       }
@@ -131,20 +133,20 @@ namespace CUGOJ.RPC.Gen.Services.Base
       public async global::System.Threading.Tasks.Task<global::CUGOJ.RPC.Gen.Services.Base.SaveUserInfoResponse> recv_SaveUserInfo(CancellationToken cancellationToken = default)
       {
         
-        var tmp127 = await InputProtocol.ReadMessageBeginAsync(cancellationToken);
-        if (tmp127.Type == TMessageType.Exception)
+        var tmp141 = await InputProtocol.ReadMessageBeginAsync(cancellationToken);
+        if (tmp141.Type == TMessageType.Exception)
         {
-          var tmp128 = await TApplicationException.ReadAsync(InputProtocol, cancellationToken);
+          var tmp142 = await TApplicationException.ReadAsync(InputProtocol, cancellationToken);
           await InputProtocol.ReadMessageEndAsync(cancellationToken);
-          throw tmp128;
+          throw tmp142;
         }
 
-        var tmp129 = new InternalStructs.SaveUserInfo_result();
-        await tmp129.ReadAsync(InputProtocol, cancellationToken);
+        var tmp143 = new InternalStructs.SaveUserInfo_result();
+        await tmp143.ReadAsync(InputProtocol, cancellationToken);
         await InputProtocol.ReadMessageEndAsync(cancellationToken);
-        if (tmp129.__isset.success)
+        if (tmp143.__isset.success)
         {
-          return tmp129.Success;
+          return tmp143.Success;
         }
         throw new TApplicationException(TApplicationException.ExceptionType.MissingResult, "SaveUserInfo failed: unknown result");
       }
@@ -159,11 +161,11 @@ namespace CUGOJ.RPC.Gen.Services.Base
       {
         await OutputProtocol.WriteMessageBeginAsync(new TMessage("MulGetUserInfo", TMessageType.Call, SeqId), cancellationToken);
         
-        var tmp130 = new InternalStructs.MulGetUserInfo_args() {
+        var tmp144 = new InternalStructs.MulGetUserInfo_args() {
           Req = req,
         };
         
-        await tmp130.WriteAsync(OutputProtocol, cancellationToken);
+        await tmp144.WriteAsync(OutputProtocol, cancellationToken);
         await OutputProtocol.WriteMessageEndAsync(cancellationToken);
         await OutputProtocol.Transport.FlushAsync(cancellationToken);
       }
@@ -171,20 +173,20 @@ namespace CUGOJ.RPC.Gen.Services.Base
       public async global::System.Threading.Tasks.Task<global::CUGOJ.RPC.Gen.Services.Base.MulGetUserInfoResponse> recv_MulGetUserInfo(CancellationToken cancellationToken = default)
       {
         
-        var tmp131 = await InputProtocol.ReadMessageBeginAsync(cancellationToken);
-        if (tmp131.Type == TMessageType.Exception)
+        var tmp145 = await InputProtocol.ReadMessageBeginAsync(cancellationToken);
+        if (tmp145.Type == TMessageType.Exception)
         {
-          var tmp132 = await TApplicationException.ReadAsync(InputProtocol, cancellationToken);
+          var tmp146 = await TApplicationException.ReadAsync(InputProtocol, cancellationToken);
           await InputProtocol.ReadMessageEndAsync(cancellationToken);
-          throw tmp132;
+          throw tmp146;
         }
 
-        var tmp133 = new InternalStructs.MulGetUserInfo_result();
-        await tmp133.ReadAsync(InputProtocol, cancellationToken);
+        var tmp147 = new InternalStructs.MulGetUserInfo_result();
+        await tmp147.ReadAsync(InputProtocol, cancellationToken);
         await InputProtocol.ReadMessageEndAsync(cancellationToken);
-        if (tmp133.__isset.success)
+        if (tmp147.__isset.success)
         {
-          return tmp133.Success;
+          return tmp147.Success;
         }
         throw new TApplicationException(TApplicationException.ExceptionType.MissingResult, "MulGetUserInfo failed: unknown result");
       }
@@ -199,11 +201,11 @@ namespace CUGOJ.RPC.Gen.Services.Base
       {
         await OutputProtocol.WriteMessageBeginAsync(new TMessage("Login", TMessageType.Call, SeqId), cancellationToken);
         
-        var tmp134 = new InternalStructs.Login_args() {
+        var tmp148 = new InternalStructs.Login_args() {
           Req = req,
         };
         
-        await tmp134.WriteAsync(OutputProtocol, cancellationToken);
+        await tmp148.WriteAsync(OutputProtocol, cancellationToken);
         await OutputProtocol.WriteMessageEndAsync(cancellationToken);
         await OutputProtocol.Transport.FlushAsync(cancellationToken);
       }
@@ -211,20 +213,20 @@ namespace CUGOJ.RPC.Gen.Services.Base
       public async global::System.Threading.Tasks.Task<global::CUGOJ.RPC.Gen.Services.Base.LoginResponse> recv_Login(CancellationToken cancellationToken = default)
       {
         
-        var tmp135 = await InputProtocol.ReadMessageBeginAsync(cancellationToken);
-        if (tmp135.Type == TMessageType.Exception)
+        var tmp149 = await InputProtocol.ReadMessageBeginAsync(cancellationToken);
+        if (tmp149.Type == TMessageType.Exception)
         {
-          var tmp136 = await TApplicationException.ReadAsync(InputProtocol, cancellationToken);
+          var tmp150 = await TApplicationException.ReadAsync(InputProtocol, cancellationToken);
           await InputProtocol.ReadMessageEndAsync(cancellationToken);
-          throw tmp136;
+          throw tmp150;
         }
 
-        var tmp137 = new InternalStructs.Login_result();
-        await tmp137.ReadAsync(InputProtocol, cancellationToken);
+        var tmp151 = new InternalStructs.Login_result();
+        await tmp151.ReadAsync(InputProtocol, cancellationToken);
         await InputProtocol.ReadMessageEndAsync(cancellationToken);
-        if (tmp137.__isset.success)
+        if (tmp151.__isset.success)
         {
-          return tmp137.Success;
+          return tmp151.Success;
         }
         throw new TApplicationException(TApplicationException.ExceptionType.MissingResult, "Login failed: unknown result");
       }
@@ -239,11 +241,11 @@ namespace CUGOJ.RPC.Gen.Services.Base
       {
         await OutputProtocol.WriteMessageBeginAsync(new TMessage("SaveProblemInfo", TMessageType.Call, SeqId), cancellationToken);
         
-        var tmp138 = new InternalStructs.SaveProblemInfo_args() {
+        var tmp152 = new InternalStructs.SaveProblemInfo_args() {
           Req = req,
         };
         
-        await tmp138.WriteAsync(OutputProtocol, cancellationToken);
+        await tmp152.WriteAsync(OutputProtocol, cancellationToken);
         await OutputProtocol.WriteMessageEndAsync(cancellationToken);
         await OutputProtocol.Transport.FlushAsync(cancellationToken);
       }
@@ -251,20 +253,20 @@ namespace CUGOJ.RPC.Gen.Services.Base
       public async global::System.Threading.Tasks.Task<global::CUGOJ.RPC.Gen.Services.Base.SaveProblemInfoResponse> recv_SaveProblemInfo(CancellationToken cancellationToken = default)
       {
         
-        var tmp139 = await InputProtocol.ReadMessageBeginAsync(cancellationToken);
-        if (tmp139.Type == TMessageType.Exception)
+        var tmp153 = await InputProtocol.ReadMessageBeginAsync(cancellationToken);
+        if (tmp153.Type == TMessageType.Exception)
         {
-          var tmp140 = await TApplicationException.ReadAsync(InputProtocol, cancellationToken);
+          var tmp154 = await TApplicationException.ReadAsync(InputProtocol, cancellationToken);
           await InputProtocol.ReadMessageEndAsync(cancellationToken);
-          throw tmp140;
+          throw tmp154;
         }
 
-        var tmp141 = new InternalStructs.SaveProblemInfo_result();
-        await tmp141.ReadAsync(InputProtocol, cancellationToken);
+        var tmp155 = new InternalStructs.SaveProblemInfo_result();
+        await tmp155.ReadAsync(InputProtocol, cancellationToken);
         await InputProtocol.ReadMessageEndAsync(cancellationToken);
-        if (tmp141.__isset.success)
+        if (tmp155.__isset.success)
         {
-          return tmp141.Success;
+          return tmp155.Success;
         }
         throw new TApplicationException(TApplicationException.ExceptionType.MissingResult, "SaveProblemInfo failed: unknown result");
       }
@@ -279,11 +281,11 @@ namespace CUGOJ.RPC.Gen.Services.Base
       {
         await OutputProtocol.WriteMessageBeginAsync(new TMessage("MulGetProblemInfo", TMessageType.Call, SeqId), cancellationToken);
         
-        var tmp142 = new InternalStructs.MulGetProblemInfo_args() {
+        var tmp156 = new InternalStructs.MulGetProblemInfo_args() {
           Req = req,
         };
         
-        await tmp142.WriteAsync(OutputProtocol, cancellationToken);
+        await tmp156.WriteAsync(OutputProtocol, cancellationToken);
         await OutputProtocol.WriteMessageEndAsync(cancellationToken);
         await OutputProtocol.Transport.FlushAsync(cancellationToken);
       }
@@ -291,20 +293,20 @@ namespace CUGOJ.RPC.Gen.Services.Base
       public async global::System.Threading.Tasks.Task<global::CUGOJ.RPC.Gen.Services.Base.MulGetProblemInfoResponse> recv_MulGetProblemInfo(CancellationToken cancellationToken = default)
       {
         
-        var tmp143 = await InputProtocol.ReadMessageBeginAsync(cancellationToken);
-        if (tmp143.Type == TMessageType.Exception)
+        var tmp157 = await InputProtocol.ReadMessageBeginAsync(cancellationToken);
+        if (tmp157.Type == TMessageType.Exception)
         {
-          var tmp144 = await TApplicationException.ReadAsync(InputProtocol, cancellationToken);
+          var tmp158 = await TApplicationException.ReadAsync(InputProtocol, cancellationToken);
           await InputProtocol.ReadMessageEndAsync(cancellationToken);
-          throw tmp144;
+          throw tmp158;
         }
 
-        var tmp145 = new InternalStructs.MulGetProblemInfo_result();
-        await tmp145.ReadAsync(InputProtocol, cancellationToken);
+        var tmp159 = new InternalStructs.MulGetProblemInfo_result();
+        await tmp159.ReadAsync(InputProtocol, cancellationToken);
         await InputProtocol.ReadMessageEndAsync(cancellationToken);
-        if (tmp145.__isset.success)
+        if (tmp159.__isset.success)
         {
-          return tmp145.Success;
+          return tmp159.Success;
         }
         throw new TApplicationException(TApplicationException.ExceptionType.MissingResult, "MulGetProblemInfo failed: unknown result");
       }
@@ -319,11 +321,11 @@ namespace CUGOJ.RPC.Gen.Services.Base
       {
         await OutputProtocol.WriteMessageBeginAsync(new TMessage("GetProblemList", TMessageType.Call, SeqId), cancellationToken);
         
-        var tmp146 = new InternalStructs.GetProblemList_args() {
+        var tmp160 = new InternalStructs.GetProblemList_args() {
           Req = req,
         };
         
-        await tmp146.WriteAsync(OutputProtocol, cancellationToken);
+        await tmp160.WriteAsync(OutputProtocol, cancellationToken);
         await OutputProtocol.WriteMessageEndAsync(cancellationToken);
         await OutputProtocol.Transport.FlushAsync(cancellationToken);
       }
@@ -331,22 +333,62 @@ namespace CUGOJ.RPC.Gen.Services.Base
       public async global::System.Threading.Tasks.Task<global::CUGOJ.RPC.Gen.Services.Base.GetProblemListResponse> recv_GetProblemList(CancellationToken cancellationToken = default)
       {
         
-        var tmp147 = await InputProtocol.ReadMessageBeginAsync(cancellationToken);
-        if (tmp147.Type == TMessageType.Exception)
+        var tmp161 = await InputProtocol.ReadMessageBeginAsync(cancellationToken);
+        if (tmp161.Type == TMessageType.Exception)
         {
-          var tmp148 = await TApplicationException.ReadAsync(InputProtocol, cancellationToken);
+          var tmp162 = await TApplicationException.ReadAsync(InputProtocol, cancellationToken);
           await InputProtocol.ReadMessageEndAsync(cancellationToken);
-          throw tmp148;
+          throw tmp162;
         }
 
-        var tmp149 = new InternalStructs.GetProblemList_result();
-        await tmp149.ReadAsync(InputProtocol, cancellationToken);
+        var tmp163 = new InternalStructs.GetProblemList_result();
+        await tmp163.ReadAsync(InputProtocol, cancellationToken);
         await InputProtocol.ReadMessageEndAsync(cancellationToken);
-        if (tmp149.__isset.success)
+        if (tmp163.__isset.success)
         {
-          return tmp149.Success;
+          return tmp163.Success;
         }
         throw new TApplicationException(TApplicationException.ExceptionType.MissingResult, "GetProblemList failed: unknown result");
+      }
+
+      public async global::System.Threading.Tasks.Task<global::CUGOJ.RPC.Gen.Services.Base.GetContestProblemResponse> GetContestProblem(global::CUGOJ.RPC.Gen.Services.Base.GetContestProblemRequest req, CancellationToken cancellationToken = default)
+      {
+        await send_GetContestProblem(req, cancellationToken);
+        return await recv_GetContestProblem(cancellationToken);
+      }
+
+      public async global::System.Threading.Tasks.Task send_GetContestProblem(global::CUGOJ.RPC.Gen.Services.Base.GetContestProblemRequest req, CancellationToken cancellationToken = default)
+      {
+        await OutputProtocol.WriteMessageBeginAsync(new TMessage("GetContestProblem", TMessageType.Call, SeqId), cancellationToken);
+        
+        var tmp164 = new InternalStructs.GetContestProblem_args() {
+          Req = req,
+        };
+        
+        await tmp164.WriteAsync(OutputProtocol, cancellationToken);
+        await OutputProtocol.WriteMessageEndAsync(cancellationToken);
+        await OutputProtocol.Transport.FlushAsync(cancellationToken);
+      }
+
+      public async global::System.Threading.Tasks.Task<global::CUGOJ.RPC.Gen.Services.Base.GetContestProblemResponse> recv_GetContestProblem(CancellationToken cancellationToken = default)
+      {
+        
+        var tmp165 = await InputProtocol.ReadMessageBeginAsync(cancellationToken);
+        if (tmp165.Type == TMessageType.Exception)
+        {
+          var tmp166 = await TApplicationException.ReadAsync(InputProtocol, cancellationToken);
+          await InputProtocol.ReadMessageEndAsync(cancellationToken);
+          throw tmp166;
+        }
+
+        var tmp167 = new InternalStructs.GetContestProblem_result();
+        await tmp167.ReadAsync(InputProtocol, cancellationToken);
+        await InputProtocol.ReadMessageEndAsync(cancellationToken);
+        if (tmp167.__isset.success)
+        {
+          return tmp167.Success;
+        }
+        throw new TApplicationException(TApplicationException.ExceptionType.MissingResult, "GetContestProblem failed: unknown result");
       }
 
       public async global::System.Threading.Tasks.Task<global::CUGOJ.RPC.Gen.Services.Base.SaveContestInfoResponse> SaveContestInfo(global::CUGOJ.RPC.Gen.Services.Base.SaveContestInfoRequest req, CancellationToken cancellationToken = default)
@@ -359,11 +401,11 @@ namespace CUGOJ.RPC.Gen.Services.Base
       {
         await OutputProtocol.WriteMessageBeginAsync(new TMessage("SaveContestInfo", TMessageType.Call, SeqId), cancellationToken);
         
-        var tmp150 = new InternalStructs.SaveContestInfo_args() {
+        var tmp168 = new InternalStructs.SaveContestInfo_args() {
           Req = req,
         };
         
-        await tmp150.WriteAsync(OutputProtocol, cancellationToken);
+        await tmp168.WriteAsync(OutputProtocol, cancellationToken);
         await OutputProtocol.WriteMessageEndAsync(cancellationToken);
         await OutputProtocol.Transport.FlushAsync(cancellationToken);
       }
@@ -371,20 +413,20 @@ namespace CUGOJ.RPC.Gen.Services.Base
       public async global::System.Threading.Tasks.Task<global::CUGOJ.RPC.Gen.Services.Base.SaveContestInfoResponse> recv_SaveContestInfo(CancellationToken cancellationToken = default)
       {
         
-        var tmp151 = await InputProtocol.ReadMessageBeginAsync(cancellationToken);
-        if (tmp151.Type == TMessageType.Exception)
+        var tmp169 = await InputProtocol.ReadMessageBeginAsync(cancellationToken);
+        if (tmp169.Type == TMessageType.Exception)
         {
-          var tmp152 = await TApplicationException.ReadAsync(InputProtocol, cancellationToken);
+          var tmp170 = await TApplicationException.ReadAsync(InputProtocol, cancellationToken);
           await InputProtocol.ReadMessageEndAsync(cancellationToken);
-          throw tmp152;
+          throw tmp170;
         }
 
-        var tmp153 = new InternalStructs.SaveContestInfo_result();
-        await tmp153.ReadAsync(InputProtocol, cancellationToken);
+        var tmp171 = new InternalStructs.SaveContestInfo_result();
+        await tmp171.ReadAsync(InputProtocol, cancellationToken);
         await InputProtocol.ReadMessageEndAsync(cancellationToken);
-        if (tmp153.__isset.success)
+        if (tmp171.__isset.success)
         {
-          return tmp153.Success;
+          return tmp171.Success;
         }
         throw new TApplicationException(TApplicationException.ExceptionType.MissingResult, "SaveContestInfo failed: unknown result");
       }
@@ -399,11 +441,11 @@ namespace CUGOJ.RPC.Gen.Services.Base
       {
         await OutputProtocol.WriteMessageBeginAsync(new TMessage("MulGetContestInfo", TMessageType.Call, SeqId), cancellationToken);
         
-        var tmp154 = new InternalStructs.MulGetContestInfo_args() {
+        var tmp172 = new InternalStructs.MulGetContestInfo_args() {
           Req = req,
         };
         
-        await tmp154.WriteAsync(OutputProtocol, cancellationToken);
+        await tmp172.WriteAsync(OutputProtocol, cancellationToken);
         await OutputProtocol.WriteMessageEndAsync(cancellationToken);
         await OutputProtocol.Transport.FlushAsync(cancellationToken);
       }
@@ -411,20 +453,20 @@ namespace CUGOJ.RPC.Gen.Services.Base
       public async global::System.Threading.Tasks.Task<global::CUGOJ.RPC.Gen.Services.Base.MulGetContestInfoResponse> recv_MulGetContestInfo(CancellationToken cancellationToken = default)
       {
         
-        var tmp155 = await InputProtocol.ReadMessageBeginAsync(cancellationToken);
-        if (tmp155.Type == TMessageType.Exception)
+        var tmp173 = await InputProtocol.ReadMessageBeginAsync(cancellationToken);
+        if (tmp173.Type == TMessageType.Exception)
         {
-          var tmp156 = await TApplicationException.ReadAsync(InputProtocol, cancellationToken);
+          var tmp174 = await TApplicationException.ReadAsync(InputProtocol, cancellationToken);
           await InputProtocol.ReadMessageEndAsync(cancellationToken);
-          throw tmp156;
+          throw tmp174;
         }
 
-        var tmp157 = new InternalStructs.MulGetContestInfo_result();
-        await tmp157.ReadAsync(InputProtocol, cancellationToken);
+        var tmp175 = new InternalStructs.MulGetContestInfo_result();
+        await tmp175.ReadAsync(InputProtocol, cancellationToken);
         await InputProtocol.ReadMessageEndAsync(cancellationToken);
-        if (tmp157.__isset.success)
+        if (tmp175.__isset.success)
         {
-          return tmp157.Success;
+          return tmp175.Success;
         }
         throw new TApplicationException(TApplicationException.ExceptionType.MissingResult, "MulGetContestInfo failed: unknown result");
       }
@@ -439,11 +481,11 @@ namespace CUGOJ.RPC.Gen.Services.Base
       {
         await OutputProtocol.WriteMessageBeginAsync(new TMessage("GetContestList", TMessageType.Call, SeqId), cancellationToken);
         
-        var tmp158 = new InternalStructs.GetContestList_args() {
+        var tmp176 = new InternalStructs.GetContestList_args() {
           Req = req,
         };
         
-        await tmp158.WriteAsync(OutputProtocol, cancellationToken);
+        await tmp176.WriteAsync(OutputProtocol, cancellationToken);
         await OutputProtocol.WriteMessageEndAsync(cancellationToken);
         await OutputProtocol.Transport.FlushAsync(cancellationToken);
       }
@@ -451,20 +493,20 @@ namespace CUGOJ.RPC.Gen.Services.Base
       public async global::System.Threading.Tasks.Task<global::CUGOJ.RPC.Gen.Services.Base.GetContestListResponse> recv_GetContestList(CancellationToken cancellationToken = default)
       {
         
-        var tmp159 = await InputProtocol.ReadMessageBeginAsync(cancellationToken);
-        if (tmp159.Type == TMessageType.Exception)
+        var tmp177 = await InputProtocol.ReadMessageBeginAsync(cancellationToken);
+        if (tmp177.Type == TMessageType.Exception)
         {
-          var tmp160 = await TApplicationException.ReadAsync(InputProtocol, cancellationToken);
+          var tmp178 = await TApplicationException.ReadAsync(InputProtocol, cancellationToken);
           await InputProtocol.ReadMessageEndAsync(cancellationToken);
-          throw tmp160;
+          throw tmp178;
         }
 
-        var tmp161 = new InternalStructs.GetContestList_result();
-        await tmp161.ReadAsync(InputProtocol, cancellationToken);
+        var tmp179 = new InternalStructs.GetContestList_result();
+        await tmp179.ReadAsync(InputProtocol, cancellationToken);
         await InputProtocol.ReadMessageEndAsync(cancellationToken);
-        if (tmp161.__isset.success)
+        if (tmp179.__isset.success)
         {
-          return tmp161.Success;
+          return tmp179.Success;
         }
         throw new TApplicationException(TApplicationException.ExceptionType.MissingResult, "GetContestList failed: unknown result");
       }
@@ -487,6 +529,7 @@ namespace CUGOJ.RPC.Gen.Services.Base
         processMap_["SaveProblemInfo"] = SaveProblemInfo_ProcessAsync;
         processMap_["MulGetProblemInfo"] = MulGetProblemInfo_ProcessAsync;
         processMap_["GetProblemList"] = GetProblemList_ProcessAsync;
+        processMap_["GetContestProblem"] = GetContestProblem_ProcessAsync;
         processMap_["SaveContestInfo"] = SaveContestInfo_ProcessAsync;
         processMap_["MulGetContestInfo"] = MulGetContestInfo_ProcessAsync;
         processMap_["GetContestList"] = GetContestList_ProcessAsync;
@@ -533,30 +576,30 @@ namespace CUGOJ.RPC.Gen.Services.Base
 
       public async global::System.Threading.Tasks.Task Ping_ProcessAsync(int seqid, TProtocol iprot, TProtocol oprot, CancellationToken cancellationToken)
       {
-        var tmp162 = new InternalStructs.Ping_args();
-        await tmp162.ReadAsync(iprot, cancellationToken);
+        var tmp180 = new InternalStructs.Ping_args();
+        await tmp180.ReadAsync(iprot, cancellationToken);
         await iprot.ReadMessageEndAsync(cancellationToken);
-        var tmp163 = new InternalStructs.Ping_result();
+        var tmp181 = new InternalStructs.Ping_result();
         try
         {
-          tmp163.Success = await _iAsync.Ping(tmp162.Req, cancellationToken);
+          tmp181.Success = await _iAsync.Ping(tmp180.Req, cancellationToken);
           await oprot.WriteMessageBeginAsync(new TMessage("Ping", TMessageType.Reply, seqid), cancellationToken); 
-          await tmp163.WriteAsync(oprot, cancellationToken);
+          await tmp181.WriteAsync(oprot, cancellationToken);
         }
         catch (TTransportException)
         {
           throw;
         }
-        catch (Exception tmp164)
+        catch (Exception tmp182)
         {
-          var tmp165 = $"Error occurred in {GetType().FullName}: {tmp164.Message}";
+          var tmp183 = $"Error occurred in {GetType().FullName}: {tmp182.Message}";
           if(_logger != null)
-            _logger.LogError("{Exception}, {Message}", tmp164, tmp165);
+            _logger.LogError("{Exception}, {Message}", tmp182, tmp183);
           else
-            Console.Error.WriteLine(tmp165);
-          var tmp166 = new TApplicationException(TApplicationException.ExceptionType.InternalError," Internal error.");
+            Console.Error.WriteLine(tmp183);
+          var tmp184 = new TApplicationException(TApplicationException.ExceptionType.InternalError," Internal error.");
           await oprot.WriteMessageBeginAsync(new TMessage("Ping", TMessageType.Exception, seqid), cancellationToken);
-          await tmp166.WriteAsync(oprot, cancellationToken);
+          await tmp184.WriteAsync(oprot, cancellationToken);
         }
         await oprot.WriteMessageEndAsync(cancellationToken);
         await oprot.Transport.FlushAsync(cancellationToken);
@@ -564,30 +607,30 @@ namespace CUGOJ.RPC.Gen.Services.Base
 
       public async global::System.Threading.Tasks.Task SaveUserInfo_ProcessAsync(int seqid, TProtocol iprot, TProtocol oprot, CancellationToken cancellationToken)
       {
-        var tmp167 = new InternalStructs.SaveUserInfo_args();
-        await tmp167.ReadAsync(iprot, cancellationToken);
+        var tmp185 = new InternalStructs.SaveUserInfo_args();
+        await tmp185.ReadAsync(iprot, cancellationToken);
         await iprot.ReadMessageEndAsync(cancellationToken);
-        var tmp168 = new InternalStructs.SaveUserInfo_result();
+        var tmp186 = new InternalStructs.SaveUserInfo_result();
         try
         {
-          tmp168.Success = await _iAsync.SaveUserInfo(tmp167.Req, cancellationToken);
+          tmp186.Success = await _iAsync.SaveUserInfo(tmp185.Req, cancellationToken);
           await oprot.WriteMessageBeginAsync(new TMessage("SaveUserInfo", TMessageType.Reply, seqid), cancellationToken); 
-          await tmp168.WriteAsync(oprot, cancellationToken);
+          await tmp186.WriteAsync(oprot, cancellationToken);
         }
         catch (TTransportException)
         {
           throw;
         }
-        catch (Exception tmp169)
+        catch (Exception tmp187)
         {
-          var tmp170 = $"Error occurred in {GetType().FullName}: {tmp169.Message}";
+          var tmp188 = $"Error occurred in {GetType().FullName}: {tmp187.Message}";
           if(_logger != null)
-            _logger.LogError("{Exception}, {Message}", tmp169, tmp170);
+            _logger.LogError("{Exception}, {Message}", tmp187, tmp188);
           else
-            Console.Error.WriteLine(tmp170);
-          var tmp171 = new TApplicationException(TApplicationException.ExceptionType.InternalError," Internal error.");
+            Console.Error.WriteLine(tmp188);
+          var tmp189 = new TApplicationException(TApplicationException.ExceptionType.InternalError," Internal error.");
           await oprot.WriteMessageBeginAsync(new TMessage("SaveUserInfo", TMessageType.Exception, seqid), cancellationToken);
-          await tmp171.WriteAsync(oprot, cancellationToken);
+          await tmp189.WriteAsync(oprot, cancellationToken);
         }
         await oprot.WriteMessageEndAsync(cancellationToken);
         await oprot.Transport.FlushAsync(cancellationToken);
@@ -595,30 +638,30 @@ namespace CUGOJ.RPC.Gen.Services.Base
 
       public async global::System.Threading.Tasks.Task MulGetUserInfo_ProcessAsync(int seqid, TProtocol iprot, TProtocol oprot, CancellationToken cancellationToken)
       {
-        var tmp172 = new InternalStructs.MulGetUserInfo_args();
-        await tmp172.ReadAsync(iprot, cancellationToken);
+        var tmp190 = new InternalStructs.MulGetUserInfo_args();
+        await tmp190.ReadAsync(iprot, cancellationToken);
         await iprot.ReadMessageEndAsync(cancellationToken);
-        var tmp173 = new InternalStructs.MulGetUserInfo_result();
+        var tmp191 = new InternalStructs.MulGetUserInfo_result();
         try
         {
-          tmp173.Success = await _iAsync.MulGetUserInfo(tmp172.Req, cancellationToken);
+          tmp191.Success = await _iAsync.MulGetUserInfo(tmp190.Req, cancellationToken);
           await oprot.WriteMessageBeginAsync(new TMessage("MulGetUserInfo", TMessageType.Reply, seqid), cancellationToken); 
-          await tmp173.WriteAsync(oprot, cancellationToken);
+          await tmp191.WriteAsync(oprot, cancellationToken);
         }
         catch (TTransportException)
         {
           throw;
         }
-        catch (Exception tmp174)
+        catch (Exception tmp192)
         {
-          var tmp175 = $"Error occurred in {GetType().FullName}: {tmp174.Message}";
+          var tmp193 = $"Error occurred in {GetType().FullName}: {tmp192.Message}";
           if(_logger != null)
-            _logger.LogError("{Exception}, {Message}", tmp174, tmp175);
+            _logger.LogError("{Exception}, {Message}", tmp192, tmp193);
           else
-            Console.Error.WriteLine(tmp175);
-          var tmp176 = new TApplicationException(TApplicationException.ExceptionType.InternalError," Internal error.");
+            Console.Error.WriteLine(tmp193);
+          var tmp194 = new TApplicationException(TApplicationException.ExceptionType.InternalError," Internal error.");
           await oprot.WriteMessageBeginAsync(new TMessage("MulGetUserInfo", TMessageType.Exception, seqid), cancellationToken);
-          await tmp176.WriteAsync(oprot, cancellationToken);
+          await tmp194.WriteAsync(oprot, cancellationToken);
         }
         await oprot.WriteMessageEndAsync(cancellationToken);
         await oprot.Transport.FlushAsync(cancellationToken);
@@ -626,30 +669,30 @@ namespace CUGOJ.RPC.Gen.Services.Base
 
       public async global::System.Threading.Tasks.Task Login_ProcessAsync(int seqid, TProtocol iprot, TProtocol oprot, CancellationToken cancellationToken)
       {
-        var tmp177 = new InternalStructs.Login_args();
-        await tmp177.ReadAsync(iprot, cancellationToken);
+        var tmp195 = new InternalStructs.Login_args();
+        await tmp195.ReadAsync(iprot, cancellationToken);
         await iprot.ReadMessageEndAsync(cancellationToken);
-        var tmp178 = new InternalStructs.Login_result();
+        var tmp196 = new InternalStructs.Login_result();
         try
         {
-          tmp178.Success = await _iAsync.Login(tmp177.Req, cancellationToken);
+          tmp196.Success = await _iAsync.Login(tmp195.Req, cancellationToken);
           await oprot.WriteMessageBeginAsync(new TMessage("Login", TMessageType.Reply, seqid), cancellationToken); 
-          await tmp178.WriteAsync(oprot, cancellationToken);
+          await tmp196.WriteAsync(oprot, cancellationToken);
         }
         catch (TTransportException)
         {
           throw;
         }
-        catch (Exception tmp179)
+        catch (Exception tmp197)
         {
-          var tmp180 = $"Error occurred in {GetType().FullName}: {tmp179.Message}";
+          var tmp198 = $"Error occurred in {GetType().FullName}: {tmp197.Message}";
           if(_logger != null)
-            _logger.LogError("{Exception}, {Message}", tmp179, tmp180);
+            _logger.LogError("{Exception}, {Message}", tmp197, tmp198);
           else
-            Console.Error.WriteLine(tmp180);
-          var tmp181 = new TApplicationException(TApplicationException.ExceptionType.InternalError," Internal error.");
+            Console.Error.WriteLine(tmp198);
+          var tmp199 = new TApplicationException(TApplicationException.ExceptionType.InternalError," Internal error.");
           await oprot.WriteMessageBeginAsync(new TMessage("Login", TMessageType.Exception, seqid), cancellationToken);
-          await tmp181.WriteAsync(oprot, cancellationToken);
+          await tmp199.WriteAsync(oprot, cancellationToken);
         }
         await oprot.WriteMessageEndAsync(cancellationToken);
         await oprot.Transport.FlushAsync(cancellationToken);
@@ -657,30 +700,30 @@ namespace CUGOJ.RPC.Gen.Services.Base
 
       public async global::System.Threading.Tasks.Task SaveProblemInfo_ProcessAsync(int seqid, TProtocol iprot, TProtocol oprot, CancellationToken cancellationToken)
       {
-        var tmp182 = new InternalStructs.SaveProblemInfo_args();
-        await tmp182.ReadAsync(iprot, cancellationToken);
+        var tmp200 = new InternalStructs.SaveProblemInfo_args();
+        await tmp200.ReadAsync(iprot, cancellationToken);
         await iprot.ReadMessageEndAsync(cancellationToken);
-        var tmp183 = new InternalStructs.SaveProblemInfo_result();
+        var tmp201 = new InternalStructs.SaveProblemInfo_result();
         try
         {
-          tmp183.Success = await _iAsync.SaveProblemInfo(tmp182.Req, cancellationToken);
+          tmp201.Success = await _iAsync.SaveProblemInfo(tmp200.Req, cancellationToken);
           await oprot.WriteMessageBeginAsync(new TMessage("SaveProblemInfo", TMessageType.Reply, seqid), cancellationToken); 
-          await tmp183.WriteAsync(oprot, cancellationToken);
+          await tmp201.WriteAsync(oprot, cancellationToken);
         }
         catch (TTransportException)
         {
           throw;
         }
-        catch (Exception tmp184)
+        catch (Exception tmp202)
         {
-          var tmp185 = $"Error occurred in {GetType().FullName}: {tmp184.Message}";
+          var tmp203 = $"Error occurred in {GetType().FullName}: {tmp202.Message}";
           if(_logger != null)
-            _logger.LogError("{Exception}, {Message}", tmp184, tmp185);
+            _logger.LogError("{Exception}, {Message}", tmp202, tmp203);
           else
-            Console.Error.WriteLine(tmp185);
-          var tmp186 = new TApplicationException(TApplicationException.ExceptionType.InternalError," Internal error.");
+            Console.Error.WriteLine(tmp203);
+          var tmp204 = new TApplicationException(TApplicationException.ExceptionType.InternalError," Internal error.");
           await oprot.WriteMessageBeginAsync(new TMessage("SaveProblemInfo", TMessageType.Exception, seqid), cancellationToken);
-          await tmp186.WriteAsync(oprot, cancellationToken);
+          await tmp204.WriteAsync(oprot, cancellationToken);
         }
         await oprot.WriteMessageEndAsync(cancellationToken);
         await oprot.Transport.FlushAsync(cancellationToken);
@@ -688,30 +731,30 @@ namespace CUGOJ.RPC.Gen.Services.Base
 
       public async global::System.Threading.Tasks.Task MulGetProblemInfo_ProcessAsync(int seqid, TProtocol iprot, TProtocol oprot, CancellationToken cancellationToken)
       {
-        var tmp187 = new InternalStructs.MulGetProblemInfo_args();
-        await tmp187.ReadAsync(iprot, cancellationToken);
+        var tmp205 = new InternalStructs.MulGetProblemInfo_args();
+        await tmp205.ReadAsync(iprot, cancellationToken);
         await iprot.ReadMessageEndAsync(cancellationToken);
-        var tmp188 = new InternalStructs.MulGetProblemInfo_result();
+        var tmp206 = new InternalStructs.MulGetProblemInfo_result();
         try
         {
-          tmp188.Success = await _iAsync.MulGetProblemInfo(tmp187.Req, cancellationToken);
+          tmp206.Success = await _iAsync.MulGetProblemInfo(tmp205.Req, cancellationToken);
           await oprot.WriteMessageBeginAsync(new TMessage("MulGetProblemInfo", TMessageType.Reply, seqid), cancellationToken); 
-          await tmp188.WriteAsync(oprot, cancellationToken);
+          await tmp206.WriteAsync(oprot, cancellationToken);
         }
         catch (TTransportException)
         {
           throw;
         }
-        catch (Exception tmp189)
+        catch (Exception tmp207)
         {
-          var tmp190 = $"Error occurred in {GetType().FullName}: {tmp189.Message}";
+          var tmp208 = $"Error occurred in {GetType().FullName}: {tmp207.Message}";
           if(_logger != null)
-            _logger.LogError("{Exception}, {Message}", tmp189, tmp190);
+            _logger.LogError("{Exception}, {Message}", tmp207, tmp208);
           else
-            Console.Error.WriteLine(tmp190);
-          var tmp191 = new TApplicationException(TApplicationException.ExceptionType.InternalError," Internal error.");
+            Console.Error.WriteLine(tmp208);
+          var tmp209 = new TApplicationException(TApplicationException.ExceptionType.InternalError," Internal error.");
           await oprot.WriteMessageBeginAsync(new TMessage("MulGetProblemInfo", TMessageType.Exception, seqid), cancellationToken);
-          await tmp191.WriteAsync(oprot, cancellationToken);
+          await tmp209.WriteAsync(oprot, cancellationToken);
         }
         await oprot.WriteMessageEndAsync(cancellationToken);
         await oprot.Transport.FlushAsync(cancellationToken);
@@ -719,30 +762,61 @@ namespace CUGOJ.RPC.Gen.Services.Base
 
       public async global::System.Threading.Tasks.Task GetProblemList_ProcessAsync(int seqid, TProtocol iprot, TProtocol oprot, CancellationToken cancellationToken)
       {
-        var tmp192 = new InternalStructs.GetProblemList_args();
-        await tmp192.ReadAsync(iprot, cancellationToken);
+        var tmp210 = new InternalStructs.GetProblemList_args();
+        await tmp210.ReadAsync(iprot, cancellationToken);
         await iprot.ReadMessageEndAsync(cancellationToken);
-        var tmp193 = new InternalStructs.GetProblemList_result();
+        var tmp211 = new InternalStructs.GetProblemList_result();
         try
         {
-          tmp193.Success = await _iAsync.GetProblemList(tmp192.Req, cancellationToken);
+          tmp211.Success = await _iAsync.GetProblemList(tmp210.Req, cancellationToken);
           await oprot.WriteMessageBeginAsync(new TMessage("GetProblemList", TMessageType.Reply, seqid), cancellationToken); 
-          await tmp193.WriteAsync(oprot, cancellationToken);
+          await tmp211.WriteAsync(oprot, cancellationToken);
         }
         catch (TTransportException)
         {
           throw;
         }
-        catch (Exception tmp194)
+        catch (Exception tmp212)
         {
-          var tmp195 = $"Error occurred in {GetType().FullName}: {tmp194.Message}";
+          var tmp213 = $"Error occurred in {GetType().FullName}: {tmp212.Message}";
           if(_logger != null)
-            _logger.LogError("{Exception}, {Message}", tmp194, tmp195);
+            _logger.LogError("{Exception}, {Message}", tmp212, tmp213);
           else
-            Console.Error.WriteLine(tmp195);
-          var tmp196 = new TApplicationException(TApplicationException.ExceptionType.InternalError," Internal error.");
+            Console.Error.WriteLine(tmp213);
+          var tmp214 = new TApplicationException(TApplicationException.ExceptionType.InternalError," Internal error.");
           await oprot.WriteMessageBeginAsync(new TMessage("GetProblemList", TMessageType.Exception, seqid), cancellationToken);
-          await tmp196.WriteAsync(oprot, cancellationToken);
+          await tmp214.WriteAsync(oprot, cancellationToken);
+        }
+        await oprot.WriteMessageEndAsync(cancellationToken);
+        await oprot.Transport.FlushAsync(cancellationToken);
+      }
+
+      public async global::System.Threading.Tasks.Task GetContestProblem_ProcessAsync(int seqid, TProtocol iprot, TProtocol oprot, CancellationToken cancellationToken)
+      {
+        var tmp215 = new InternalStructs.GetContestProblem_args();
+        await tmp215.ReadAsync(iprot, cancellationToken);
+        await iprot.ReadMessageEndAsync(cancellationToken);
+        var tmp216 = new InternalStructs.GetContestProblem_result();
+        try
+        {
+          tmp216.Success = await _iAsync.GetContestProblem(tmp215.Req, cancellationToken);
+          await oprot.WriteMessageBeginAsync(new TMessage("GetContestProblem", TMessageType.Reply, seqid), cancellationToken); 
+          await tmp216.WriteAsync(oprot, cancellationToken);
+        }
+        catch (TTransportException)
+        {
+          throw;
+        }
+        catch (Exception tmp217)
+        {
+          var tmp218 = $"Error occurred in {GetType().FullName}: {tmp217.Message}";
+          if(_logger != null)
+            _logger.LogError("{Exception}, {Message}", tmp217, tmp218);
+          else
+            Console.Error.WriteLine(tmp218);
+          var tmp219 = new TApplicationException(TApplicationException.ExceptionType.InternalError," Internal error.");
+          await oprot.WriteMessageBeginAsync(new TMessage("GetContestProblem", TMessageType.Exception, seqid), cancellationToken);
+          await tmp219.WriteAsync(oprot, cancellationToken);
         }
         await oprot.WriteMessageEndAsync(cancellationToken);
         await oprot.Transport.FlushAsync(cancellationToken);
@@ -750,30 +824,30 @@ namespace CUGOJ.RPC.Gen.Services.Base
 
       public async global::System.Threading.Tasks.Task SaveContestInfo_ProcessAsync(int seqid, TProtocol iprot, TProtocol oprot, CancellationToken cancellationToken)
       {
-        var tmp197 = new InternalStructs.SaveContestInfo_args();
-        await tmp197.ReadAsync(iprot, cancellationToken);
+        var tmp220 = new InternalStructs.SaveContestInfo_args();
+        await tmp220.ReadAsync(iprot, cancellationToken);
         await iprot.ReadMessageEndAsync(cancellationToken);
-        var tmp198 = new InternalStructs.SaveContestInfo_result();
+        var tmp221 = new InternalStructs.SaveContestInfo_result();
         try
         {
-          tmp198.Success = await _iAsync.SaveContestInfo(tmp197.Req, cancellationToken);
+          tmp221.Success = await _iAsync.SaveContestInfo(tmp220.Req, cancellationToken);
           await oprot.WriteMessageBeginAsync(new TMessage("SaveContestInfo", TMessageType.Reply, seqid), cancellationToken); 
-          await tmp198.WriteAsync(oprot, cancellationToken);
+          await tmp221.WriteAsync(oprot, cancellationToken);
         }
         catch (TTransportException)
         {
           throw;
         }
-        catch (Exception tmp199)
+        catch (Exception tmp222)
         {
-          var tmp200 = $"Error occurred in {GetType().FullName}: {tmp199.Message}";
+          var tmp223 = $"Error occurred in {GetType().FullName}: {tmp222.Message}";
           if(_logger != null)
-            _logger.LogError("{Exception}, {Message}", tmp199, tmp200);
+            _logger.LogError("{Exception}, {Message}", tmp222, tmp223);
           else
-            Console.Error.WriteLine(tmp200);
-          var tmp201 = new TApplicationException(TApplicationException.ExceptionType.InternalError," Internal error.");
+            Console.Error.WriteLine(tmp223);
+          var tmp224 = new TApplicationException(TApplicationException.ExceptionType.InternalError," Internal error.");
           await oprot.WriteMessageBeginAsync(new TMessage("SaveContestInfo", TMessageType.Exception, seqid), cancellationToken);
-          await tmp201.WriteAsync(oprot, cancellationToken);
+          await tmp224.WriteAsync(oprot, cancellationToken);
         }
         await oprot.WriteMessageEndAsync(cancellationToken);
         await oprot.Transport.FlushAsync(cancellationToken);
@@ -781,30 +855,30 @@ namespace CUGOJ.RPC.Gen.Services.Base
 
       public async global::System.Threading.Tasks.Task MulGetContestInfo_ProcessAsync(int seqid, TProtocol iprot, TProtocol oprot, CancellationToken cancellationToken)
       {
-        var tmp202 = new InternalStructs.MulGetContestInfo_args();
-        await tmp202.ReadAsync(iprot, cancellationToken);
+        var tmp225 = new InternalStructs.MulGetContestInfo_args();
+        await tmp225.ReadAsync(iprot, cancellationToken);
         await iprot.ReadMessageEndAsync(cancellationToken);
-        var tmp203 = new InternalStructs.MulGetContestInfo_result();
+        var tmp226 = new InternalStructs.MulGetContestInfo_result();
         try
         {
-          tmp203.Success = await _iAsync.MulGetContestInfo(tmp202.Req, cancellationToken);
+          tmp226.Success = await _iAsync.MulGetContestInfo(tmp225.Req, cancellationToken);
           await oprot.WriteMessageBeginAsync(new TMessage("MulGetContestInfo", TMessageType.Reply, seqid), cancellationToken); 
-          await tmp203.WriteAsync(oprot, cancellationToken);
+          await tmp226.WriteAsync(oprot, cancellationToken);
         }
         catch (TTransportException)
         {
           throw;
         }
-        catch (Exception tmp204)
+        catch (Exception tmp227)
         {
-          var tmp205 = $"Error occurred in {GetType().FullName}: {tmp204.Message}";
+          var tmp228 = $"Error occurred in {GetType().FullName}: {tmp227.Message}";
           if(_logger != null)
-            _logger.LogError("{Exception}, {Message}", tmp204, tmp205);
+            _logger.LogError("{Exception}, {Message}", tmp227, tmp228);
           else
-            Console.Error.WriteLine(tmp205);
-          var tmp206 = new TApplicationException(TApplicationException.ExceptionType.InternalError," Internal error.");
+            Console.Error.WriteLine(tmp228);
+          var tmp229 = new TApplicationException(TApplicationException.ExceptionType.InternalError," Internal error.");
           await oprot.WriteMessageBeginAsync(new TMessage("MulGetContestInfo", TMessageType.Exception, seqid), cancellationToken);
-          await tmp206.WriteAsync(oprot, cancellationToken);
+          await tmp229.WriteAsync(oprot, cancellationToken);
         }
         await oprot.WriteMessageEndAsync(cancellationToken);
         await oprot.Transport.FlushAsync(cancellationToken);
@@ -812,30 +886,30 @@ namespace CUGOJ.RPC.Gen.Services.Base
 
       public async global::System.Threading.Tasks.Task GetContestList_ProcessAsync(int seqid, TProtocol iprot, TProtocol oprot, CancellationToken cancellationToken)
       {
-        var tmp207 = new InternalStructs.GetContestList_args();
-        await tmp207.ReadAsync(iprot, cancellationToken);
+        var tmp230 = new InternalStructs.GetContestList_args();
+        await tmp230.ReadAsync(iprot, cancellationToken);
         await iprot.ReadMessageEndAsync(cancellationToken);
-        var tmp208 = new InternalStructs.GetContestList_result();
+        var tmp231 = new InternalStructs.GetContestList_result();
         try
         {
-          tmp208.Success = await _iAsync.GetContestList(tmp207.Req, cancellationToken);
+          tmp231.Success = await _iAsync.GetContestList(tmp230.Req, cancellationToken);
           await oprot.WriteMessageBeginAsync(new TMessage("GetContestList", TMessageType.Reply, seqid), cancellationToken); 
-          await tmp208.WriteAsync(oprot, cancellationToken);
+          await tmp231.WriteAsync(oprot, cancellationToken);
         }
         catch (TTransportException)
         {
           throw;
         }
-        catch (Exception tmp209)
+        catch (Exception tmp232)
         {
-          var tmp210 = $"Error occurred in {GetType().FullName}: {tmp209.Message}";
+          var tmp233 = $"Error occurred in {GetType().FullName}: {tmp232.Message}";
           if(_logger != null)
-            _logger.LogError("{Exception}, {Message}", tmp209, tmp210);
+            _logger.LogError("{Exception}, {Message}", tmp232, tmp233);
           else
-            Console.Error.WriteLine(tmp210);
-          var tmp211 = new TApplicationException(TApplicationException.ExceptionType.InternalError," Internal error.");
+            Console.Error.WriteLine(tmp233);
+          var tmp234 = new TApplicationException(TApplicationException.ExceptionType.InternalError," Internal error.");
           await oprot.WriteMessageBeginAsync(new TMessage("GetContestList", TMessageType.Exception, seqid), cancellationToken);
-          await tmp211.WriteAsync(oprot, cancellationToken);
+          await tmp234.WriteAsync(oprot, cancellationToken);
         }
         await oprot.WriteMessageEndAsync(cancellationToken);
         await oprot.Transport.FlushAsync(cancellationToken);
@@ -876,13 +950,13 @@ namespace CUGOJ.RPC.Gen.Services.Base
 
         public Ping_args DeepCopy()
         {
-          var tmp212 = new Ping_args();
+          var tmp235 = new Ping_args();
           if((Req != null) && __isset.req)
           {
-            tmp212.Req = (global::CUGOJ.RPC.Gen.Base.PingRequest)this.Req.DeepCopy();
+            tmp235.Req = (global::CUGOJ.RPC.Gen.Base.PingRequest)this.Req.DeepCopy();
           }
-          tmp212.__isset.req = this.__isset.req;
-          return tmp212;
+          tmp235.__isset.req = this.__isset.req;
+          return tmp235;
         }
 
         public async global::System.Threading.Tasks.Task ReadAsync(TProtocol iprot, CancellationToken cancellationToken)
@@ -934,15 +1008,15 @@ namespace CUGOJ.RPC.Gen.Services.Base
           oprot.IncrementRecursionDepth();
           try
           {
-            var tmp213 = new TStruct("Ping_args");
-            await oprot.WriteStructBeginAsync(tmp213, cancellationToken);
-            var tmp214 = new TField();
+            var tmp236 = new TStruct("Ping_args");
+            await oprot.WriteStructBeginAsync(tmp236, cancellationToken);
+            var tmp237 = new TField();
             if((Req != null) && __isset.req)
             {
-              tmp214.Name = "req";
-              tmp214.Type = TType.Struct;
-              tmp214.ID = 1;
-              await oprot.WriteFieldBeginAsync(tmp214, cancellationToken);
+              tmp237.Name = "req";
+              tmp237.Type = TType.Struct;
+              tmp237.ID = 1;
+              await oprot.WriteFieldBeginAsync(tmp237, cancellationToken);
               await Req.WriteAsync(oprot, cancellationToken);
               await oprot.WriteFieldEndAsync(cancellationToken);
             }
@@ -975,16 +1049,16 @@ namespace CUGOJ.RPC.Gen.Services.Base
 
         public override string ToString()
         {
-          var tmp215 = new StringBuilder("Ping_args(");
-          int tmp216 = 0;
+          var tmp238 = new StringBuilder("Ping_args(");
+          int tmp239 = 0;
           if((Req != null) && __isset.req)
           {
-            if(0 < tmp216++) { tmp215.Append(", "); }
-            tmp215.Append("Req: ");
-            Req.ToString(tmp215);
+            if(0 < tmp239++) { tmp238.Append(", "); }
+            tmp238.Append("Req: ");
+            Req.ToString(tmp238);
           }
-          tmp215.Append(')');
-          return tmp215.ToString();
+          tmp238.Append(')');
+          return tmp238.ToString();
         }
       }
 
@@ -1019,13 +1093,13 @@ namespace CUGOJ.RPC.Gen.Services.Base
 
         public Ping_result DeepCopy()
         {
-          var tmp217 = new Ping_result();
+          var tmp240 = new Ping_result();
           if((Success != null) && __isset.success)
           {
-            tmp217.Success = (global::CUGOJ.RPC.Gen.Base.PingResponse)this.Success.DeepCopy();
+            tmp240.Success = (global::CUGOJ.RPC.Gen.Base.PingResponse)this.Success.DeepCopy();
           }
-          tmp217.__isset.success = this.__isset.success;
-          return tmp217;
+          tmp240.__isset.success = this.__isset.success;
+          return tmp240;
         }
 
         public async global::System.Threading.Tasks.Task ReadAsync(TProtocol iprot, CancellationToken cancellationToken)
@@ -1077,18 +1151,18 @@ namespace CUGOJ.RPC.Gen.Services.Base
           oprot.IncrementRecursionDepth();
           try
           {
-            var tmp218 = new TStruct("Ping_result");
-            await oprot.WriteStructBeginAsync(tmp218, cancellationToken);
-            var tmp219 = new TField();
+            var tmp241 = new TStruct("Ping_result");
+            await oprot.WriteStructBeginAsync(tmp241, cancellationToken);
+            var tmp242 = new TField();
 
             if(this.__isset.success)
             {
               if (Success != null)
               {
-                tmp219.Name = "Success";
-                tmp219.Type = TType.Struct;
-                tmp219.ID = 0;
-                await oprot.WriteFieldBeginAsync(tmp219, cancellationToken);
+                tmp242.Name = "Success";
+                tmp242.Type = TType.Struct;
+                tmp242.ID = 0;
+                await oprot.WriteFieldBeginAsync(tmp242, cancellationToken);
                 await Success.WriteAsync(oprot, cancellationToken);
                 await oprot.WriteFieldEndAsync(cancellationToken);
               }
@@ -1122,16 +1196,16 @@ namespace CUGOJ.RPC.Gen.Services.Base
 
         public override string ToString()
         {
-          var tmp220 = new StringBuilder("Ping_result(");
-          int tmp221 = 0;
+          var tmp243 = new StringBuilder("Ping_result(");
+          int tmp244 = 0;
           if((Success != null) && __isset.success)
           {
-            if(0 < tmp221++) { tmp220.Append(", "); }
-            tmp220.Append("Success: ");
-            Success.ToString(tmp220);
+            if(0 < tmp244++) { tmp243.Append(", "); }
+            tmp243.Append("Success: ");
+            Success.ToString(tmp243);
           }
-          tmp220.Append(')');
-          return tmp220.ToString();
+          tmp243.Append(')');
+          return tmp243.ToString();
         }
       }
 
@@ -1166,13 +1240,13 @@ namespace CUGOJ.RPC.Gen.Services.Base
 
         public SaveUserInfo_args DeepCopy()
         {
-          var tmp222 = new SaveUserInfo_args();
+          var tmp245 = new SaveUserInfo_args();
           if((Req != null) && __isset.req)
           {
-            tmp222.Req = (global::CUGOJ.RPC.Gen.Services.Base.SaveUserInfoRequest)this.Req.DeepCopy();
+            tmp245.Req = (global::CUGOJ.RPC.Gen.Services.Base.SaveUserInfoRequest)this.Req.DeepCopy();
           }
-          tmp222.__isset.req = this.__isset.req;
-          return tmp222;
+          tmp245.__isset.req = this.__isset.req;
+          return tmp245;
         }
 
         public async global::System.Threading.Tasks.Task ReadAsync(TProtocol iprot, CancellationToken cancellationToken)
@@ -1224,15 +1298,15 @@ namespace CUGOJ.RPC.Gen.Services.Base
           oprot.IncrementRecursionDepth();
           try
           {
-            var tmp223 = new TStruct("SaveUserInfo_args");
-            await oprot.WriteStructBeginAsync(tmp223, cancellationToken);
-            var tmp224 = new TField();
+            var tmp246 = new TStruct("SaveUserInfo_args");
+            await oprot.WriteStructBeginAsync(tmp246, cancellationToken);
+            var tmp247 = new TField();
             if((Req != null) && __isset.req)
             {
-              tmp224.Name = "req";
-              tmp224.Type = TType.Struct;
-              tmp224.ID = 1;
-              await oprot.WriteFieldBeginAsync(tmp224, cancellationToken);
+              tmp247.Name = "req";
+              tmp247.Type = TType.Struct;
+              tmp247.ID = 1;
+              await oprot.WriteFieldBeginAsync(tmp247, cancellationToken);
               await Req.WriteAsync(oprot, cancellationToken);
               await oprot.WriteFieldEndAsync(cancellationToken);
             }
@@ -1265,16 +1339,16 @@ namespace CUGOJ.RPC.Gen.Services.Base
 
         public override string ToString()
         {
-          var tmp225 = new StringBuilder("SaveUserInfo_args(");
-          int tmp226 = 0;
+          var tmp248 = new StringBuilder("SaveUserInfo_args(");
+          int tmp249 = 0;
           if((Req != null) && __isset.req)
           {
-            if(0 < tmp226++) { tmp225.Append(", "); }
-            tmp225.Append("Req: ");
-            Req.ToString(tmp225);
+            if(0 < tmp249++) { tmp248.Append(", "); }
+            tmp248.Append("Req: ");
+            Req.ToString(tmp248);
           }
-          tmp225.Append(')');
-          return tmp225.ToString();
+          tmp248.Append(')');
+          return tmp248.ToString();
         }
       }
 
@@ -1309,13 +1383,13 @@ namespace CUGOJ.RPC.Gen.Services.Base
 
         public SaveUserInfo_result DeepCopy()
         {
-          var tmp227 = new SaveUserInfo_result();
+          var tmp250 = new SaveUserInfo_result();
           if((Success != null) && __isset.success)
           {
-            tmp227.Success = (global::CUGOJ.RPC.Gen.Services.Base.SaveUserInfoResponse)this.Success.DeepCopy();
+            tmp250.Success = (global::CUGOJ.RPC.Gen.Services.Base.SaveUserInfoResponse)this.Success.DeepCopy();
           }
-          tmp227.__isset.success = this.__isset.success;
-          return tmp227;
+          tmp250.__isset.success = this.__isset.success;
+          return tmp250;
         }
 
         public async global::System.Threading.Tasks.Task ReadAsync(TProtocol iprot, CancellationToken cancellationToken)
@@ -1367,18 +1441,18 @@ namespace CUGOJ.RPC.Gen.Services.Base
           oprot.IncrementRecursionDepth();
           try
           {
-            var tmp228 = new TStruct("SaveUserInfo_result");
-            await oprot.WriteStructBeginAsync(tmp228, cancellationToken);
-            var tmp229 = new TField();
+            var tmp251 = new TStruct("SaveUserInfo_result");
+            await oprot.WriteStructBeginAsync(tmp251, cancellationToken);
+            var tmp252 = new TField();
 
             if(this.__isset.success)
             {
               if (Success != null)
               {
-                tmp229.Name = "Success";
-                tmp229.Type = TType.Struct;
-                tmp229.ID = 0;
-                await oprot.WriteFieldBeginAsync(tmp229, cancellationToken);
+                tmp252.Name = "Success";
+                tmp252.Type = TType.Struct;
+                tmp252.ID = 0;
+                await oprot.WriteFieldBeginAsync(tmp252, cancellationToken);
                 await Success.WriteAsync(oprot, cancellationToken);
                 await oprot.WriteFieldEndAsync(cancellationToken);
               }
@@ -1412,16 +1486,16 @@ namespace CUGOJ.RPC.Gen.Services.Base
 
         public override string ToString()
         {
-          var tmp230 = new StringBuilder("SaveUserInfo_result(");
-          int tmp231 = 0;
+          var tmp253 = new StringBuilder("SaveUserInfo_result(");
+          int tmp254 = 0;
           if((Success != null) && __isset.success)
           {
-            if(0 < tmp231++) { tmp230.Append(", "); }
-            tmp230.Append("Success: ");
-            Success.ToString(tmp230);
+            if(0 < tmp254++) { tmp253.Append(", "); }
+            tmp253.Append("Success: ");
+            Success.ToString(tmp253);
           }
-          tmp230.Append(')');
-          return tmp230.ToString();
+          tmp253.Append(')');
+          return tmp253.ToString();
         }
       }
 
@@ -1456,13 +1530,13 @@ namespace CUGOJ.RPC.Gen.Services.Base
 
         public MulGetUserInfo_args DeepCopy()
         {
-          var tmp232 = new MulGetUserInfo_args();
+          var tmp255 = new MulGetUserInfo_args();
           if((Req != null) && __isset.req)
           {
-            tmp232.Req = (global::CUGOJ.RPC.Gen.Services.Base.MulGetUserInfoRequest)this.Req.DeepCopy();
+            tmp255.Req = (global::CUGOJ.RPC.Gen.Services.Base.MulGetUserInfoRequest)this.Req.DeepCopy();
           }
-          tmp232.__isset.req = this.__isset.req;
-          return tmp232;
+          tmp255.__isset.req = this.__isset.req;
+          return tmp255;
         }
 
         public async global::System.Threading.Tasks.Task ReadAsync(TProtocol iprot, CancellationToken cancellationToken)
@@ -1514,15 +1588,15 @@ namespace CUGOJ.RPC.Gen.Services.Base
           oprot.IncrementRecursionDepth();
           try
           {
-            var tmp233 = new TStruct("MulGetUserInfo_args");
-            await oprot.WriteStructBeginAsync(tmp233, cancellationToken);
-            var tmp234 = new TField();
+            var tmp256 = new TStruct("MulGetUserInfo_args");
+            await oprot.WriteStructBeginAsync(tmp256, cancellationToken);
+            var tmp257 = new TField();
             if((Req != null) && __isset.req)
             {
-              tmp234.Name = "req";
-              tmp234.Type = TType.Struct;
-              tmp234.ID = 1;
-              await oprot.WriteFieldBeginAsync(tmp234, cancellationToken);
+              tmp257.Name = "req";
+              tmp257.Type = TType.Struct;
+              tmp257.ID = 1;
+              await oprot.WriteFieldBeginAsync(tmp257, cancellationToken);
               await Req.WriteAsync(oprot, cancellationToken);
               await oprot.WriteFieldEndAsync(cancellationToken);
             }
@@ -1555,16 +1629,16 @@ namespace CUGOJ.RPC.Gen.Services.Base
 
         public override string ToString()
         {
-          var tmp235 = new StringBuilder("MulGetUserInfo_args(");
-          int tmp236 = 0;
+          var tmp258 = new StringBuilder("MulGetUserInfo_args(");
+          int tmp259 = 0;
           if((Req != null) && __isset.req)
           {
-            if(0 < tmp236++) { tmp235.Append(", "); }
-            tmp235.Append("Req: ");
-            Req.ToString(tmp235);
+            if(0 < tmp259++) { tmp258.Append(", "); }
+            tmp258.Append("Req: ");
+            Req.ToString(tmp258);
           }
-          tmp235.Append(')');
-          return tmp235.ToString();
+          tmp258.Append(')');
+          return tmp258.ToString();
         }
       }
 
@@ -1599,13 +1673,13 @@ namespace CUGOJ.RPC.Gen.Services.Base
 
         public MulGetUserInfo_result DeepCopy()
         {
-          var tmp237 = new MulGetUserInfo_result();
+          var tmp260 = new MulGetUserInfo_result();
           if((Success != null) && __isset.success)
           {
-            tmp237.Success = (global::CUGOJ.RPC.Gen.Services.Base.MulGetUserInfoResponse)this.Success.DeepCopy();
+            tmp260.Success = (global::CUGOJ.RPC.Gen.Services.Base.MulGetUserInfoResponse)this.Success.DeepCopy();
           }
-          tmp237.__isset.success = this.__isset.success;
-          return tmp237;
+          tmp260.__isset.success = this.__isset.success;
+          return tmp260;
         }
 
         public async global::System.Threading.Tasks.Task ReadAsync(TProtocol iprot, CancellationToken cancellationToken)
@@ -1657,18 +1731,18 @@ namespace CUGOJ.RPC.Gen.Services.Base
           oprot.IncrementRecursionDepth();
           try
           {
-            var tmp238 = new TStruct("MulGetUserInfo_result");
-            await oprot.WriteStructBeginAsync(tmp238, cancellationToken);
-            var tmp239 = new TField();
+            var tmp261 = new TStruct("MulGetUserInfo_result");
+            await oprot.WriteStructBeginAsync(tmp261, cancellationToken);
+            var tmp262 = new TField();
 
             if(this.__isset.success)
             {
               if (Success != null)
               {
-                tmp239.Name = "Success";
-                tmp239.Type = TType.Struct;
-                tmp239.ID = 0;
-                await oprot.WriteFieldBeginAsync(tmp239, cancellationToken);
+                tmp262.Name = "Success";
+                tmp262.Type = TType.Struct;
+                tmp262.ID = 0;
+                await oprot.WriteFieldBeginAsync(tmp262, cancellationToken);
                 await Success.WriteAsync(oprot, cancellationToken);
                 await oprot.WriteFieldEndAsync(cancellationToken);
               }
@@ -1702,16 +1776,16 @@ namespace CUGOJ.RPC.Gen.Services.Base
 
         public override string ToString()
         {
-          var tmp240 = new StringBuilder("MulGetUserInfo_result(");
-          int tmp241 = 0;
+          var tmp263 = new StringBuilder("MulGetUserInfo_result(");
+          int tmp264 = 0;
           if((Success != null) && __isset.success)
           {
-            if(0 < tmp241++) { tmp240.Append(", "); }
-            tmp240.Append("Success: ");
-            Success.ToString(tmp240);
+            if(0 < tmp264++) { tmp263.Append(", "); }
+            tmp263.Append("Success: ");
+            Success.ToString(tmp263);
           }
-          tmp240.Append(')');
-          return tmp240.ToString();
+          tmp263.Append(')');
+          return tmp263.ToString();
         }
       }
 
@@ -1746,13 +1820,13 @@ namespace CUGOJ.RPC.Gen.Services.Base
 
         public Login_args DeepCopy()
         {
-          var tmp242 = new Login_args();
+          var tmp265 = new Login_args();
           if((Req != null) && __isset.req)
           {
-            tmp242.Req = (global::CUGOJ.RPC.Gen.Services.Base.LoginRequest)this.Req.DeepCopy();
+            tmp265.Req = (global::CUGOJ.RPC.Gen.Services.Base.LoginRequest)this.Req.DeepCopy();
           }
-          tmp242.__isset.req = this.__isset.req;
-          return tmp242;
+          tmp265.__isset.req = this.__isset.req;
+          return tmp265;
         }
 
         public async global::System.Threading.Tasks.Task ReadAsync(TProtocol iprot, CancellationToken cancellationToken)
@@ -1804,15 +1878,15 @@ namespace CUGOJ.RPC.Gen.Services.Base
           oprot.IncrementRecursionDepth();
           try
           {
-            var tmp243 = new TStruct("Login_args");
-            await oprot.WriteStructBeginAsync(tmp243, cancellationToken);
-            var tmp244 = new TField();
+            var tmp266 = new TStruct("Login_args");
+            await oprot.WriteStructBeginAsync(tmp266, cancellationToken);
+            var tmp267 = new TField();
             if((Req != null) && __isset.req)
             {
-              tmp244.Name = "req";
-              tmp244.Type = TType.Struct;
-              tmp244.ID = 1;
-              await oprot.WriteFieldBeginAsync(tmp244, cancellationToken);
+              tmp267.Name = "req";
+              tmp267.Type = TType.Struct;
+              tmp267.ID = 1;
+              await oprot.WriteFieldBeginAsync(tmp267, cancellationToken);
               await Req.WriteAsync(oprot, cancellationToken);
               await oprot.WriteFieldEndAsync(cancellationToken);
             }
@@ -1845,16 +1919,16 @@ namespace CUGOJ.RPC.Gen.Services.Base
 
         public override string ToString()
         {
-          var tmp245 = new StringBuilder("Login_args(");
-          int tmp246 = 0;
+          var tmp268 = new StringBuilder("Login_args(");
+          int tmp269 = 0;
           if((Req != null) && __isset.req)
           {
-            if(0 < tmp246++) { tmp245.Append(", "); }
-            tmp245.Append("Req: ");
-            Req.ToString(tmp245);
+            if(0 < tmp269++) { tmp268.Append(", "); }
+            tmp268.Append("Req: ");
+            Req.ToString(tmp268);
           }
-          tmp245.Append(')');
-          return tmp245.ToString();
+          tmp268.Append(')');
+          return tmp268.ToString();
         }
       }
 
@@ -1889,13 +1963,13 @@ namespace CUGOJ.RPC.Gen.Services.Base
 
         public Login_result DeepCopy()
         {
-          var tmp247 = new Login_result();
+          var tmp270 = new Login_result();
           if((Success != null) && __isset.success)
           {
-            tmp247.Success = (global::CUGOJ.RPC.Gen.Services.Base.LoginResponse)this.Success.DeepCopy();
+            tmp270.Success = (global::CUGOJ.RPC.Gen.Services.Base.LoginResponse)this.Success.DeepCopy();
           }
-          tmp247.__isset.success = this.__isset.success;
-          return tmp247;
+          tmp270.__isset.success = this.__isset.success;
+          return tmp270;
         }
 
         public async global::System.Threading.Tasks.Task ReadAsync(TProtocol iprot, CancellationToken cancellationToken)
@@ -1947,18 +2021,18 @@ namespace CUGOJ.RPC.Gen.Services.Base
           oprot.IncrementRecursionDepth();
           try
           {
-            var tmp248 = new TStruct("Login_result");
-            await oprot.WriteStructBeginAsync(tmp248, cancellationToken);
-            var tmp249 = new TField();
+            var tmp271 = new TStruct("Login_result");
+            await oprot.WriteStructBeginAsync(tmp271, cancellationToken);
+            var tmp272 = new TField();
 
             if(this.__isset.success)
             {
               if (Success != null)
               {
-                tmp249.Name = "Success";
-                tmp249.Type = TType.Struct;
-                tmp249.ID = 0;
-                await oprot.WriteFieldBeginAsync(tmp249, cancellationToken);
+                tmp272.Name = "Success";
+                tmp272.Type = TType.Struct;
+                tmp272.ID = 0;
+                await oprot.WriteFieldBeginAsync(tmp272, cancellationToken);
                 await Success.WriteAsync(oprot, cancellationToken);
                 await oprot.WriteFieldEndAsync(cancellationToken);
               }
@@ -1992,16 +2066,16 @@ namespace CUGOJ.RPC.Gen.Services.Base
 
         public override string ToString()
         {
-          var tmp250 = new StringBuilder("Login_result(");
-          int tmp251 = 0;
+          var tmp273 = new StringBuilder("Login_result(");
+          int tmp274 = 0;
           if((Success != null) && __isset.success)
           {
-            if(0 < tmp251++) { tmp250.Append(", "); }
-            tmp250.Append("Success: ");
-            Success.ToString(tmp250);
+            if(0 < tmp274++) { tmp273.Append(", "); }
+            tmp273.Append("Success: ");
+            Success.ToString(tmp273);
           }
-          tmp250.Append(')');
-          return tmp250.ToString();
+          tmp273.Append(')');
+          return tmp273.ToString();
         }
       }
 
@@ -2036,13 +2110,13 @@ namespace CUGOJ.RPC.Gen.Services.Base
 
         public SaveProblemInfo_args DeepCopy()
         {
-          var tmp252 = new SaveProblemInfo_args();
+          var tmp275 = new SaveProblemInfo_args();
           if((Req != null) && __isset.req)
           {
-            tmp252.Req = (global::CUGOJ.RPC.Gen.Services.Base.SaveProblemInfoRequest)this.Req.DeepCopy();
+            tmp275.Req = (global::CUGOJ.RPC.Gen.Services.Base.SaveProblemInfoRequest)this.Req.DeepCopy();
           }
-          tmp252.__isset.req = this.__isset.req;
-          return tmp252;
+          tmp275.__isset.req = this.__isset.req;
+          return tmp275;
         }
 
         public async global::System.Threading.Tasks.Task ReadAsync(TProtocol iprot, CancellationToken cancellationToken)
@@ -2094,15 +2168,15 @@ namespace CUGOJ.RPC.Gen.Services.Base
           oprot.IncrementRecursionDepth();
           try
           {
-            var tmp253 = new TStruct("SaveProblemInfo_args");
-            await oprot.WriteStructBeginAsync(tmp253, cancellationToken);
-            var tmp254 = new TField();
+            var tmp276 = new TStruct("SaveProblemInfo_args");
+            await oprot.WriteStructBeginAsync(tmp276, cancellationToken);
+            var tmp277 = new TField();
             if((Req != null) && __isset.req)
             {
-              tmp254.Name = "req";
-              tmp254.Type = TType.Struct;
-              tmp254.ID = 1;
-              await oprot.WriteFieldBeginAsync(tmp254, cancellationToken);
+              tmp277.Name = "req";
+              tmp277.Type = TType.Struct;
+              tmp277.ID = 1;
+              await oprot.WriteFieldBeginAsync(tmp277, cancellationToken);
               await Req.WriteAsync(oprot, cancellationToken);
               await oprot.WriteFieldEndAsync(cancellationToken);
             }
@@ -2135,16 +2209,16 @@ namespace CUGOJ.RPC.Gen.Services.Base
 
         public override string ToString()
         {
-          var tmp255 = new StringBuilder("SaveProblemInfo_args(");
-          int tmp256 = 0;
+          var tmp278 = new StringBuilder("SaveProblemInfo_args(");
+          int tmp279 = 0;
           if((Req != null) && __isset.req)
           {
-            if(0 < tmp256++) { tmp255.Append(", "); }
-            tmp255.Append("Req: ");
-            Req.ToString(tmp255);
+            if(0 < tmp279++) { tmp278.Append(", "); }
+            tmp278.Append("Req: ");
+            Req.ToString(tmp278);
           }
-          tmp255.Append(')');
-          return tmp255.ToString();
+          tmp278.Append(')');
+          return tmp278.ToString();
         }
       }
 
@@ -2179,13 +2253,13 @@ namespace CUGOJ.RPC.Gen.Services.Base
 
         public SaveProblemInfo_result DeepCopy()
         {
-          var tmp257 = new SaveProblemInfo_result();
+          var tmp280 = new SaveProblemInfo_result();
           if((Success != null) && __isset.success)
           {
-            tmp257.Success = (global::CUGOJ.RPC.Gen.Services.Base.SaveProblemInfoResponse)this.Success.DeepCopy();
+            tmp280.Success = (global::CUGOJ.RPC.Gen.Services.Base.SaveProblemInfoResponse)this.Success.DeepCopy();
           }
-          tmp257.__isset.success = this.__isset.success;
-          return tmp257;
+          tmp280.__isset.success = this.__isset.success;
+          return tmp280;
         }
 
         public async global::System.Threading.Tasks.Task ReadAsync(TProtocol iprot, CancellationToken cancellationToken)
@@ -2237,18 +2311,18 @@ namespace CUGOJ.RPC.Gen.Services.Base
           oprot.IncrementRecursionDepth();
           try
           {
-            var tmp258 = new TStruct("SaveProblemInfo_result");
-            await oprot.WriteStructBeginAsync(tmp258, cancellationToken);
-            var tmp259 = new TField();
+            var tmp281 = new TStruct("SaveProblemInfo_result");
+            await oprot.WriteStructBeginAsync(tmp281, cancellationToken);
+            var tmp282 = new TField();
 
             if(this.__isset.success)
             {
               if (Success != null)
               {
-                tmp259.Name = "Success";
-                tmp259.Type = TType.Struct;
-                tmp259.ID = 0;
-                await oprot.WriteFieldBeginAsync(tmp259, cancellationToken);
+                tmp282.Name = "Success";
+                tmp282.Type = TType.Struct;
+                tmp282.ID = 0;
+                await oprot.WriteFieldBeginAsync(tmp282, cancellationToken);
                 await Success.WriteAsync(oprot, cancellationToken);
                 await oprot.WriteFieldEndAsync(cancellationToken);
               }
@@ -2282,16 +2356,16 @@ namespace CUGOJ.RPC.Gen.Services.Base
 
         public override string ToString()
         {
-          var tmp260 = new StringBuilder("SaveProblemInfo_result(");
-          int tmp261 = 0;
+          var tmp283 = new StringBuilder("SaveProblemInfo_result(");
+          int tmp284 = 0;
           if((Success != null) && __isset.success)
           {
-            if(0 < tmp261++) { tmp260.Append(", "); }
-            tmp260.Append("Success: ");
-            Success.ToString(tmp260);
+            if(0 < tmp284++) { tmp283.Append(", "); }
+            tmp283.Append("Success: ");
+            Success.ToString(tmp283);
           }
-          tmp260.Append(')');
-          return tmp260.ToString();
+          tmp283.Append(')');
+          return tmp283.ToString();
         }
       }
 
@@ -2326,13 +2400,13 @@ namespace CUGOJ.RPC.Gen.Services.Base
 
         public MulGetProblemInfo_args DeepCopy()
         {
-          var tmp262 = new MulGetProblemInfo_args();
+          var tmp285 = new MulGetProblemInfo_args();
           if((Req != null) && __isset.req)
           {
-            tmp262.Req = (global::CUGOJ.RPC.Gen.Services.Base.MulGetProblemInfoRequest)this.Req.DeepCopy();
+            tmp285.Req = (global::CUGOJ.RPC.Gen.Services.Base.MulGetProblemInfoRequest)this.Req.DeepCopy();
           }
-          tmp262.__isset.req = this.__isset.req;
-          return tmp262;
+          tmp285.__isset.req = this.__isset.req;
+          return tmp285;
         }
 
         public async global::System.Threading.Tasks.Task ReadAsync(TProtocol iprot, CancellationToken cancellationToken)
@@ -2384,15 +2458,15 @@ namespace CUGOJ.RPC.Gen.Services.Base
           oprot.IncrementRecursionDepth();
           try
           {
-            var tmp263 = new TStruct("MulGetProblemInfo_args");
-            await oprot.WriteStructBeginAsync(tmp263, cancellationToken);
-            var tmp264 = new TField();
+            var tmp286 = new TStruct("MulGetProblemInfo_args");
+            await oprot.WriteStructBeginAsync(tmp286, cancellationToken);
+            var tmp287 = new TField();
             if((Req != null) && __isset.req)
             {
-              tmp264.Name = "req";
-              tmp264.Type = TType.Struct;
-              tmp264.ID = 1;
-              await oprot.WriteFieldBeginAsync(tmp264, cancellationToken);
+              tmp287.Name = "req";
+              tmp287.Type = TType.Struct;
+              tmp287.ID = 1;
+              await oprot.WriteFieldBeginAsync(tmp287, cancellationToken);
               await Req.WriteAsync(oprot, cancellationToken);
               await oprot.WriteFieldEndAsync(cancellationToken);
             }
@@ -2425,16 +2499,16 @@ namespace CUGOJ.RPC.Gen.Services.Base
 
         public override string ToString()
         {
-          var tmp265 = new StringBuilder("MulGetProblemInfo_args(");
-          int tmp266 = 0;
+          var tmp288 = new StringBuilder("MulGetProblemInfo_args(");
+          int tmp289 = 0;
           if((Req != null) && __isset.req)
           {
-            if(0 < tmp266++) { tmp265.Append(", "); }
-            tmp265.Append("Req: ");
-            Req.ToString(tmp265);
+            if(0 < tmp289++) { tmp288.Append(", "); }
+            tmp288.Append("Req: ");
+            Req.ToString(tmp288);
           }
-          tmp265.Append(')');
-          return tmp265.ToString();
+          tmp288.Append(')');
+          return tmp288.ToString();
         }
       }
 
@@ -2469,13 +2543,13 @@ namespace CUGOJ.RPC.Gen.Services.Base
 
         public MulGetProblemInfo_result DeepCopy()
         {
-          var tmp267 = new MulGetProblemInfo_result();
+          var tmp290 = new MulGetProblemInfo_result();
           if((Success != null) && __isset.success)
           {
-            tmp267.Success = (global::CUGOJ.RPC.Gen.Services.Base.MulGetProblemInfoResponse)this.Success.DeepCopy();
+            tmp290.Success = (global::CUGOJ.RPC.Gen.Services.Base.MulGetProblemInfoResponse)this.Success.DeepCopy();
           }
-          tmp267.__isset.success = this.__isset.success;
-          return tmp267;
+          tmp290.__isset.success = this.__isset.success;
+          return tmp290;
         }
 
         public async global::System.Threading.Tasks.Task ReadAsync(TProtocol iprot, CancellationToken cancellationToken)
@@ -2527,18 +2601,18 @@ namespace CUGOJ.RPC.Gen.Services.Base
           oprot.IncrementRecursionDepth();
           try
           {
-            var tmp268 = new TStruct("MulGetProblemInfo_result");
-            await oprot.WriteStructBeginAsync(tmp268, cancellationToken);
-            var tmp269 = new TField();
+            var tmp291 = new TStruct("MulGetProblemInfo_result");
+            await oprot.WriteStructBeginAsync(tmp291, cancellationToken);
+            var tmp292 = new TField();
 
             if(this.__isset.success)
             {
               if (Success != null)
               {
-                tmp269.Name = "Success";
-                tmp269.Type = TType.Struct;
-                tmp269.ID = 0;
-                await oprot.WriteFieldBeginAsync(tmp269, cancellationToken);
+                tmp292.Name = "Success";
+                tmp292.Type = TType.Struct;
+                tmp292.ID = 0;
+                await oprot.WriteFieldBeginAsync(tmp292, cancellationToken);
                 await Success.WriteAsync(oprot, cancellationToken);
                 await oprot.WriteFieldEndAsync(cancellationToken);
               }
@@ -2572,16 +2646,16 @@ namespace CUGOJ.RPC.Gen.Services.Base
 
         public override string ToString()
         {
-          var tmp270 = new StringBuilder("MulGetProblemInfo_result(");
-          int tmp271 = 0;
+          var tmp293 = new StringBuilder("MulGetProblemInfo_result(");
+          int tmp294 = 0;
           if((Success != null) && __isset.success)
           {
-            if(0 < tmp271++) { tmp270.Append(", "); }
-            tmp270.Append("Success: ");
-            Success.ToString(tmp270);
+            if(0 < tmp294++) { tmp293.Append(", "); }
+            tmp293.Append("Success: ");
+            Success.ToString(tmp293);
           }
-          tmp270.Append(')');
-          return tmp270.ToString();
+          tmp293.Append(')');
+          return tmp293.ToString();
         }
       }
 
@@ -2616,13 +2690,13 @@ namespace CUGOJ.RPC.Gen.Services.Base
 
         public GetProblemList_args DeepCopy()
         {
-          var tmp272 = new GetProblemList_args();
+          var tmp295 = new GetProblemList_args();
           if((Req != null) && __isset.req)
           {
-            tmp272.Req = (global::CUGOJ.RPC.Gen.Services.Base.GetProblemListRequest)this.Req.DeepCopy();
+            tmp295.Req = (global::CUGOJ.RPC.Gen.Services.Base.GetProblemListRequest)this.Req.DeepCopy();
           }
-          tmp272.__isset.req = this.__isset.req;
-          return tmp272;
+          tmp295.__isset.req = this.__isset.req;
+          return tmp295;
         }
 
         public async global::System.Threading.Tasks.Task ReadAsync(TProtocol iprot, CancellationToken cancellationToken)
@@ -2674,15 +2748,15 @@ namespace CUGOJ.RPC.Gen.Services.Base
           oprot.IncrementRecursionDepth();
           try
           {
-            var tmp273 = new TStruct("GetProblemList_args");
-            await oprot.WriteStructBeginAsync(tmp273, cancellationToken);
-            var tmp274 = new TField();
+            var tmp296 = new TStruct("GetProblemList_args");
+            await oprot.WriteStructBeginAsync(tmp296, cancellationToken);
+            var tmp297 = new TField();
             if((Req != null) && __isset.req)
             {
-              tmp274.Name = "req";
-              tmp274.Type = TType.Struct;
-              tmp274.ID = 1;
-              await oprot.WriteFieldBeginAsync(tmp274, cancellationToken);
+              tmp297.Name = "req";
+              tmp297.Type = TType.Struct;
+              tmp297.ID = 1;
+              await oprot.WriteFieldBeginAsync(tmp297, cancellationToken);
               await Req.WriteAsync(oprot, cancellationToken);
               await oprot.WriteFieldEndAsync(cancellationToken);
             }
@@ -2715,16 +2789,16 @@ namespace CUGOJ.RPC.Gen.Services.Base
 
         public override string ToString()
         {
-          var tmp275 = new StringBuilder("GetProblemList_args(");
-          int tmp276 = 0;
+          var tmp298 = new StringBuilder("GetProblemList_args(");
+          int tmp299 = 0;
           if((Req != null) && __isset.req)
           {
-            if(0 < tmp276++) { tmp275.Append(", "); }
-            tmp275.Append("Req: ");
-            Req.ToString(tmp275);
+            if(0 < tmp299++) { tmp298.Append(", "); }
+            tmp298.Append("Req: ");
+            Req.ToString(tmp298);
           }
-          tmp275.Append(')');
-          return tmp275.ToString();
+          tmp298.Append(')');
+          return tmp298.ToString();
         }
       }
 
@@ -2759,13 +2833,13 @@ namespace CUGOJ.RPC.Gen.Services.Base
 
         public GetProblemList_result DeepCopy()
         {
-          var tmp277 = new GetProblemList_result();
+          var tmp300 = new GetProblemList_result();
           if((Success != null) && __isset.success)
           {
-            tmp277.Success = (global::CUGOJ.RPC.Gen.Services.Base.GetProblemListResponse)this.Success.DeepCopy();
+            tmp300.Success = (global::CUGOJ.RPC.Gen.Services.Base.GetProblemListResponse)this.Success.DeepCopy();
           }
-          tmp277.__isset.success = this.__isset.success;
-          return tmp277;
+          tmp300.__isset.success = this.__isset.success;
+          return tmp300;
         }
 
         public async global::System.Threading.Tasks.Task ReadAsync(TProtocol iprot, CancellationToken cancellationToken)
@@ -2817,18 +2891,18 @@ namespace CUGOJ.RPC.Gen.Services.Base
           oprot.IncrementRecursionDepth();
           try
           {
-            var tmp278 = new TStruct("GetProblemList_result");
-            await oprot.WriteStructBeginAsync(tmp278, cancellationToken);
-            var tmp279 = new TField();
+            var tmp301 = new TStruct("GetProblemList_result");
+            await oprot.WriteStructBeginAsync(tmp301, cancellationToken);
+            var tmp302 = new TField();
 
             if(this.__isset.success)
             {
               if (Success != null)
               {
-                tmp279.Name = "Success";
-                tmp279.Type = TType.Struct;
-                tmp279.ID = 0;
-                await oprot.WriteFieldBeginAsync(tmp279, cancellationToken);
+                tmp302.Name = "Success";
+                tmp302.Type = TType.Struct;
+                tmp302.ID = 0;
+                await oprot.WriteFieldBeginAsync(tmp302, cancellationToken);
                 await Success.WriteAsync(oprot, cancellationToken);
                 await oprot.WriteFieldEndAsync(cancellationToken);
               }
@@ -2862,16 +2936,306 @@ namespace CUGOJ.RPC.Gen.Services.Base
 
         public override string ToString()
         {
-          var tmp280 = new StringBuilder("GetProblemList_result(");
-          int tmp281 = 0;
+          var tmp303 = new StringBuilder("GetProblemList_result(");
+          int tmp304 = 0;
           if((Success != null) && __isset.success)
           {
-            if(0 < tmp281++) { tmp280.Append(", "); }
-            tmp280.Append("Success: ");
-            Success.ToString(tmp280);
+            if(0 < tmp304++) { tmp303.Append(", "); }
+            tmp303.Append("Success: ");
+            Success.ToString(tmp303);
           }
-          tmp280.Append(')');
-          return tmp280.ToString();
+          tmp303.Append(')');
+          return tmp303.ToString();
+        }
+      }
+
+
+      public partial class GetContestProblem_args : TBase
+      {
+        private global::CUGOJ.RPC.Gen.Services.Base.GetContestProblemRequest _req;
+
+        public global::CUGOJ.RPC.Gen.Services.Base.GetContestProblemRequest Req
+        {
+          get
+          {
+            return _req;
+          }
+          set
+          {
+            __isset.req = true;
+            this._req = value;
+          }
+        }
+
+
+        public Isset __isset;
+        public struct Isset
+        {
+          public bool req;
+        }
+
+        public GetContestProblem_args()
+        {
+        }
+
+        public GetContestProblem_args DeepCopy()
+        {
+          var tmp305 = new GetContestProblem_args();
+          if((Req != null) && __isset.req)
+          {
+            tmp305.Req = (global::CUGOJ.RPC.Gen.Services.Base.GetContestProblemRequest)this.Req.DeepCopy();
+          }
+          tmp305.__isset.req = this.__isset.req;
+          return tmp305;
+        }
+
+        public async global::System.Threading.Tasks.Task ReadAsync(TProtocol iprot, CancellationToken cancellationToken)
+        {
+          iprot.IncrementRecursionDepth();
+          try
+          {
+            TField field;
+            await iprot.ReadStructBeginAsync(cancellationToken);
+            while (true)
+            {
+              field = await iprot.ReadFieldBeginAsync(cancellationToken);
+              if (field.Type == TType.Stop)
+              {
+                break;
+              }
+
+              switch (field.ID)
+              {
+                case 1:
+                  if (field.Type == TType.Struct)
+                  {
+                    Req = new global::CUGOJ.RPC.Gen.Services.Base.GetContestProblemRequest();
+                    await Req.ReadAsync(iprot, cancellationToken);
+                  }
+                  else
+                  {
+                    await TProtocolUtil.SkipAsync(iprot, field.Type, cancellationToken);
+                  }
+                  break;
+                default: 
+                  await TProtocolUtil.SkipAsync(iprot, field.Type, cancellationToken);
+                  break;
+              }
+
+              await iprot.ReadFieldEndAsync(cancellationToken);
+            }
+
+            await iprot.ReadStructEndAsync(cancellationToken);
+          }
+          finally
+          {
+            iprot.DecrementRecursionDepth();
+          }
+        }
+
+        public async global::System.Threading.Tasks.Task WriteAsync(TProtocol oprot, CancellationToken cancellationToken)
+        {
+          oprot.IncrementRecursionDepth();
+          try
+          {
+            var tmp306 = new TStruct("GetContestProblem_args");
+            await oprot.WriteStructBeginAsync(tmp306, cancellationToken);
+            var tmp307 = new TField();
+            if((Req != null) && __isset.req)
+            {
+              tmp307.Name = "req";
+              tmp307.Type = TType.Struct;
+              tmp307.ID = 1;
+              await oprot.WriteFieldBeginAsync(tmp307, cancellationToken);
+              await Req.WriteAsync(oprot, cancellationToken);
+              await oprot.WriteFieldEndAsync(cancellationToken);
+            }
+            await oprot.WriteFieldStopAsync(cancellationToken);
+            await oprot.WriteStructEndAsync(cancellationToken);
+          }
+          finally
+          {
+            oprot.DecrementRecursionDepth();
+          }
+        }
+
+        public override bool Equals(object that)
+        {
+          if (!(that is GetContestProblem_args other)) return false;
+          if (ReferenceEquals(this, other)) return true;
+          return ((__isset.req == other.__isset.req) && ((!__isset.req) || (global::System.Object.Equals(Req, other.Req))));
+        }
+
+        public override int GetHashCode() {
+          int hashcode = 157;
+          unchecked {
+            if((Req != null) && __isset.req)
+            {
+              hashcode = (hashcode * 397) + Req.GetHashCode();
+            }
+          }
+          return hashcode;
+        }
+
+        public override string ToString()
+        {
+          var tmp308 = new StringBuilder("GetContestProblem_args(");
+          int tmp309 = 0;
+          if((Req != null) && __isset.req)
+          {
+            if(0 < tmp309++) { tmp308.Append(", "); }
+            tmp308.Append("Req: ");
+            Req.ToString(tmp308);
+          }
+          tmp308.Append(')');
+          return tmp308.ToString();
+        }
+      }
+
+
+      public partial class GetContestProblem_result : TBase
+      {
+        private global::CUGOJ.RPC.Gen.Services.Base.GetContestProblemResponse _success;
+
+        public global::CUGOJ.RPC.Gen.Services.Base.GetContestProblemResponse Success
+        {
+          get
+          {
+            return _success;
+          }
+          set
+          {
+            __isset.success = true;
+            this._success = value;
+          }
+        }
+
+
+        public Isset __isset;
+        public struct Isset
+        {
+          public bool success;
+        }
+
+        public GetContestProblem_result()
+        {
+        }
+
+        public GetContestProblem_result DeepCopy()
+        {
+          var tmp310 = new GetContestProblem_result();
+          if((Success != null) && __isset.success)
+          {
+            tmp310.Success = (global::CUGOJ.RPC.Gen.Services.Base.GetContestProblemResponse)this.Success.DeepCopy();
+          }
+          tmp310.__isset.success = this.__isset.success;
+          return tmp310;
+        }
+
+        public async global::System.Threading.Tasks.Task ReadAsync(TProtocol iprot, CancellationToken cancellationToken)
+        {
+          iprot.IncrementRecursionDepth();
+          try
+          {
+            TField field;
+            await iprot.ReadStructBeginAsync(cancellationToken);
+            while (true)
+            {
+              field = await iprot.ReadFieldBeginAsync(cancellationToken);
+              if (field.Type == TType.Stop)
+              {
+                break;
+              }
+
+              switch (field.ID)
+              {
+                case 0:
+                  if (field.Type == TType.Struct)
+                  {
+                    Success = new global::CUGOJ.RPC.Gen.Services.Base.GetContestProblemResponse();
+                    await Success.ReadAsync(iprot, cancellationToken);
+                  }
+                  else
+                  {
+                    await TProtocolUtil.SkipAsync(iprot, field.Type, cancellationToken);
+                  }
+                  break;
+                default: 
+                  await TProtocolUtil.SkipAsync(iprot, field.Type, cancellationToken);
+                  break;
+              }
+
+              await iprot.ReadFieldEndAsync(cancellationToken);
+            }
+
+            await iprot.ReadStructEndAsync(cancellationToken);
+          }
+          finally
+          {
+            iprot.DecrementRecursionDepth();
+          }
+        }
+
+        public async global::System.Threading.Tasks.Task WriteAsync(TProtocol oprot, CancellationToken cancellationToken)
+        {
+          oprot.IncrementRecursionDepth();
+          try
+          {
+            var tmp311 = new TStruct("GetContestProblem_result");
+            await oprot.WriteStructBeginAsync(tmp311, cancellationToken);
+            var tmp312 = new TField();
+
+            if(this.__isset.success)
+            {
+              if (Success != null)
+              {
+                tmp312.Name = "Success";
+                tmp312.Type = TType.Struct;
+                tmp312.ID = 0;
+                await oprot.WriteFieldBeginAsync(tmp312, cancellationToken);
+                await Success.WriteAsync(oprot, cancellationToken);
+                await oprot.WriteFieldEndAsync(cancellationToken);
+              }
+            }
+            await oprot.WriteFieldStopAsync(cancellationToken);
+            await oprot.WriteStructEndAsync(cancellationToken);
+          }
+          finally
+          {
+            oprot.DecrementRecursionDepth();
+          }
+        }
+
+        public override bool Equals(object that)
+        {
+          if (!(that is GetContestProblem_result other)) return false;
+          if (ReferenceEquals(this, other)) return true;
+          return ((__isset.success == other.__isset.success) && ((!__isset.success) || (global::System.Object.Equals(Success, other.Success))));
+        }
+
+        public override int GetHashCode() {
+          int hashcode = 157;
+          unchecked {
+            if((Success != null) && __isset.success)
+            {
+              hashcode = (hashcode * 397) + Success.GetHashCode();
+            }
+          }
+          return hashcode;
+        }
+
+        public override string ToString()
+        {
+          var tmp313 = new StringBuilder("GetContestProblem_result(");
+          int tmp314 = 0;
+          if((Success != null) && __isset.success)
+          {
+            if(0 < tmp314++) { tmp313.Append(", "); }
+            tmp313.Append("Success: ");
+            Success.ToString(tmp313);
+          }
+          tmp313.Append(')');
+          return tmp313.ToString();
         }
       }
 
@@ -2906,13 +3270,13 @@ namespace CUGOJ.RPC.Gen.Services.Base
 
         public SaveContestInfo_args DeepCopy()
         {
-          var tmp282 = new SaveContestInfo_args();
+          var tmp315 = new SaveContestInfo_args();
           if((Req != null) && __isset.req)
           {
-            tmp282.Req = (global::CUGOJ.RPC.Gen.Services.Base.SaveContestInfoRequest)this.Req.DeepCopy();
+            tmp315.Req = (global::CUGOJ.RPC.Gen.Services.Base.SaveContestInfoRequest)this.Req.DeepCopy();
           }
-          tmp282.__isset.req = this.__isset.req;
-          return tmp282;
+          tmp315.__isset.req = this.__isset.req;
+          return tmp315;
         }
 
         public async global::System.Threading.Tasks.Task ReadAsync(TProtocol iprot, CancellationToken cancellationToken)
@@ -2964,15 +3328,15 @@ namespace CUGOJ.RPC.Gen.Services.Base
           oprot.IncrementRecursionDepth();
           try
           {
-            var tmp283 = new TStruct("SaveContestInfo_args");
-            await oprot.WriteStructBeginAsync(tmp283, cancellationToken);
-            var tmp284 = new TField();
+            var tmp316 = new TStruct("SaveContestInfo_args");
+            await oprot.WriteStructBeginAsync(tmp316, cancellationToken);
+            var tmp317 = new TField();
             if((Req != null) && __isset.req)
             {
-              tmp284.Name = "req";
-              tmp284.Type = TType.Struct;
-              tmp284.ID = 1;
-              await oprot.WriteFieldBeginAsync(tmp284, cancellationToken);
+              tmp317.Name = "req";
+              tmp317.Type = TType.Struct;
+              tmp317.ID = 1;
+              await oprot.WriteFieldBeginAsync(tmp317, cancellationToken);
               await Req.WriteAsync(oprot, cancellationToken);
               await oprot.WriteFieldEndAsync(cancellationToken);
             }
@@ -3005,16 +3369,16 @@ namespace CUGOJ.RPC.Gen.Services.Base
 
         public override string ToString()
         {
-          var tmp285 = new StringBuilder("SaveContestInfo_args(");
-          int tmp286 = 0;
+          var tmp318 = new StringBuilder("SaveContestInfo_args(");
+          int tmp319 = 0;
           if((Req != null) && __isset.req)
           {
-            if(0 < tmp286++) { tmp285.Append(", "); }
-            tmp285.Append("Req: ");
-            Req.ToString(tmp285);
+            if(0 < tmp319++) { tmp318.Append(", "); }
+            tmp318.Append("Req: ");
+            Req.ToString(tmp318);
           }
-          tmp285.Append(')');
-          return tmp285.ToString();
+          tmp318.Append(')');
+          return tmp318.ToString();
         }
       }
 
@@ -3049,13 +3413,13 @@ namespace CUGOJ.RPC.Gen.Services.Base
 
         public SaveContestInfo_result DeepCopy()
         {
-          var tmp287 = new SaveContestInfo_result();
+          var tmp320 = new SaveContestInfo_result();
           if((Success != null) && __isset.success)
           {
-            tmp287.Success = (global::CUGOJ.RPC.Gen.Services.Base.SaveContestInfoResponse)this.Success.DeepCopy();
+            tmp320.Success = (global::CUGOJ.RPC.Gen.Services.Base.SaveContestInfoResponse)this.Success.DeepCopy();
           }
-          tmp287.__isset.success = this.__isset.success;
-          return tmp287;
+          tmp320.__isset.success = this.__isset.success;
+          return tmp320;
         }
 
         public async global::System.Threading.Tasks.Task ReadAsync(TProtocol iprot, CancellationToken cancellationToken)
@@ -3107,18 +3471,18 @@ namespace CUGOJ.RPC.Gen.Services.Base
           oprot.IncrementRecursionDepth();
           try
           {
-            var tmp288 = new TStruct("SaveContestInfo_result");
-            await oprot.WriteStructBeginAsync(tmp288, cancellationToken);
-            var tmp289 = new TField();
+            var tmp321 = new TStruct("SaveContestInfo_result");
+            await oprot.WriteStructBeginAsync(tmp321, cancellationToken);
+            var tmp322 = new TField();
 
             if(this.__isset.success)
             {
               if (Success != null)
               {
-                tmp289.Name = "Success";
-                tmp289.Type = TType.Struct;
-                tmp289.ID = 0;
-                await oprot.WriteFieldBeginAsync(tmp289, cancellationToken);
+                tmp322.Name = "Success";
+                tmp322.Type = TType.Struct;
+                tmp322.ID = 0;
+                await oprot.WriteFieldBeginAsync(tmp322, cancellationToken);
                 await Success.WriteAsync(oprot, cancellationToken);
                 await oprot.WriteFieldEndAsync(cancellationToken);
               }
@@ -3152,16 +3516,16 @@ namespace CUGOJ.RPC.Gen.Services.Base
 
         public override string ToString()
         {
-          var tmp290 = new StringBuilder("SaveContestInfo_result(");
-          int tmp291 = 0;
+          var tmp323 = new StringBuilder("SaveContestInfo_result(");
+          int tmp324 = 0;
           if((Success != null) && __isset.success)
           {
-            if(0 < tmp291++) { tmp290.Append(", "); }
-            tmp290.Append("Success: ");
-            Success.ToString(tmp290);
+            if(0 < tmp324++) { tmp323.Append(", "); }
+            tmp323.Append("Success: ");
+            Success.ToString(tmp323);
           }
-          tmp290.Append(')');
-          return tmp290.ToString();
+          tmp323.Append(')');
+          return tmp323.ToString();
         }
       }
 
@@ -3196,13 +3560,13 @@ namespace CUGOJ.RPC.Gen.Services.Base
 
         public MulGetContestInfo_args DeepCopy()
         {
-          var tmp292 = new MulGetContestInfo_args();
+          var tmp325 = new MulGetContestInfo_args();
           if((Req != null) && __isset.req)
           {
-            tmp292.Req = (global::CUGOJ.RPC.Gen.Services.Base.MulGetContestInfoRequest)this.Req.DeepCopy();
+            tmp325.Req = (global::CUGOJ.RPC.Gen.Services.Base.MulGetContestInfoRequest)this.Req.DeepCopy();
           }
-          tmp292.__isset.req = this.__isset.req;
-          return tmp292;
+          tmp325.__isset.req = this.__isset.req;
+          return tmp325;
         }
 
         public async global::System.Threading.Tasks.Task ReadAsync(TProtocol iprot, CancellationToken cancellationToken)
@@ -3254,15 +3618,15 @@ namespace CUGOJ.RPC.Gen.Services.Base
           oprot.IncrementRecursionDepth();
           try
           {
-            var tmp293 = new TStruct("MulGetContestInfo_args");
-            await oprot.WriteStructBeginAsync(tmp293, cancellationToken);
-            var tmp294 = new TField();
+            var tmp326 = new TStruct("MulGetContestInfo_args");
+            await oprot.WriteStructBeginAsync(tmp326, cancellationToken);
+            var tmp327 = new TField();
             if((Req != null) && __isset.req)
             {
-              tmp294.Name = "req";
-              tmp294.Type = TType.Struct;
-              tmp294.ID = 1;
-              await oprot.WriteFieldBeginAsync(tmp294, cancellationToken);
+              tmp327.Name = "req";
+              tmp327.Type = TType.Struct;
+              tmp327.ID = 1;
+              await oprot.WriteFieldBeginAsync(tmp327, cancellationToken);
               await Req.WriteAsync(oprot, cancellationToken);
               await oprot.WriteFieldEndAsync(cancellationToken);
             }
@@ -3295,16 +3659,16 @@ namespace CUGOJ.RPC.Gen.Services.Base
 
         public override string ToString()
         {
-          var tmp295 = new StringBuilder("MulGetContestInfo_args(");
-          int tmp296 = 0;
+          var tmp328 = new StringBuilder("MulGetContestInfo_args(");
+          int tmp329 = 0;
           if((Req != null) && __isset.req)
           {
-            if(0 < tmp296++) { tmp295.Append(", "); }
-            tmp295.Append("Req: ");
-            Req.ToString(tmp295);
+            if(0 < tmp329++) { tmp328.Append(", "); }
+            tmp328.Append("Req: ");
+            Req.ToString(tmp328);
           }
-          tmp295.Append(')');
-          return tmp295.ToString();
+          tmp328.Append(')');
+          return tmp328.ToString();
         }
       }
 
@@ -3339,13 +3703,13 @@ namespace CUGOJ.RPC.Gen.Services.Base
 
         public MulGetContestInfo_result DeepCopy()
         {
-          var tmp297 = new MulGetContestInfo_result();
+          var tmp330 = new MulGetContestInfo_result();
           if((Success != null) && __isset.success)
           {
-            tmp297.Success = (global::CUGOJ.RPC.Gen.Services.Base.MulGetContestInfoResponse)this.Success.DeepCopy();
+            tmp330.Success = (global::CUGOJ.RPC.Gen.Services.Base.MulGetContestInfoResponse)this.Success.DeepCopy();
           }
-          tmp297.__isset.success = this.__isset.success;
-          return tmp297;
+          tmp330.__isset.success = this.__isset.success;
+          return tmp330;
         }
 
         public async global::System.Threading.Tasks.Task ReadAsync(TProtocol iprot, CancellationToken cancellationToken)
@@ -3397,18 +3761,18 @@ namespace CUGOJ.RPC.Gen.Services.Base
           oprot.IncrementRecursionDepth();
           try
           {
-            var tmp298 = new TStruct("MulGetContestInfo_result");
-            await oprot.WriteStructBeginAsync(tmp298, cancellationToken);
-            var tmp299 = new TField();
+            var tmp331 = new TStruct("MulGetContestInfo_result");
+            await oprot.WriteStructBeginAsync(tmp331, cancellationToken);
+            var tmp332 = new TField();
 
             if(this.__isset.success)
             {
               if (Success != null)
               {
-                tmp299.Name = "Success";
-                tmp299.Type = TType.Struct;
-                tmp299.ID = 0;
-                await oprot.WriteFieldBeginAsync(tmp299, cancellationToken);
+                tmp332.Name = "Success";
+                tmp332.Type = TType.Struct;
+                tmp332.ID = 0;
+                await oprot.WriteFieldBeginAsync(tmp332, cancellationToken);
                 await Success.WriteAsync(oprot, cancellationToken);
                 await oprot.WriteFieldEndAsync(cancellationToken);
               }
@@ -3442,16 +3806,16 @@ namespace CUGOJ.RPC.Gen.Services.Base
 
         public override string ToString()
         {
-          var tmp300 = new StringBuilder("MulGetContestInfo_result(");
-          int tmp301 = 0;
+          var tmp333 = new StringBuilder("MulGetContestInfo_result(");
+          int tmp334 = 0;
           if((Success != null) && __isset.success)
           {
-            if(0 < tmp301++) { tmp300.Append(", "); }
-            tmp300.Append("Success: ");
-            Success.ToString(tmp300);
+            if(0 < tmp334++) { tmp333.Append(", "); }
+            tmp333.Append("Success: ");
+            Success.ToString(tmp333);
           }
-          tmp300.Append(')');
-          return tmp300.ToString();
+          tmp333.Append(')');
+          return tmp333.ToString();
         }
       }
 
@@ -3486,13 +3850,13 @@ namespace CUGOJ.RPC.Gen.Services.Base
 
         public GetContestList_args DeepCopy()
         {
-          var tmp302 = new GetContestList_args();
+          var tmp335 = new GetContestList_args();
           if((Req != null) && __isset.req)
           {
-            tmp302.Req = (global::CUGOJ.RPC.Gen.Services.Base.GetContestListRequest)this.Req.DeepCopy();
+            tmp335.Req = (global::CUGOJ.RPC.Gen.Services.Base.GetContestListRequest)this.Req.DeepCopy();
           }
-          tmp302.__isset.req = this.__isset.req;
-          return tmp302;
+          tmp335.__isset.req = this.__isset.req;
+          return tmp335;
         }
 
         public async global::System.Threading.Tasks.Task ReadAsync(TProtocol iprot, CancellationToken cancellationToken)
@@ -3544,15 +3908,15 @@ namespace CUGOJ.RPC.Gen.Services.Base
           oprot.IncrementRecursionDepth();
           try
           {
-            var tmp303 = new TStruct("GetContestList_args");
-            await oprot.WriteStructBeginAsync(tmp303, cancellationToken);
-            var tmp304 = new TField();
+            var tmp336 = new TStruct("GetContestList_args");
+            await oprot.WriteStructBeginAsync(tmp336, cancellationToken);
+            var tmp337 = new TField();
             if((Req != null) && __isset.req)
             {
-              tmp304.Name = "req";
-              tmp304.Type = TType.Struct;
-              tmp304.ID = 1;
-              await oprot.WriteFieldBeginAsync(tmp304, cancellationToken);
+              tmp337.Name = "req";
+              tmp337.Type = TType.Struct;
+              tmp337.ID = 1;
+              await oprot.WriteFieldBeginAsync(tmp337, cancellationToken);
               await Req.WriteAsync(oprot, cancellationToken);
               await oprot.WriteFieldEndAsync(cancellationToken);
             }
@@ -3585,16 +3949,16 @@ namespace CUGOJ.RPC.Gen.Services.Base
 
         public override string ToString()
         {
-          var tmp305 = new StringBuilder("GetContestList_args(");
-          int tmp306 = 0;
+          var tmp338 = new StringBuilder("GetContestList_args(");
+          int tmp339 = 0;
           if((Req != null) && __isset.req)
           {
-            if(0 < tmp306++) { tmp305.Append(", "); }
-            tmp305.Append("Req: ");
-            Req.ToString(tmp305);
+            if(0 < tmp339++) { tmp338.Append(", "); }
+            tmp338.Append("Req: ");
+            Req.ToString(tmp338);
           }
-          tmp305.Append(')');
-          return tmp305.ToString();
+          tmp338.Append(')');
+          return tmp338.ToString();
         }
       }
 
@@ -3629,13 +3993,13 @@ namespace CUGOJ.RPC.Gen.Services.Base
 
         public GetContestList_result DeepCopy()
         {
-          var tmp307 = new GetContestList_result();
+          var tmp340 = new GetContestList_result();
           if((Success != null) && __isset.success)
           {
-            tmp307.Success = (global::CUGOJ.RPC.Gen.Services.Base.GetContestListResponse)this.Success.DeepCopy();
+            tmp340.Success = (global::CUGOJ.RPC.Gen.Services.Base.GetContestListResponse)this.Success.DeepCopy();
           }
-          tmp307.__isset.success = this.__isset.success;
-          return tmp307;
+          tmp340.__isset.success = this.__isset.success;
+          return tmp340;
         }
 
         public async global::System.Threading.Tasks.Task ReadAsync(TProtocol iprot, CancellationToken cancellationToken)
@@ -3687,18 +4051,18 @@ namespace CUGOJ.RPC.Gen.Services.Base
           oprot.IncrementRecursionDepth();
           try
           {
-            var tmp308 = new TStruct("GetContestList_result");
-            await oprot.WriteStructBeginAsync(tmp308, cancellationToken);
-            var tmp309 = new TField();
+            var tmp341 = new TStruct("GetContestList_result");
+            await oprot.WriteStructBeginAsync(tmp341, cancellationToken);
+            var tmp342 = new TField();
 
             if(this.__isset.success)
             {
               if (Success != null)
               {
-                tmp309.Name = "Success";
-                tmp309.Type = TType.Struct;
-                tmp309.ID = 0;
-                await oprot.WriteFieldBeginAsync(tmp309, cancellationToken);
+                tmp342.Name = "Success";
+                tmp342.Type = TType.Struct;
+                tmp342.ID = 0;
+                await oprot.WriteFieldBeginAsync(tmp342, cancellationToken);
                 await Success.WriteAsync(oprot, cancellationToken);
                 await oprot.WriteFieldEndAsync(cancellationToken);
               }
@@ -3732,16 +4096,16 @@ namespace CUGOJ.RPC.Gen.Services.Base
 
         public override string ToString()
         {
-          var tmp310 = new StringBuilder("GetContestList_result(");
-          int tmp311 = 0;
+          var tmp343 = new StringBuilder("GetContestList_result(");
+          int tmp344 = 0;
           if((Success != null) && __isset.success)
           {
-            if(0 < tmp311++) { tmp310.Append(", "); }
-            tmp310.Append("Success: ");
-            Success.ToString(tmp310);
+            if(0 < tmp344++) { tmp343.Append(", "); }
+            tmp343.Append("Success: ");
+            Success.ToString(tmp343);
           }
-          tmp310.Append(')');
-          return tmp310.ToString();
+          tmp343.Append(')');
+          return tmp343.ToString();
         }
       }
 
