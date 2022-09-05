@@ -37,6 +37,8 @@ namespace CUGOJ.RPC.Gen.Services.Base
   {
     private global::CUGOJ.RPC.Gen.Base.BaseResp _BaseResp;
 
+    public long ProblemID { get; set; }
+
     public global::CUGOJ.RPC.Gen.Base.BaseResp BaseResp
     {
       get
@@ -61,9 +63,15 @@ namespace CUGOJ.RPC.Gen.Services.Base
     {
     }
 
+    public SaveProblemInfoResponse(long ProblemID) : this()
+    {
+      this.ProblemID = ProblemID;
+    }
+
     public SaveProblemInfoResponse DeepCopy()
     {
       var tmp43 = new SaveProblemInfoResponse();
+      tmp43.ProblemID = this.ProblemID;
       if((BaseResp != null) && __isset.BaseResp)
       {
         tmp43.BaseResp = (global::CUGOJ.RPC.Gen.Base.BaseResp)this.BaseResp.DeepCopy();
@@ -77,6 +85,7 @@ namespace CUGOJ.RPC.Gen.Services.Base
       iprot.IncrementRecursionDepth();
       try
       {
+        bool isset_ProblemID = false;
         TField field;
         await iprot.ReadStructBeginAsync(cancellationToken);
         while (true)
@@ -89,6 +98,17 @@ namespace CUGOJ.RPC.Gen.Services.Base
 
           switch (field.ID)
           {
+            case 1:
+              if (field.Type == TType.I64)
+              {
+                ProblemID = await iprot.ReadI64Async(cancellationToken);
+                isset_ProblemID = true;
+              }
+              else
+              {
+                await TProtocolUtil.SkipAsync(iprot, field.Type, cancellationToken);
+              }
+              break;
             case 255:
               if (field.Type == TType.Struct)
               {
@@ -109,6 +129,10 @@ namespace CUGOJ.RPC.Gen.Services.Base
         }
 
         await iprot.ReadStructEndAsync(cancellationToken);
+        if (!isset_ProblemID)
+        {
+          throw new TProtocolException(TProtocolException.INVALID_DATA);
+        }
       }
       finally
       {
@@ -124,6 +148,12 @@ namespace CUGOJ.RPC.Gen.Services.Base
         var tmp44 = new TStruct("SaveProblemInfoResponse");
         await oprot.WriteStructBeginAsync(tmp44, cancellationToken);
         var tmp45 = new TField();
+        tmp45.Name = "ProblemID";
+        tmp45.Type = TType.I64;
+        tmp45.ID = 1;
+        await oprot.WriteFieldBeginAsync(tmp45, cancellationToken);
+        await oprot.WriteI64Async(ProblemID, cancellationToken);
+        await oprot.WriteFieldEndAsync(cancellationToken);
         if((BaseResp != null) && __isset.BaseResp)
         {
           tmp45.Name = "BaseResp";
@@ -146,12 +176,14 @@ namespace CUGOJ.RPC.Gen.Services.Base
     {
       if (!(that is SaveProblemInfoResponse other)) return false;
       if (ReferenceEquals(this, other)) return true;
-      return ((__isset.BaseResp == other.__isset.BaseResp) && ((!__isset.BaseResp) || (global::System.Object.Equals(BaseResp, other.BaseResp))));
+      return global::System.Object.Equals(ProblemID, other.ProblemID)
+        && ((__isset.BaseResp == other.__isset.BaseResp) && ((!__isset.BaseResp) || (global::System.Object.Equals(BaseResp, other.BaseResp))));
     }
 
     public override int GetHashCode() {
       int hashcode = 157;
       unchecked {
+        hashcode = (hashcode * 397) + ProblemID.GetHashCode();
         if((BaseResp != null) && __isset.BaseResp)
         {
           hashcode = (hashcode * 397) + BaseResp.GetHashCode();
@@ -163,11 +195,11 @@ namespace CUGOJ.RPC.Gen.Services.Base
     public override string ToString()
     {
       var tmp46 = new StringBuilder("SaveProblemInfoResponse(");
-      int tmp47 = 0;
+      tmp46.Append(", ProblemID: ");
+      ProblemID.ToString(tmp46);
       if((BaseResp != null) && __isset.BaseResp)
       {
-        if(0 < tmp47++) { tmp46.Append(", "); }
-        tmp46.Append("BaseResp: ");
+        tmp46.Append(", BaseResp: ");
         BaseResp.ToString(tmp46);
       }
       tmp46.Append(')');

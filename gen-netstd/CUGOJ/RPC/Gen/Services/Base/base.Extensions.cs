@@ -46,10 +46,37 @@ namespace CUGOJ.RPC.Gen.Services.Base
       if (source == null)
         return null;
 
-      var tmp312 = new Dictionary<string, string>(source.Count);
+      var tmp345 = new Dictionary<string, string>(source.Count);
       foreach (var pair in source)
-        tmp312.Add((pair.Key != null) ? pair.Key : null, (pair.Value != null) ? pair.Value : null);
-      return tmp312;
+        tmp345.Add((pair.Key != null) ? pair.Key : null, (pair.Value != null) ? pair.Value : null);
+      return tmp345;
+    }
+
+
+    public static bool Equals(this List<global::CUGOJ.RPC.Gen.Common.ContestProblemStruct> instance, object that)
+    {
+      if (!(that is List<global::CUGOJ.RPC.Gen.Common.ContestProblemStruct> other)) return false;
+      if (ReferenceEquals(instance, other)) return true;
+
+      return TCollections.Equals(instance, other);
+    }
+
+
+    public static int GetHashCode(this List<global::CUGOJ.RPC.Gen.Common.ContestProblemStruct> instance)
+    {
+      return TCollections.GetHashCode(instance);
+    }
+
+
+    public static List<global::CUGOJ.RPC.Gen.Common.ContestProblemStruct> DeepCopy(this List<global::CUGOJ.RPC.Gen.Common.ContestProblemStruct> source)
+    {
+      if (source == null)
+        return null;
+
+      var tmp346 = new List<global::CUGOJ.RPC.Gen.Common.ContestProblemStruct>(source.Count);
+      foreach (var elem in source)
+        tmp346.Add((elem != null) ? elem.DeepCopy() : null);
+      return tmp346;
     }
 
 
@@ -73,10 +100,10 @@ namespace CUGOJ.RPC.Gen.Services.Base
       if (source == null)
         return null;
 
-      var tmp313 = new List<global::CUGOJ.RPC.Gen.Common.ContestStruct>(source.Count);
+      var tmp347 = new List<global::CUGOJ.RPC.Gen.Common.ContestStruct>(source.Count);
       foreach (var elem in source)
-        tmp313.Add((elem != null) ? elem.DeepCopy() : null);
-      return tmp313;
+        tmp347.Add((elem != null) ? elem.DeepCopy() : null);
+      return tmp347;
     }
 
 
@@ -100,10 +127,10 @@ namespace CUGOJ.RPC.Gen.Services.Base
       if (source == null)
         return null;
 
-      var tmp314 = new List<global::CUGOJ.RPC.Gen.Common.ProblemStruct>(source.Count);
+      var tmp348 = new List<global::CUGOJ.RPC.Gen.Common.ProblemStruct>(source.Count);
       foreach (var elem in source)
-        tmp314.Add((elem != null) ? elem.DeepCopy() : null);
-      return tmp314;
+        tmp348.Add((elem != null) ? elem.DeepCopy() : null);
+      return tmp348;
     }
 
 
@@ -127,10 +154,10 @@ namespace CUGOJ.RPC.Gen.Services.Base
       if (source == null)
         return null;
 
-      var tmp315 = new List<global::CUGOJ.RPC.Gen.Common.UserStruct>(source.Count);
+      var tmp349 = new List<global::CUGOJ.RPC.Gen.Common.UserStruct>(source.Count);
       foreach (var elem in source)
-        tmp315.Add((elem != null) ? elem.DeepCopy() : null);
-      return tmp315;
+        tmp349.Add((elem != null) ? elem.DeepCopy() : null);
+      return tmp349;
     }
 
 
@@ -154,10 +181,10 @@ namespace CUGOJ.RPC.Gen.Services.Base
       if (source == null)
         return null;
 
-      var tmp316 = new List<long>(source.Count);
+      var tmp350 = new List<long>(source.Count);
       foreach (var elem in source)
-        tmp316.Add(elem);
-      return tmp316;
+        tmp350.Add(elem);
+      return tmp350;
     }
 
 
