@@ -24,7 +24,14 @@ public static class ParamsTool
     private static Dictionary<string, string> _authenticationArgs = new Dictionary<string, string>()
     {
         {"connectionString","connectionString"},
-        {"c","connectionString"}
+        {"c","connectionString"},
+        {"debug","-debug"},
+        {"mysql","mysql"},
+        {"redis","redis"},
+        {"rabbit","rabbit"},
+        {"neo4j","neo4j"},
+        {"trace","trace"},
+        {"log","log"},
     };
     private static Dictionary<string, string> _baseArgs = new Dictionary<string, string>()
     {
@@ -32,8 +39,25 @@ public static class ParamsTool
         {"c","connectionString"},
         {"debug","-debug"},
         {"mysql","mysql"},
-        {"neo4j","neo4j"}
+        {"redis","redis"},
+        {"rabbit","rabbit"},
+        {"neo4j","neo4j"},
+        {"trace","trace"},
+        {"log","log"},
     };
+    private static Dictionary<string, string> _gatewayArgs = new Dictionary<string, string>()
+    {
+        {"connectionString","connectionString"},
+        {"c","connectionString"},
+        {"debug","-debug"},
+        {"mysql","mysql"},
+        {"redis","redis"},
+        {"rabbit","rabbit"},
+        {"neo4j","neo4j"},
+        {"trace","trace"},
+        {"log","log"},
+    };
+
     public static Dictionary<string, string> ParseArgs(string[] args, ServiceTypeEnum type)
     {
         Dictionary<string, string> res = new();
@@ -43,6 +67,7 @@ public static class ParamsTool
             case ServiceTypeEnum.Core: keys = _coreArgs; break;
             case ServiceTypeEnum.Authentication: keys = _authenticationArgs; break;
             case ServiceTypeEnum.Base: keys = _baseArgs; break;
+            case ServiceTypeEnum.Gateway: keys = _gatewayArgs; break;
             default:
                 return new Dictionary<string, string>();
         }
