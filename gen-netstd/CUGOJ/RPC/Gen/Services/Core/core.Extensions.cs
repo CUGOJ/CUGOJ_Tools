@@ -46,10 +46,10 @@ namespace CUGOJ.RPC.Gen.Services.Core
       if (source == null)
         return null;
 
-      var tmp81 = new Dictionary<string, string>(source.Count);
+      var tmp502 = new Dictionary<string, string>(source.Count);
       foreach (var pair in source)
-        tmp81.Add((pair.Key != null) ? pair.Key : null, (pair.Value != null) ? pair.Value : null);
-      return tmp81;
+        tmp502.Add((pair.Key != null) ? pair.Key : null, (pair.Value != null) ? pair.Value : null);
+      return tmp502;
     }
 
 
@@ -73,10 +73,118 @@ namespace CUGOJ.RPC.Gen.Services.Core
       if (source == null)
         return null;
 
-      var tmp82 = new List<global::CUGOJ.RPC.Gen.Base.ServiceBaseInfo>(source.Count);
+      var tmp503 = new List<global::CUGOJ.RPC.Gen.Base.ServiceBaseInfo>(source.Count);
       foreach (var elem in source)
-        tmp82.Add((elem != null) ? elem.DeepCopy() : null);
-      return tmp82;
+        tmp503.Add((elem != null) ? elem.DeepCopy() : null);
+      return tmp503;
+    }
+
+
+    public static bool Equals(this List<global::CUGOJ.RPC.Gen.Common.ContestStruct> instance, object that)
+    {
+      if (!(that is List<global::CUGOJ.RPC.Gen.Common.ContestStruct> other)) return false;
+      if (ReferenceEquals(instance, other)) return true;
+
+      return TCollections.Equals(instance, other);
+    }
+
+
+    public static int GetHashCode(this List<global::CUGOJ.RPC.Gen.Common.ContestStruct> instance)
+    {
+      return TCollections.GetHashCode(instance);
+    }
+
+
+    public static List<global::CUGOJ.RPC.Gen.Common.ContestStruct> DeepCopy(this List<global::CUGOJ.RPC.Gen.Common.ContestStruct> source)
+    {
+      if (source == null)
+        return null;
+
+      var tmp504 = new List<global::CUGOJ.RPC.Gen.Common.ContestStruct>(source.Count);
+      foreach (var elem in source)
+        tmp504.Add((elem != null) ? elem.DeepCopy() : null);
+      return tmp504;
+    }
+
+
+    public static bool Equals(this List<global::CUGOJ.RPC.Gen.Common.ProblemStruct> instance, object that)
+    {
+      if (!(that is List<global::CUGOJ.RPC.Gen.Common.ProblemStruct> other)) return false;
+      if (ReferenceEquals(instance, other)) return true;
+
+      return TCollections.Equals(instance, other);
+    }
+
+
+    public static int GetHashCode(this List<global::CUGOJ.RPC.Gen.Common.ProblemStruct> instance)
+    {
+      return TCollections.GetHashCode(instance);
+    }
+
+
+    public static List<global::CUGOJ.RPC.Gen.Common.ProblemStruct> DeepCopy(this List<global::CUGOJ.RPC.Gen.Common.ProblemStruct> source)
+    {
+      if (source == null)
+        return null;
+
+      var tmp505 = new List<global::CUGOJ.RPC.Gen.Common.ProblemStruct>(source.Count);
+      foreach (var elem in source)
+        tmp505.Add((elem != null) ? elem.DeepCopy() : null);
+      return tmp505;
+    }
+
+
+    public static bool Equals(this List<global::CUGOJ.RPC.Gen.Common.SubmissionStruct> instance, object that)
+    {
+      if (!(that is List<global::CUGOJ.RPC.Gen.Common.SubmissionStruct> other)) return false;
+      if (ReferenceEquals(instance, other)) return true;
+
+      return TCollections.Equals(instance, other);
+    }
+
+
+    public static int GetHashCode(this List<global::CUGOJ.RPC.Gen.Common.SubmissionStruct> instance)
+    {
+      return TCollections.GetHashCode(instance);
+    }
+
+
+    public static List<global::CUGOJ.RPC.Gen.Common.SubmissionStruct> DeepCopy(this List<global::CUGOJ.RPC.Gen.Common.SubmissionStruct> source)
+    {
+      if (source == null)
+        return null;
+
+      var tmp506 = new List<global::CUGOJ.RPC.Gen.Common.SubmissionStruct>(source.Count);
+      foreach (var elem in source)
+        tmp506.Add((elem != null) ? elem.DeepCopy() : null);
+      return tmp506;
+    }
+
+
+    public static bool Equals(this List<string> instance, object that)
+    {
+      if (!(that is List<string> other)) return false;
+      if (ReferenceEquals(instance, other)) return true;
+
+      return TCollections.Equals(instance, other);
+    }
+
+
+    public static int GetHashCode(this List<string> instance)
+    {
+      return TCollections.GetHashCode(instance);
+    }
+
+
+    public static List<string> DeepCopy(this List<string> source)
+    {
+      if (source == null)
+        return null;
+
+      var tmp507 = new List<string>(source.Count);
+      foreach (var elem in source)
+        tmp507.Add((elem != null) ? elem : null);
+      return tmp507;
     }
 
 

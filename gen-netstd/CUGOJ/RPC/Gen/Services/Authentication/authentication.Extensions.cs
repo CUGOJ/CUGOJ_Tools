@@ -46,10 +46,37 @@ namespace CUGOJ.RPC.Gen.Services.Authentication
       if (source == null)
         return null;
 
-      var tmp19 = new Dictionary<string, string>(source.Count);
+      var tmp48 = new Dictionary<string, string>(source.Count);
       foreach (var pair in source)
-        tmp19.Add((pair.Key != null) ? pair.Key : null, (pair.Value != null) ? pair.Value : null);
-      return tmp19;
+        tmp48.Add((pair.Key != null) ? pair.Key : null, (pair.Value != null) ? pair.Value : null);
+      return tmp48;
+    }
+
+
+    public static bool Equals(this List<string> instance, object that)
+    {
+      if (!(that is List<string> other)) return false;
+      if (ReferenceEquals(instance, other)) return true;
+
+      return TCollections.Equals(instance, other);
+    }
+
+
+    public static int GetHashCode(this List<string> instance)
+    {
+      return TCollections.GetHashCode(instance);
+    }
+
+
+    public static List<string> DeepCopy(this List<string> source)
+    {
+      if (source == null)
+        return null;
+
+      var tmp49 = new List<string>(source.Count);
+      foreach (var elem in source)
+        tmp49.Add((elem != null) ? elem : null);
+      return tmp49;
     }
 
 

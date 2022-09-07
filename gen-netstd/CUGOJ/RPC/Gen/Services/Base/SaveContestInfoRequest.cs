@@ -35,9 +35,23 @@ namespace CUGOJ.RPC.Gen.Services.Base
 
   public partial class SaveContestInfoRequest : TBase
   {
+    private List<global::CUGOJ.RPC.Gen.Common.ContestProblemStruct> _ProblemList;
     private global::CUGOJ.RPC.Gen.Base.@Base _Base;
 
     public global::CUGOJ.RPC.Gen.Common.ContestStruct Contest { get; set; }
+
+    public List<global::CUGOJ.RPC.Gen.Common.ContestProblemStruct> ProblemList
+    {
+      get
+      {
+        return _ProblemList;
+      }
+      set
+      {
+        __isset.ProblemList = true;
+        this._ProblemList = value;
+      }
+    }
 
     public global::CUGOJ.RPC.Gen.Base.@Base Base
     {
@@ -56,6 +70,7 @@ namespace CUGOJ.RPC.Gen.Services.Base
     public Isset __isset;
     public struct Isset
     {
+      public bool ProblemList;
       public bool @Base;
     }
 
@@ -70,17 +85,22 @@ namespace CUGOJ.RPC.Gen.Services.Base
 
     public SaveContestInfoRequest DeepCopy()
     {
-      var tmp112 = new SaveContestInfoRequest();
+      var tmp102 = new SaveContestInfoRequest();
       if((Contest != null))
       {
-        tmp112.Contest = (global::CUGOJ.RPC.Gen.Common.ContestStruct)this.Contest.DeepCopy();
+        tmp102.Contest = (global::CUGOJ.RPC.Gen.Common.ContestStruct)this.Contest.DeepCopy();
       }
+      if((ProblemList != null) && __isset.ProblemList)
+      {
+        tmp102.ProblemList = this.ProblemList.DeepCopy();
+      }
+      tmp102.__isset.ProblemList = this.__isset.ProblemList;
       if((Base != null) && __isset.@Base)
       {
-        tmp112.Base = (global::CUGOJ.RPC.Gen.Base.@Base)this.Base.DeepCopy();
+        tmp102.Base = (global::CUGOJ.RPC.Gen.Base.@Base)this.Base.DeepCopy();
       }
-      tmp112.__isset.@Base = this.__isset.@Base;
-      return tmp112;
+      tmp102.__isset.@Base = this.__isset.@Base;
+      return tmp102;
     }
 
     public async global::System.Threading.Tasks.Task ReadAsync(TProtocol iprot, CancellationToken cancellationToken)
@@ -107,6 +127,27 @@ namespace CUGOJ.RPC.Gen.Services.Base
                 Contest = new global::CUGOJ.RPC.Gen.Common.ContestStruct();
                 await Contest.ReadAsync(iprot, cancellationToken);
                 isset_Contest = true;
+              }
+              else
+              {
+                await TProtocolUtil.SkipAsync(iprot, field.Type, cancellationToken);
+              }
+              break;
+            case 2:
+              if (field.Type == TType.List)
+              {
+                {
+                  TList _list103 = await iprot.ReadListBeginAsync(cancellationToken);
+                  ProblemList = new List<global::CUGOJ.RPC.Gen.Common.ContestProblemStruct>(_list103.Count);
+                  for(int _i104 = 0; _i104 < _list103.Count; ++_i104)
+                  {
+                    global::CUGOJ.RPC.Gen.Common.ContestProblemStruct _elem105;
+                    _elem105 = new global::CUGOJ.RPC.Gen.Common.ContestProblemStruct();
+                    await _elem105.ReadAsync(iprot, cancellationToken);
+                    ProblemList.Add(_elem105);
+                  }
+                  await iprot.ReadListEndAsync(cancellationToken);
+                }
               }
               else
               {
@@ -149,24 +190,40 @@ namespace CUGOJ.RPC.Gen.Services.Base
       oprot.IncrementRecursionDepth();
       try
       {
-        var tmp113 = new TStruct("SaveContestInfoRequest");
-        await oprot.WriteStructBeginAsync(tmp113, cancellationToken);
-        var tmp114 = new TField();
+        var tmp106 = new TStruct("SaveContestInfoRequest");
+        await oprot.WriteStructBeginAsync(tmp106, cancellationToken);
+        var tmp107 = new TField();
         if((Contest != null))
         {
-          tmp114.Name = "Contest";
-          tmp114.Type = TType.Struct;
-          tmp114.ID = 1;
-          await oprot.WriteFieldBeginAsync(tmp114, cancellationToken);
+          tmp107.Name = "Contest";
+          tmp107.Type = TType.Struct;
+          tmp107.ID = 1;
+          await oprot.WriteFieldBeginAsync(tmp107, cancellationToken);
           await Contest.WriteAsync(oprot, cancellationToken);
+          await oprot.WriteFieldEndAsync(cancellationToken);
+        }
+        if((ProblemList != null) && __isset.ProblemList)
+        {
+          tmp107.Name = "ProblemList";
+          tmp107.Type = TType.List;
+          tmp107.ID = 2;
+          await oprot.WriteFieldBeginAsync(tmp107, cancellationToken);
+          {
+            await oprot.WriteListBeginAsync(new TList(TType.Struct, ProblemList.Count), cancellationToken);
+            foreach (global::CUGOJ.RPC.Gen.Common.ContestProblemStruct _iter108 in ProblemList)
+            {
+              await _iter108.WriteAsync(oprot, cancellationToken);
+            }
+            await oprot.WriteListEndAsync(cancellationToken);
+          }
           await oprot.WriteFieldEndAsync(cancellationToken);
         }
         if((Base != null) && __isset.@Base)
         {
-          tmp114.Name = "Base";
-          tmp114.Type = TType.Struct;
-          tmp114.ID = 255;
-          await oprot.WriteFieldBeginAsync(tmp114, cancellationToken);
+          tmp107.Name = "Base";
+          tmp107.Type = TType.Struct;
+          tmp107.ID = 255;
+          await oprot.WriteFieldBeginAsync(tmp107, cancellationToken);
           await Base.WriteAsync(oprot, cancellationToken);
           await oprot.WriteFieldEndAsync(cancellationToken);
         }
@@ -184,6 +241,7 @@ namespace CUGOJ.RPC.Gen.Services.Base
       if (!(that is SaveContestInfoRequest other)) return false;
       if (ReferenceEquals(this, other)) return true;
       return global::System.Object.Equals(Contest, other.Contest)
+        && ((__isset.ProblemList == other.__isset.ProblemList) && ((!__isset.ProblemList) || (TCollections.Equals(ProblemList, other.ProblemList))))
         && ((__isset.@Base == other.__isset.@Base) && ((!__isset.@Base) || (global::System.Object.Equals(Base, other.Base))));
     }
 
@@ -193,6 +251,10 @@ namespace CUGOJ.RPC.Gen.Services.Base
         if((Contest != null))
         {
           hashcode = (hashcode * 397) + Contest.GetHashCode();
+        }
+        if((ProblemList != null) && __isset.ProblemList)
+        {
+          hashcode = (hashcode * 397) + TCollections.GetHashCode(ProblemList);
         }
         if((Base != null) && __isset.@Base)
         {
@@ -204,19 +266,24 @@ namespace CUGOJ.RPC.Gen.Services.Base
 
     public override string ToString()
     {
-      var tmp115 = new StringBuilder("SaveContestInfoRequest(");
+      var tmp109 = new StringBuilder("SaveContestInfoRequest(");
       if((Contest != null))
       {
-        tmp115.Append(", Contest: ");
-        Contest.ToString(tmp115);
+        tmp109.Append(", Contest: ");
+        Contest.ToString(tmp109);
+      }
+      if((ProblemList != null) && __isset.ProblemList)
+      {
+        tmp109.Append(", ProblemList: ");
+        ProblemList.ToString(tmp109);
       }
       if((Base != null) && __isset.@Base)
       {
-        tmp115.Append(", Base: ");
-        Base.ToString(tmp115);
+        tmp109.Append(", Base: ");
+        Base.ToString(tmp109);
       }
-      tmp115.Append(')');
-      return tmp115.ToString();
+      tmp109.Append(')');
+      return tmp109.ToString();
     }
   }
 

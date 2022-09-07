@@ -11,6 +11,8 @@ using OpenTelemetry.Trace;
 namespace CUGOJ.CUGOJ_Tools.RPC;
 public static partial class RPCService
 {
+    public static bool Ready { get; private set; } = false;
+    public static bool IsCenter { get; private set; } = false;
     public static readonly string BaseServiceName = "CUGOJ.Base";
     public static readonly string CoreServiceName = "CUGOJ.Core";
     public static readonly string FileServiceName = "CUGOJ.File";
@@ -77,16 +79,14 @@ public static partial class RPCService
     public static async Task<CUGOJ.RPC.Gen.Base.ServiceBaseInfo> ConnectCore(string connectionString, int port)
     {
         var registerInfo = RPCRegisterInfo.NewRPCRegisterInfoByConnectionString(connectionString);
-        RPCClient.CoreClient.Init(registerInfo.CoreIP, registerInfo.CorePort);
-        if (RPCClient.CoreClient.Client == null)
+        RPCClientManager.Init(registerInfo.CoreIP, registerInfo.CorePort);
+        if (RPCClientManager.Center == null)
         {
             throw new Exception("未能成功建立与Core服务的联系,请检查连接串的正确性");
         }
-        var registerReq = new CUGOJ.RPC.Gen.Services.Core.RegisterServiceRequest(connectionString, port);
-        registerReq.Base = RPCTools.NewBase();
         try
         {
-            var registerResp = await RPCClient.CoreClient.Client.RegisterService(registerReq);
+            var registerResp = await RPCClientManager.RegisterService(port, connectionString);
             if (registerResp == null)
             {
                 throw new Exception("未能成功建立与Core服务的联系,请检查连接串的正确性");
@@ -109,6 +109,7 @@ public static partial class RPCService
     private static async Task InitServices(string serviceName, string? connectionString, int port)
     {
         Console.WriteLine("正在初始化服务:" + serviceName);
+        CUGOJ.CUGOJ_Tools.CronJob.CronJob.Init();
         Context.Context.ServiceName = serviceName;
         if (Context.Context.Debug)
         {
@@ -136,7 +137,10 @@ public static partial class RPCService
                 throw e;
             }
         }
-
+        else
+        {
+            RPCClientManager.Init(Context.Context.ServiceBaseInfo.ServiceIP, port);
+        }
         Interceptor.InitIntercepor(new(serviceName));
         if (Context.Context.ServiceBaseInfo.LogAddress != string.Empty)
         {
@@ -159,6 +163,12 @@ public static partial class RPCService
         TServer server = new Thrift.Server.TThreadPoolAsyncServer(proxy, transport);
         Console.WriteLine("启动服务");
         Console.WriteLine("服务地址:" + Context.Context.ServiceBaseInfo.ServiceIP + ":" + Context.Context.ServiceBaseInfo.ServicePort);
+
+        Task.Delay(1000).ContinueWith((t) =>
+        {
+            Ready = true;
+            Console.WriteLine("服务启动成功");
+        });
         await server.ServeAsync(new CancellationToken());
     }
     private static async Task StartService(string serviceName, ITAsyncProcessor processor, string? connectionString, int port = 0, Action? preStart = null)
@@ -223,6 +233,5 @@ public static partial class RPCService
             throw e;
         }
     }
-
 
 }

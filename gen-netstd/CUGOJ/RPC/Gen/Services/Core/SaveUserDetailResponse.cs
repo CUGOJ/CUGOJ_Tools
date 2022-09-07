@@ -30,14 +30,12 @@ using Thrift.Processor;
 #pragma warning disable IDE1006  // parts of the code use IDL spelling
 #pragma warning disable IDE0083  // pattern matching "that is not SomeType" requires net5.0 but we still support earlier versions
 
-namespace CUGOJ.RPC.Gen.Services.Base
+namespace CUGOJ.RPC.Gen.Services.Core
 {
 
-  public partial class SaveContestInfoResponse : TBase
+  public partial class SaveUserDetailResponse : TBase
   {
     private global::CUGOJ.RPC.Gen.Base.BaseResp _BaseResp;
-
-    public long ContestID { get; set; }
 
     public global::CUGOJ.RPC.Gen.Base.BaseResp BaseResp
     {
@@ -59,19 +57,13 @@ namespace CUGOJ.RPC.Gen.Services.Base
       public bool BaseResp;
     }
 
-    public SaveContestInfoResponse()
+    public SaveUserDetailResponse()
     {
     }
 
-    public SaveContestInfoResponse(long ContestID) : this()
+    public SaveUserDetailResponse DeepCopy()
     {
-      this.ContestID = ContestID;
-    }
-
-    public SaveContestInfoResponse DeepCopy()
-    {
-      var tmp111 = new SaveContestInfoResponse();
-      tmp111.ContestID = this.ContestID;
+      var tmp111 = new SaveUserDetailResponse();
       if((BaseResp != null) && __isset.BaseResp)
       {
         tmp111.BaseResp = (global::CUGOJ.RPC.Gen.Base.BaseResp)this.BaseResp.DeepCopy();
@@ -85,7 +77,6 @@ namespace CUGOJ.RPC.Gen.Services.Base
       iprot.IncrementRecursionDepth();
       try
       {
-        bool isset_ContestID = false;
         TField field;
         await iprot.ReadStructBeginAsync(cancellationToken);
         while (true)
@@ -98,17 +89,6 @@ namespace CUGOJ.RPC.Gen.Services.Base
 
           switch (field.ID)
           {
-            case 1:
-              if (field.Type == TType.I64)
-              {
-                ContestID = await iprot.ReadI64Async(cancellationToken);
-                isset_ContestID = true;
-              }
-              else
-              {
-                await TProtocolUtil.SkipAsync(iprot, field.Type, cancellationToken);
-              }
-              break;
             case 255:
               if (field.Type == TType.Struct)
               {
@@ -129,10 +109,6 @@ namespace CUGOJ.RPC.Gen.Services.Base
         }
 
         await iprot.ReadStructEndAsync(cancellationToken);
-        if (!isset_ContestID)
-        {
-          throw new TProtocolException(TProtocolException.INVALID_DATA);
-        }
       }
       finally
       {
@@ -145,15 +121,9 @@ namespace CUGOJ.RPC.Gen.Services.Base
       oprot.IncrementRecursionDepth();
       try
       {
-        var tmp112 = new TStruct("SaveContestInfoResponse");
+        var tmp112 = new TStruct("SaveUserDetailResponse");
         await oprot.WriteStructBeginAsync(tmp112, cancellationToken);
         var tmp113 = new TField();
-        tmp113.Name = "ContestID";
-        tmp113.Type = TType.I64;
-        tmp113.ID = 1;
-        await oprot.WriteFieldBeginAsync(tmp113, cancellationToken);
-        await oprot.WriteI64Async(ContestID, cancellationToken);
-        await oprot.WriteFieldEndAsync(cancellationToken);
         if((BaseResp != null) && __isset.BaseResp)
         {
           tmp113.Name = "BaseResp";
@@ -174,16 +144,14 @@ namespace CUGOJ.RPC.Gen.Services.Base
 
     public override bool Equals(object that)
     {
-      if (!(that is SaveContestInfoResponse other)) return false;
+      if (!(that is SaveUserDetailResponse other)) return false;
       if (ReferenceEquals(this, other)) return true;
-      return global::System.Object.Equals(ContestID, other.ContestID)
-        && ((__isset.BaseResp == other.__isset.BaseResp) && ((!__isset.BaseResp) || (global::System.Object.Equals(BaseResp, other.BaseResp))));
+      return ((__isset.BaseResp == other.__isset.BaseResp) && ((!__isset.BaseResp) || (global::System.Object.Equals(BaseResp, other.BaseResp))));
     }
 
     public override int GetHashCode() {
       int hashcode = 157;
       unchecked {
-        hashcode = (hashcode * 397) + ContestID.GetHashCode();
         if((BaseResp != null) && __isset.BaseResp)
         {
           hashcode = (hashcode * 397) + BaseResp.GetHashCode();
@@ -194,12 +162,12 @@ namespace CUGOJ.RPC.Gen.Services.Base
 
     public override string ToString()
     {
-      var tmp114 = new StringBuilder("SaveContestInfoResponse(");
-      tmp114.Append(", ContestID: ");
-      ContestID.ToString(tmp114);
+      var tmp114 = new StringBuilder("SaveUserDetailResponse(");
+      int tmp115 = 0;
       if((BaseResp != null) && __isset.BaseResp)
       {
-        tmp114.Append(", BaseResp: ");
+        if(0 < tmp115++) { tmp114.Append(", "); }
+        tmp114.Append("BaseResp: ");
         BaseResp.ToString(tmp114);
       }
       tmp114.Append(')');

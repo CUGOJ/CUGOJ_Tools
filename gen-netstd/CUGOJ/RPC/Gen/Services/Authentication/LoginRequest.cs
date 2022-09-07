@@ -30,15 +30,13 @@ using Thrift.Processor;
 #pragma warning disable IDE1006  // parts of the code use IDL spelling
 #pragma warning disable IDE0083  // pattern matching "that is not SomeType" requires net5.0 but we still support earlier versions
 
-namespace CUGOJ.RPC.Gen.Services.Base
+namespace CUGOJ.RPC.Gen.Services.Authentication
 {
 
-  public partial class SaveUserInfoRequest : TBase
+  public partial class LoginRequest : TBase
   {
     private global::CUGOJ.RPC.Gen.Common.UserLoginInfoStruct _UserLoginInfo;
     private global::CUGOJ.RPC.Gen.Base.@Base _Base;
-
-    public global::CUGOJ.RPC.Gen.Common.UserStruct User { get; set; }
 
     public global::CUGOJ.RPC.Gen.Common.UserLoginInfoStruct UserLoginInfo
     {
@@ -74,22 +72,13 @@ namespace CUGOJ.RPC.Gen.Services.Base
       public bool @Base;
     }
 
-    public SaveUserInfoRequest()
+    public LoginRequest()
     {
     }
 
-    public SaveUserInfoRequest(global::CUGOJ.RPC.Gen.Common.UserStruct User) : this()
+    public LoginRequest DeepCopy()
     {
-      this.User = User;
-    }
-
-    public SaveUserInfoRequest DeepCopy()
-    {
-      var tmp0 = new SaveUserInfoRequest();
-      if((User != null))
-      {
-        tmp0.User = (global::CUGOJ.RPC.Gen.Common.UserStruct)this.User.DeepCopy();
-      }
+      var tmp0 = new LoginRequest();
       if((UserLoginInfo != null) && __isset.UserLoginInfo)
       {
         tmp0.UserLoginInfo = (global::CUGOJ.RPC.Gen.Common.UserLoginInfoStruct)this.UserLoginInfo.DeepCopy();
@@ -108,7 +97,6 @@ namespace CUGOJ.RPC.Gen.Services.Base
       iprot.IncrementRecursionDepth();
       try
       {
-        bool isset_User = false;
         TField field;
         await iprot.ReadStructBeginAsync(cancellationToken);
         while (true)
@@ -122,18 +110,6 @@ namespace CUGOJ.RPC.Gen.Services.Base
           switch (field.ID)
           {
             case 1:
-              if (field.Type == TType.Struct)
-              {
-                User = new global::CUGOJ.RPC.Gen.Common.UserStruct();
-                await User.ReadAsync(iprot, cancellationToken);
-                isset_User = true;
-              }
-              else
-              {
-                await TProtocolUtil.SkipAsync(iprot, field.Type, cancellationToken);
-              }
-              break;
-            case 2:
               if (field.Type == TType.Struct)
               {
                 UserLoginInfo = new global::CUGOJ.RPC.Gen.Common.UserLoginInfoStruct();
@@ -164,10 +140,6 @@ namespace CUGOJ.RPC.Gen.Services.Base
         }
 
         await iprot.ReadStructEndAsync(cancellationToken);
-        if (!isset_User)
-        {
-          throw new TProtocolException(TProtocolException.INVALID_DATA);
-        }
       }
       finally
       {
@@ -180,23 +152,14 @@ namespace CUGOJ.RPC.Gen.Services.Base
       oprot.IncrementRecursionDepth();
       try
       {
-        var tmp1 = new TStruct("SaveUserInfoRequest");
+        var tmp1 = new TStruct("LoginRequest");
         await oprot.WriteStructBeginAsync(tmp1, cancellationToken);
         var tmp2 = new TField();
-        if((User != null))
-        {
-          tmp2.Name = "User";
-          tmp2.Type = TType.Struct;
-          tmp2.ID = 1;
-          await oprot.WriteFieldBeginAsync(tmp2, cancellationToken);
-          await User.WriteAsync(oprot, cancellationToken);
-          await oprot.WriteFieldEndAsync(cancellationToken);
-        }
         if((UserLoginInfo != null) && __isset.UserLoginInfo)
         {
           tmp2.Name = "UserLoginInfo";
           tmp2.Type = TType.Struct;
-          tmp2.ID = 2;
+          tmp2.ID = 1;
           await oprot.WriteFieldBeginAsync(tmp2, cancellationToken);
           await UserLoginInfo.WriteAsync(oprot, cancellationToken);
           await oprot.WriteFieldEndAsync(cancellationToken);
@@ -221,20 +184,15 @@ namespace CUGOJ.RPC.Gen.Services.Base
 
     public override bool Equals(object that)
     {
-      if (!(that is SaveUserInfoRequest other)) return false;
+      if (!(that is LoginRequest other)) return false;
       if (ReferenceEquals(this, other)) return true;
-      return global::System.Object.Equals(User, other.User)
-        && ((__isset.UserLoginInfo == other.__isset.UserLoginInfo) && ((!__isset.UserLoginInfo) || (global::System.Object.Equals(UserLoginInfo, other.UserLoginInfo))))
+      return ((__isset.UserLoginInfo == other.__isset.UserLoginInfo) && ((!__isset.UserLoginInfo) || (global::System.Object.Equals(UserLoginInfo, other.UserLoginInfo))))
         && ((__isset.@Base == other.__isset.@Base) && ((!__isset.@Base) || (global::System.Object.Equals(Base, other.Base))));
     }
 
     public override int GetHashCode() {
       int hashcode = 157;
       unchecked {
-        if((User != null))
-        {
-          hashcode = (hashcode * 397) + User.GetHashCode();
-        }
         if((UserLoginInfo != null) && __isset.UserLoginInfo)
         {
           hashcode = (hashcode * 397) + UserLoginInfo.GetHashCode();
@@ -249,20 +207,18 @@ namespace CUGOJ.RPC.Gen.Services.Base
 
     public override string ToString()
     {
-      var tmp3 = new StringBuilder("SaveUserInfoRequest(");
-      if((User != null))
-      {
-        tmp3.Append(", User: ");
-        User.ToString(tmp3);
-      }
+      var tmp3 = new StringBuilder("LoginRequest(");
+      int tmp4 = 0;
       if((UserLoginInfo != null) && __isset.UserLoginInfo)
       {
-        tmp3.Append(", UserLoginInfo: ");
+        if(0 < tmp4++) { tmp3.Append(", "); }
+        tmp3.Append("UserLoginInfo: ");
         UserLoginInfo.ToString(tmp3);
       }
       if((Base != null) && __isset.@Base)
       {
-        tmp3.Append(", Base: ");
+        if(0 < tmp4++) { tmp3.Append(", "); }
+        tmp3.Append("Base: ");
         Base.ToString(tmp3);
       }
       tmp3.Append(')');

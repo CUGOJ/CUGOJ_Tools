@@ -20,24 +20,28 @@ public class RedisProcessor
     }
     public virtual void SetString(string key, string value, TimeSpan expireTime = new TimeSpan())
     {
-        if (_client == null) return;
-        _client.Set(key, value, expireTime);
+        using var client = _client;
+        if (client == null) return;
+        client.Set(key, value, expireTime);
     }
     public virtual string? GetString(string key)
     {
-        if (_client == null) return null;
-        return _client.Get<string>(key);
+        using var client = _client;
+        if (client == null) return null;
+        return client.Get<string>(key);
     }
     public virtual void Set<T>(string key, T value, TimeSpan expireTime = new TimeSpan()) where T : class
     {
-        if (_client == null) return;
+        using var client = _client;
+        if (client == null) return;
         var json = System.Text.Json.JsonSerializer.Serialize<T>(value);
-        _client.Set(key, json, expireTime);
+        client.Set(key, json, expireTime);
     }
     public virtual T? Get<T>(string key) where T : class
     {
-        if (_client == null) return null;
-        var json = _client.Get<string>(key);
+        using var client = _client;
+        if (client == null) return null;
+        var json = client.Get<string>(key);
         if (json == null) return null;
         return System.Text.Json.JsonSerializer.Deserialize<T>(json);
     }
