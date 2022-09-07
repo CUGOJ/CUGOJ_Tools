@@ -30,28 +30,14 @@ using Thrift.Processor;
 #pragma warning disable IDE1006  // parts of the code use IDL spelling
 #pragma warning disable IDE0083  // pattern matching "that is not SomeType" requires net5.0 but we still support earlier versions
 
-namespace CUGOJ.RPC.Gen.Services.Base
+namespace CUGOJ.RPC.Gen.Services.Core
 {
 
-  public partial class SaveUserInfoRequest : TBase
+  public partial class SubmitProblemRequest : TBase
   {
-    private global::CUGOJ.RPC.Gen.Common.UserLoginInfoStruct _UserLoginInfo;
     private global::CUGOJ.RPC.Gen.Base.@Base _Base;
 
-    public global::CUGOJ.RPC.Gen.Common.UserStruct User { get; set; }
-
-    public global::CUGOJ.RPC.Gen.Common.UserLoginInfoStruct UserLoginInfo
-    {
-      get
-      {
-        return _UserLoginInfo;
-      }
-      set
-      {
-        __isset.UserLoginInfo = true;
-        this._UserLoginInfo = value;
-      }
-    }
+    public global::CUGOJ.RPC.Gen.Common.SubmissionStruct Submission { get; set; }
 
     public global::CUGOJ.RPC.Gen.Base.@Base Base
     {
@@ -70,37 +56,31 @@ namespace CUGOJ.RPC.Gen.Services.Base
     public Isset __isset;
     public struct Isset
     {
-      public bool UserLoginInfo;
       public bool @Base;
     }
 
-    public SaveUserInfoRequest()
+    public SubmitProblemRequest()
     {
     }
 
-    public SaveUserInfoRequest(global::CUGOJ.RPC.Gen.Common.UserStruct User) : this()
+    public SubmitProblemRequest(global::CUGOJ.RPC.Gen.Common.SubmissionStruct Submission) : this()
     {
-      this.User = User;
+      this.Submission = Submission;
     }
 
-    public SaveUserInfoRequest DeepCopy()
+    public SubmitProblemRequest DeepCopy()
     {
-      var tmp0 = new SaveUserInfoRequest();
-      if((User != null))
+      var tmp131 = new SubmitProblemRequest();
+      if((Submission != null))
       {
-        tmp0.User = (global::CUGOJ.RPC.Gen.Common.UserStruct)this.User.DeepCopy();
+        tmp131.Submission = (global::CUGOJ.RPC.Gen.Common.SubmissionStruct)this.Submission.DeepCopy();
       }
-      if((UserLoginInfo != null) && __isset.UserLoginInfo)
-      {
-        tmp0.UserLoginInfo = (global::CUGOJ.RPC.Gen.Common.UserLoginInfoStruct)this.UserLoginInfo.DeepCopy();
-      }
-      tmp0.__isset.UserLoginInfo = this.__isset.UserLoginInfo;
       if((Base != null) && __isset.@Base)
       {
-        tmp0.Base = (global::CUGOJ.RPC.Gen.Base.@Base)this.Base.DeepCopy();
+        tmp131.Base = (global::CUGOJ.RPC.Gen.Base.@Base)this.Base.DeepCopy();
       }
-      tmp0.__isset.@Base = this.__isset.@Base;
-      return tmp0;
+      tmp131.__isset.@Base = this.__isset.@Base;
+      return tmp131;
     }
 
     public async global::System.Threading.Tasks.Task ReadAsync(TProtocol iprot, CancellationToken cancellationToken)
@@ -108,7 +88,7 @@ namespace CUGOJ.RPC.Gen.Services.Base
       iprot.IncrementRecursionDepth();
       try
       {
-        bool isset_User = false;
+        bool isset_Submission = false;
         TField field;
         await iprot.ReadStructBeginAsync(cancellationToken);
         while (true)
@@ -124,20 +104,9 @@ namespace CUGOJ.RPC.Gen.Services.Base
             case 1:
               if (field.Type == TType.Struct)
               {
-                User = new global::CUGOJ.RPC.Gen.Common.UserStruct();
-                await User.ReadAsync(iprot, cancellationToken);
-                isset_User = true;
-              }
-              else
-              {
-                await TProtocolUtil.SkipAsync(iprot, field.Type, cancellationToken);
-              }
-              break;
-            case 2:
-              if (field.Type == TType.Struct)
-              {
-                UserLoginInfo = new global::CUGOJ.RPC.Gen.Common.UserLoginInfoStruct();
-                await UserLoginInfo.ReadAsync(iprot, cancellationToken);
+                Submission = new global::CUGOJ.RPC.Gen.Common.SubmissionStruct();
+                await Submission.ReadAsync(iprot, cancellationToken);
+                isset_Submission = true;
               }
               else
               {
@@ -164,7 +133,7 @@ namespace CUGOJ.RPC.Gen.Services.Base
         }
 
         await iprot.ReadStructEndAsync(cancellationToken);
-        if (!isset_User)
+        if (!isset_Submission)
         {
           throw new TProtocolException(TProtocolException.INVALID_DATA);
         }
@@ -180,33 +149,24 @@ namespace CUGOJ.RPC.Gen.Services.Base
       oprot.IncrementRecursionDepth();
       try
       {
-        var tmp1 = new TStruct("SaveUserInfoRequest");
-        await oprot.WriteStructBeginAsync(tmp1, cancellationToken);
-        var tmp2 = new TField();
-        if((User != null))
+        var tmp132 = new TStruct("SubmitProblemRequest");
+        await oprot.WriteStructBeginAsync(tmp132, cancellationToken);
+        var tmp133 = new TField();
+        if((Submission != null))
         {
-          tmp2.Name = "User";
-          tmp2.Type = TType.Struct;
-          tmp2.ID = 1;
-          await oprot.WriteFieldBeginAsync(tmp2, cancellationToken);
-          await User.WriteAsync(oprot, cancellationToken);
-          await oprot.WriteFieldEndAsync(cancellationToken);
-        }
-        if((UserLoginInfo != null) && __isset.UserLoginInfo)
-        {
-          tmp2.Name = "UserLoginInfo";
-          tmp2.Type = TType.Struct;
-          tmp2.ID = 2;
-          await oprot.WriteFieldBeginAsync(tmp2, cancellationToken);
-          await UserLoginInfo.WriteAsync(oprot, cancellationToken);
+          tmp133.Name = "Submission";
+          tmp133.Type = TType.Struct;
+          tmp133.ID = 1;
+          await oprot.WriteFieldBeginAsync(tmp133, cancellationToken);
+          await Submission.WriteAsync(oprot, cancellationToken);
           await oprot.WriteFieldEndAsync(cancellationToken);
         }
         if((Base != null) && __isset.@Base)
         {
-          tmp2.Name = "Base";
-          tmp2.Type = TType.Struct;
-          tmp2.ID = 255;
-          await oprot.WriteFieldBeginAsync(tmp2, cancellationToken);
+          tmp133.Name = "Base";
+          tmp133.Type = TType.Struct;
+          tmp133.ID = 255;
+          await oprot.WriteFieldBeginAsync(tmp133, cancellationToken);
           await Base.WriteAsync(oprot, cancellationToken);
           await oprot.WriteFieldEndAsync(cancellationToken);
         }
@@ -221,23 +181,18 @@ namespace CUGOJ.RPC.Gen.Services.Base
 
     public override bool Equals(object that)
     {
-      if (!(that is SaveUserInfoRequest other)) return false;
+      if (!(that is SubmitProblemRequest other)) return false;
       if (ReferenceEquals(this, other)) return true;
-      return global::System.Object.Equals(User, other.User)
-        && ((__isset.UserLoginInfo == other.__isset.UserLoginInfo) && ((!__isset.UserLoginInfo) || (global::System.Object.Equals(UserLoginInfo, other.UserLoginInfo))))
+      return global::System.Object.Equals(Submission, other.Submission)
         && ((__isset.@Base == other.__isset.@Base) && ((!__isset.@Base) || (global::System.Object.Equals(Base, other.Base))));
     }
 
     public override int GetHashCode() {
       int hashcode = 157;
       unchecked {
-        if((User != null))
+        if((Submission != null))
         {
-          hashcode = (hashcode * 397) + User.GetHashCode();
-        }
-        if((UserLoginInfo != null) && __isset.UserLoginInfo)
-        {
-          hashcode = (hashcode * 397) + UserLoginInfo.GetHashCode();
+          hashcode = (hashcode * 397) + Submission.GetHashCode();
         }
         if((Base != null) && __isset.@Base)
         {
@@ -249,24 +204,19 @@ namespace CUGOJ.RPC.Gen.Services.Base
 
     public override string ToString()
     {
-      var tmp3 = new StringBuilder("SaveUserInfoRequest(");
-      if((User != null))
+      var tmp134 = new StringBuilder("SubmitProblemRequest(");
+      if((Submission != null))
       {
-        tmp3.Append(", User: ");
-        User.ToString(tmp3);
-      }
-      if((UserLoginInfo != null) && __isset.UserLoginInfo)
-      {
-        tmp3.Append(", UserLoginInfo: ");
-        UserLoginInfo.ToString(tmp3);
+        tmp134.Append(", Submission: ");
+        Submission.ToString(tmp134);
       }
       if((Base != null) && __isset.@Base)
       {
-        tmp3.Append(", Base: ");
-        Base.ToString(tmp3);
+        tmp134.Append(", Base: ");
+        Base.ToString(tmp134);
       }
-      tmp3.Append(')');
-      return tmp3.ToString();
+      tmp134.Append(')');
+      return tmp134.ToString();
     }
   }
 

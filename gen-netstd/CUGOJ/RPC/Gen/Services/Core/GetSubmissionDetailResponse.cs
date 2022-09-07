@@ -30,14 +30,14 @@ using Thrift.Processor;
 #pragma warning disable IDE1006  // parts of the code use IDL spelling
 #pragma warning disable IDE0083  // pattern matching "that is not SomeType" requires net5.0 but we still support earlier versions
 
-namespace CUGOJ.RPC.Gen.Services.Base
+namespace CUGOJ.RPC.Gen.Services.Core
 {
 
-  public partial class SaveContestInfoResponse : TBase
+  public partial class GetSubmissionDetailResponse : TBase
   {
     private global::CUGOJ.RPC.Gen.Base.BaseResp _BaseResp;
 
-    public long ContestID { get; set; }
+    public global::CUGOJ.RPC.Gen.Common.SubmissionStruct Submission { get; set; }
 
     public global::CUGOJ.RPC.Gen.Base.BaseResp BaseResp
     {
@@ -59,25 +59,28 @@ namespace CUGOJ.RPC.Gen.Services.Base
       public bool BaseResp;
     }
 
-    public SaveContestInfoResponse()
+    public GetSubmissionDetailResponse()
     {
     }
 
-    public SaveContestInfoResponse(long ContestID) : this()
+    public GetSubmissionDetailResponse(global::CUGOJ.RPC.Gen.Common.SubmissionStruct Submission) : this()
     {
-      this.ContestID = ContestID;
+      this.Submission = Submission;
     }
 
-    public SaveContestInfoResponse DeepCopy()
+    public GetSubmissionDetailResponse DeepCopy()
     {
-      var tmp111 = new SaveContestInfoResponse();
-      tmp111.ContestID = this.ContestID;
+      var tmp174 = new GetSubmissionDetailResponse();
+      if((Submission != null))
+      {
+        tmp174.Submission = (global::CUGOJ.RPC.Gen.Common.SubmissionStruct)this.Submission.DeepCopy();
+      }
       if((BaseResp != null) && __isset.BaseResp)
       {
-        tmp111.BaseResp = (global::CUGOJ.RPC.Gen.Base.BaseResp)this.BaseResp.DeepCopy();
+        tmp174.BaseResp = (global::CUGOJ.RPC.Gen.Base.BaseResp)this.BaseResp.DeepCopy();
       }
-      tmp111.__isset.BaseResp = this.__isset.BaseResp;
-      return tmp111;
+      tmp174.__isset.BaseResp = this.__isset.BaseResp;
+      return tmp174;
     }
 
     public async global::System.Threading.Tasks.Task ReadAsync(TProtocol iprot, CancellationToken cancellationToken)
@@ -85,7 +88,7 @@ namespace CUGOJ.RPC.Gen.Services.Base
       iprot.IncrementRecursionDepth();
       try
       {
-        bool isset_ContestID = false;
+        bool isset_Submission = false;
         TField field;
         await iprot.ReadStructBeginAsync(cancellationToken);
         while (true)
@@ -99,10 +102,11 @@ namespace CUGOJ.RPC.Gen.Services.Base
           switch (field.ID)
           {
             case 1:
-              if (field.Type == TType.I64)
+              if (field.Type == TType.Struct)
               {
-                ContestID = await iprot.ReadI64Async(cancellationToken);
-                isset_ContestID = true;
+                Submission = new global::CUGOJ.RPC.Gen.Common.SubmissionStruct();
+                await Submission.ReadAsync(iprot, cancellationToken);
+                isset_Submission = true;
               }
               else
               {
@@ -129,7 +133,7 @@ namespace CUGOJ.RPC.Gen.Services.Base
         }
 
         await iprot.ReadStructEndAsync(cancellationToken);
-        if (!isset_ContestID)
+        if (!isset_Submission)
         {
           throw new TProtocolException(TProtocolException.INVALID_DATA);
         }
@@ -145,21 +149,24 @@ namespace CUGOJ.RPC.Gen.Services.Base
       oprot.IncrementRecursionDepth();
       try
       {
-        var tmp112 = new TStruct("SaveContestInfoResponse");
-        await oprot.WriteStructBeginAsync(tmp112, cancellationToken);
-        var tmp113 = new TField();
-        tmp113.Name = "ContestID";
-        tmp113.Type = TType.I64;
-        tmp113.ID = 1;
-        await oprot.WriteFieldBeginAsync(tmp113, cancellationToken);
-        await oprot.WriteI64Async(ContestID, cancellationToken);
-        await oprot.WriteFieldEndAsync(cancellationToken);
+        var tmp175 = new TStruct("GetSubmissionDetailResponse");
+        await oprot.WriteStructBeginAsync(tmp175, cancellationToken);
+        var tmp176 = new TField();
+        if((Submission != null))
+        {
+          tmp176.Name = "Submission";
+          tmp176.Type = TType.Struct;
+          tmp176.ID = 1;
+          await oprot.WriteFieldBeginAsync(tmp176, cancellationToken);
+          await Submission.WriteAsync(oprot, cancellationToken);
+          await oprot.WriteFieldEndAsync(cancellationToken);
+        }
         if((BaseResp != null) && __isset.BaseResp)
         {
-          tmp113.Name = "BaseResp";
-          tmp113.Type = TType.Struct;
-          tmp113.ID = 255;
-          await oprot.WriteFieldBeginAsync(tmp113, cancellationToken);
+          tmp176.Name = "BaseResp";
+          tmp176.Type = TType.Struct;
+          tmp176.ID = 255;
+          await oprot.WriteFieldBeginAsync(tmp176, cancellationToken);
           await BaseResp.WriteAsync(oprot, cancellationToken);
           await oprot.WriteFieldEndAsync(cancellationToken);
         }
@@ -174,16 +181,19 @@ namespace CUGOJ.RPC.Gen.Services.Base
 
     public override bool Equals(object that)
     {
-      if (!(that is SaveContestInfoResponse other)) return false;
+      if (!(that is GetSubmissionDetailResponse other)) return false;
       if (ReferenceEquals(this, other)) return true;
-      return global::System.Object.Equals(ContestID, other.ContestID)
+      return global::System.Object.Equals(Submission, other.Submission)
         && ((__isset.BaseResp == other.__isset.BaseResp) && ((!__isset.BaseResp) || (global::System.Object.Equals(BaseResp, other.BaseResp))));
     }
 
     public override int GetHashCode() {
       int hashcode = 157;
       unchecked {
-        hashcode = (hashcode * 397) + ContestID.GetHashCode();
+        if((Submission != null))
+        {
+          hashcode = (hashcode * 397) + Submission.GetHashCode();
+        }
         if((BaseResp != null) && __isset.BaseResp)
         {
           hashcode = (hashcode * 397) + BaseResp.GetHashCode();
@@ -194,16 +204,19 @@ namespace CUGOJ.RPC.Gen.Services.Base
 
     public override string ToString()
     {
-      var tmp114 = new StringBuilder("SaveContestInfoResponse(");
-      tmp114.Append(", ContestID: ");
-      ContestID.ToString(tmp114);
+      var tmp177 = new StringBuilder("GetSubmissionDetailResponse(");
+      if((Submission != null))
+      {
+        tmp177.Append(", Submission: ");
+        Submission.ToString(tmp177);
+      }
       if((BaseResp != null) && __isset.BaseResp)
       {
-        tmp114.Append(", BaseResp: ");
-        BaseResp.ToString(tmp114);
+        tmp177.Append(", BaseResp: ");
+        BaseResp.ToString(tmp177);
       }
-      tmp114.Append(')');
-      return tmp114.ToString();
+      tmp177.Append(')');
+      return tmp177.ToString();
     }
   }
 

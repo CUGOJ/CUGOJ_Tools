@@ -30,39 +30,25 @@ using Thrift.Processor;
 #pragma warning disable IDE1006  // parts of the code use IDL spelling
 #pragma warning disable IDE0083  // pattern matching "that is not SomeType" requires net5.0 but we still support earlier versions
 
-namespace CUGOJ.RPC.Gen.Services.Base
+namespace CUGOJ.RPC.Gen.Services.Core
 {
 
-  public partial class SaveUserInfoRequest : TBase
+  public partial class GetUserDetailResponse : TBase
   {
-    private global::CUGOJ.RPC.Gen.Common.UserLoginInfoStruct _UserLoginInfo;
-    private global::CUGOJ.RPC.Gen.Base.@Base _Base;
+    private global::CUGOJ.RPC.Gen.Base.BaseResp _BaseResp;
 
     public global::CUGOJ.RPC.Gen.Common.UserStruct User { get; set; }
 
-    public global::CUGOJ.RPC.Gen.Common.UserLoginInfoStruct UserLoginInfo
+    public global::CUGOJ.RPC.Gen.Base.BaseResp BaseResp
     {
       get
       {
-        return _UserLoginInfo;
+        return _BaseResp;
       }
       set
       {
-        __isset.UserLoginInfo = true;
-        this._UserLoginInfo = value;
-      }
-    }
-
-    public global::CUGOJ.RPC.Gen.Base.@Base Base
-    {
-      get
-      {
-        return _Base;
-      }
-      set
-      {
-        __isset.@Base = true;
-        this._Base = value;
+        __isset.BaseResp = true;
+        this._BaseResp = value;
       }
     }
 
@@ -70,37 +56,31 @@ namespace CUGOJ.RPC.Gen.Services.Base
     public Isset __isset;
     public struct Isset
     {
-      public bool UserLoginInfo;
-      public bool @Base;
+      public bool BaseResp;
     }
 
-    public SaveUserInfoRequest()
+    public GetUserDetailResponse()
     {
     }
 
-    public SaveUserInfoRequest(global::CUGOJ.RPC.Gen.Common.UserStruct User) : this()
+    public GetUserDetailResponse(global::CUGOJ.RPC.Gen.Common.UserStruct User) : this()
     {
       this.User = User;
     }
 
-    public SaveUserInfoRequest DeepCopy()
+    public GetUserDetailResponse DeepCopy()
     {
-      var tmp0 = new SaveUserInfoRequest();
+      var tmp101 = new GetUserDetailResponse();
       if((User != null))
       {
-        tmp0.User = (global::CUGOJ.RPC.Gen.Common.UserStruct)this.User.DeepCopy();
+        tmp101.User = (global::CUGOJ.RPC.Gen.Common.UserStruct)this.User.DeepCopy();
       }
-      if((UserLoginInfo != null) && __isset.UserLoginInfo)
+      if((BaseResp != null) && __isset.BaseResp)
       {
-        tmp0.UserLoginInfo = (global::CUGOJ.RPC.Gen.Common.UserLoginInfoStruct)this.UserLoginInfo.DeepCopy();
+        tmp101.BaseResp = (global::CUGOJ.RPC.Gen.Base.BaseResp)this.BaseResp.DeepCopy();
       }
-      tmp0.__isset.UserLoginInfo = this.__isset.UserLoginInfo;
-      if((Base != null) && __isset.@Base)
-      {
-        tmp0.Base = (global::CUGOJ.RPC.Gen.Base.@Base)this.Base.DeepCopy();
-      }
-      tmp0.__isset.@Base = this.__isset.@Base;
-      return tmp0;
+      tmp101.__isset.BaseResp = this.__isset.BaseResp;
+      return tmp101;
     }
 
     public async global::System.Threading.Tasks.Task ReadAsync(TProtocol iprot, CancellationToken cancellationToken)
@@ -133,22 +113,11 @@ namespace CUGOJ.RPC.Gen.Services.Base
                 await TProtocolUtil.SkipAsync(iprot, field.Type, cancellationToken);
               }
               break;
-            case 2:
-              if (field.Type == TType.Struct)
-              {
-                UserLoginInfo = new global::CUGOJ.RPC.Gen.Common.UserLoginInfoStruct();
-                await UserLoginInfo.ReadAsync(iprot, cancellationToken);
-              }
-              else
-              {
-                await TProtocolUtil.SkipAsync(iprot, field.Type, cancellationToken);
-              }
-              break;
             case 255:
               if (field.Type == TType.Struct)
               {
-                Base = new global::CUGOJ.RPC.Gen.Base.@Base();
-                await Base.ReadAsync(iprot, cancellationToken);
+                BaseResp = new global::CUGOJ.RPC.Gen.Base.BaseResp();
+                await BaseResp.ReadAsync(iprot, cancellationToken);
               }
               else
               {
@@ -180,34 +149,25 @@ namespace CUGOJ.RPC.Gen.Services.Base
       oprot.IncrementRecursionDepth();
       try
       {
-        var tmp1 = new TStruct("SaveUserInfoRequest");
-        await oprot.WriteStructBeginAsync(tmp1, cancellationToken);
-        var tmp2 = new TField();
+        var tmp102 = new TStruct("GetUserDetailResponse");
+        await oprot.WriteStructBeginAsync(tmp102, cancellationToken);
+        var tmp103 = new TField();
         if((User != null))
         {
-          tmp2.Name = "User";
-          tmp2.Type = TType.Struct;
-          tmp2.ID = 1;
-          await oprot.WriteFieldBeginAsync(tmp2, cancellationToken);
+          tmp103.Name = "User";
+          tmp103.Type = TType.Struct;
+          tmp103.ID = 1;
+          await oprot.WriteFieldBeginAsync(tmp103, cancellationToken);
           await User.WriteAsync(oprot, cancellationToken);
           await oprot.WriteFieldEndAsync(cancellationToken);
         }
-        if((UserLoginInfo != null) && __isset.UserLoginInfo)
+        if((BaseResp != null) && __isset.BaseResp)
         {
-          tmp2.Name = "UserLoginInfo";
-          tmp2.Type = TType.Struct;
-          tmp2.ID = 2;
-          await oprot.WriteFieldBeginAsync(tmp2, cancellationToken);
-          await UserLoginInfo.WriteAsync(oprot, cancellationToken);
-          await oprot.WriteFieldEndAsync(cancellationToken);
-        }
-        if((Base != null) && __isset.@Base)
-        {
-          tmp2.Name = "Base";
-          tmp2.Type = TType.Struct;
-          tmp2.ID = 255;
-          await oprot.WriteFieldBeginAsync(tmp2, cancellationToken);
-          await Base.WriteAsync(oprot, cancellationToken);
+          tmp103.Name = "BaseResp";
+          tmp103.Type = TType.Struct;
+          tmp103.ID = 255;
+          await oprot.WriteFieldBeginAsync(tmp103, cancellationToken);
+          await BaseResp.WriteAsync(oprot, cancellationToken);
           await oprot.WriteFieldEndAsync(cancellationToken);
         }
         await oprot.WriteFieldStopAsync(cancellationToken);
@@ -221,11 +181,10 @@ namespace CUGOJ.RPC.Gen.Services.Base
 
     public override bool Equals(object that)
     {
-      if (!(that is SaveUserInfoRequest other)) return false;
+      if (!(that is GetUserDetailResponse other)) return false;
       if (ReferenceEquals(this, other)) return true;
       return global::System.Object.Equals(User, other.User)
-        && ((__isset.UserLoginInfo == other.__isset.UserLoginInfo) && ((!__isset.UserLoginInfo) || (global::System.Object.Equals(UserLoginInfo, other.UserLoginInfo))))
-        && ((__isset.@Base == other.__isset.@Base) && ((!__isset.@Base) || (global::System.Object.Equals(Base, other.Base))));
+        && ((__isset.BaseResp == other.__isset.BaseResp) && ((!__isset.BaseResp) || (global::System.Object.Equals(BaseResp, other.BaseResp))));
     }
 
     public override int GetHashCode() {
@@ -235,13 +194,9 @@ namespace CUGOJ.RPC.Gen.Services.Base
         {
           hashcode = (hashcode * 397) + User.GetHashCode();
         }
-        if((UserLoginInfo != null) && __isset.UserLoginInfo)
+        if((BaseResp != null) && __isset.BaseResp)
         {
-          hashcode = (hashcode * 397) + UserLoginInfo.GetHashCode();
-        }
-        if((Base != null) && __isset.@Base)
-        {
-          hashcode = (hashcode * 397) + Base.GetHashCode();
+          hashcode = (hashcode * 397) + BaseResp.GetHashCode();
         }
       }
       return hashcode;
@@ -249,24 +204,19 @@ namespace CUGOJ.RPC.Gen.Services.Base
 
     public override string ToString()
     {
-      var tmp3 = new StringBuilder("SaveUserInfoRequest(");
+      var tmp104 = new StringBuilder("GetUserDetailResponse(");
       if((User != null))
       {
-        tmp3.Append(", User: ");
-        User.ToString(tmp3);
+        tmp104.Append(", User: ");
+        User.ToString(tmp104);
       }
-      if((UserLoginInfo != null) && __isset.UserLoginInfo)
+      if((BaseResp != null) && __isset.BaseResp)
       {
-        tmp3.Append(", UserLoginInfo: ");
-        UserLoginInfo.ToString(tmp3);
+        tmp104.Append(", BaseResp: ");
+        BaseResp.ToString(tmp104);
       }
-      if((Base != null) && __isset.@Base)
-      {
-        tmp3.Append(", Base: ");
-        Base.ToString(tmp3);
-      }
-      tmp3.Append(')');
-      return tmp3.ToString();
+      tmp104.Append(')');
+      return tmp104.ToString();
     }
   }
 
