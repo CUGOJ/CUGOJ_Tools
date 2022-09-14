@@ -3,7 +3,7 @@ namespace CUGOJ.CUGOJ_Tools.RPC;
 
 public static partial class RPCService
 {
-    public static async Task StartCoreService<T>(string env, string? ip = null, int? port = null, string? traceAddress = null, string? logAddress = null, string? mysqlAddress = null, string? redisAddress = null, string? neo4jAddress = null, Action? preStart = null) where T : class, CUGOJ.RPC.Gen.Services.Core.CoreService.IAsync
+    public static async Task StartCoreService<T>(string env, string? ServiceID, string? ip = null, int? port = null, string? traceAddress = null, string? logAddress = null, string? mysqlAddress = null, string? redisAddress = null, string? neo4jAddress = null, Action? preStart = null) where T : class, CUGOJ.RPC.Gen.Services.Core.CoreService.IAsync
     {
         Console.WriteLine("正在启动Core服务");
         if (ip == null)
@@ -17,7 +17,7 @@ public static partial class RPCService
         IsCenter = true;
         Context.Context.ServiceBaseInfo = new CUGOJ.RPC.Gen.Base.ServiceBaseInfo()
         {
-            ServiceID = System.Guid.NewGuid().ToString(),
+            ServiceID = ServiceID == null ? System.Guid.NewGuid().ToString() : ServiceID,
             ServiceIP = ip,
             ServicePort = port.ToString(),
             ServiceType = CUGOJ.RPC.Gen.Base.ServiceTypeEnum.Core,
@@ -31,6 +31,7 @@ public static partial class RPCService
         };
         var handler = Trace.TraceFactory.CreateTracableObject<T>(new ServiceInterceptor());
         CUGOJ.RPC.Gen.Services.Core.CoreService.AsyncProcessor processor = new(handler);
-        await StartService(CoreServiceName, processor, null, port.Value, preStart);
+        ServiceType = CUGOJ.RPC.Gen.Base.ServiceTypeEnum.Core;
+        await StartService(processor, null, port.Value, preStart);
     }
 }

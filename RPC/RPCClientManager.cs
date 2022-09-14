@@ -67,6 +67,9 @@ public static class RPCClientManager
     private static ILoadBalancer<CUGOJ.RPC.Gen.Services.Core.CoreService.Client>? _coreService;
     private static ILoadBalancer<CUGOJ.RPC.Gen.Services.Base.BaseService.Client>? _baseService;
 
+    public static CUGOJ.RPC.Gen.Services.Authentication.AuthenticationService.Client? AuthenticationClient
+    { get; set; }
+
     private static int _port;
     private static string _connectionString = string.Empty;
     private static bool _lostCenter = false;
@@ -89,7 +92,7 @@ public static class RPCClientManager
             {
                 var startTime = Tools.CommonTools.UnixMili();
                 var req = new CUGOJ.RPC.Gen.Base.PingRequest(startTime);
-                req.Base = RPCTools.NewBase();
+                req.Base = RPCTools.NewRootBase();
                 var resp = await Center.Ping(req);
                 if (resp == null || resp.BaseResp.Status != ((int)RPCTools.RPCStatus.OK))
                 {
@@ -122,4 +125,5 @@ public static class RPCClientManager
         registerReq.Base = RPCTools.NewBase();
         return await client.RegisterService(registerReq);
     }
+
 }

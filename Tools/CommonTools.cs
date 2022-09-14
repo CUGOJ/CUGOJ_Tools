@@ -27,4 +27,10 @@ public static class CommonTools
             return false;
         }
     }
+
+    public static bool IsEmptyString(string? str)
+    {
+        return str == null
+        || str == "null" || str == string.Empty;
+    }
 }

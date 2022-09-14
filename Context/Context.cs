@@ -50,4 +50,19 @@ public static class Context
         get => _method.Value;
         set => _method.Value = value != null ? value : string.Empty;
     }
+
+    private static AsyncLocal<string> _userID = new();
+    public static string UserID
+    {
+        get => _userID.Value == null ? string.Empty : UserID;
+        set => _userID.Value = value != null ? value : string.Empty;
+    }
+
+
+    private static AsyncLocal<string> _serviceID = new();
+    public static string? ServiceID
+    {
+        get => _serviceID.Value;
+        set => _serviceID.Value = value != null ? value : string.Empty;
+    }
 }

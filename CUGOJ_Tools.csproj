@@ -5,8 +5,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <PackageId>CUGOJ_Tools</PackageId>
-    <Verison>1.0.5</Verison>
-    <PackageVersion>1.0.5</PackageVersion>
+    <Verison>1.0.6</Verison>
+    <PackageVersion>1.0.6</PackageVersion>
     <Authors>zhaoxiao,zhutianze</Authors>
     <Company>CUG</Company>
   </PropertyGroup>
@@ -22,6 +22,9 @@
     <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
     <PackageReference Include="Serilog.Sinks.Loki" Version="3.0.0" />
     <PackageReference Include="ServiceStack.Redis" Version="6.3.0" />
+    <PackageReference Include="EntityFramework" Version="6.4.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.8" />
   </ItemGroup>
 
 </Project>

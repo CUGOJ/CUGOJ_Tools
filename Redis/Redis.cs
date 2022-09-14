@@ -1,3 +1,4 @@
+using System.Runtime.InteropServices;
 using ServiceStack.Redis;
 namespace CUGOJ.CUGOJ_Tools.Redis;
 
@@ -18,32 +19,74 @@ public class RedisProcessor
             return _clientManager.GetClient();
         }
     }
-    public virtual void SetString(string key, string value, TimeSpan expireTime = new TimeSpan())
+    public virtual async Task SetString(string key, string value, TimeSpan expireTime = new TimeSpan())
     {
-        using var client = _client;
-        if (client == null) return;
-        client.Set(key, value, expireTime);
+        await Task.Run(() =>
+        {
+            using var client = _client;
+            if (client == null)
+            {
+                return;
+            }
+            client.Set(key, value, expireTime);
+        });
     }
-    public virtual string? GetString(string key)
+    public virtual async Task<string?> GetString(string key)
     {
-        using var client = _client;
-        if (client == null) return null;
-        return client.Get<string>(key);
+        return await Task.Run(() =>
+        {
+            using var client = _client;
+            if (client == null) return null;
+            return client.Get<string>(key);
+        });
     }
-    public virtual void Set<T>(string key, T value, TimeSpan expireTime = new TimeSpan()) where T : class
+    public virtual async Task Set<T>(string key, T value, TimeSpan expireTime = new TimeSpan()) where T : class
     {
-        using var client = _client;
-        if (client == null) return;
-        var json = System.Text.Json.JsonSerializer.Serialize<T>(value);
-        client.Set(key, json, expireTime);
+        await Task.Run(() =>
+        {
+            using var client = _client;
+            if (client == null) return;
+            var json = System.Text.Json.JsonSerializer.Serialize<T>(value);
+            client.Set(key, json, expireTime);
+        });
     }
-    public virtual T? Get<T>(string key) where T : class
+    public virtual async Task<T?> Get<T>(string key) where T : class
     {
+        return await Task.Run(() =>
+        {
+            using var client = _client;
+            if (client == null) return null;
+            var json = client.Get<string>(key);
+            if (json == null) return null;
+            return System.Text.Json.JsonSerializer.Deserialize<T>(json);
+        });
+    }
+    public delegate Task<T?> QueryDBFunction<T, E>(E req);
+    public virtual async Task<T?> GetWithCache<T, E>(QueryDBFunction<T, E> queryDBFunction, E req, string cacheKey, int expireSeconds = 5) where T : class
+    {
+        string lockKey = "cache_lock_" + cacheKey;
+        string contentKey = "cache_content_" + cacheKey;
         using var client = _client;
-        if (client == null) return null;
-        var json = client.Get<string>(key);
-        if (json == null) return null;
-        return System.Text.Json.JsonSerializer.Deserialize<T>(json);
+        if (client == null)
+        {
+            return await queryDBFunction(req);
+        }
+        if (client.SetValueIfNotExists(lockKey, "1", TimeSpan.FromSeconds(expireSeconds)))
+        {
+            T? res = await queryDBFunction(req);
+            if (res != null)
+                await Set<T>(contentKey, res, TimeSpan.FromSeconds(expireSeconds + 2));
+            return res;
+        }
+        else
+        {
+            T? res = await Get<T>(contentKey);
+            if (res == null)
+            {
+                res = await queryDBFunction(req);
+            }
+            return res;
+        }
     }
 }
 public static class RedisContext
@@ -66,5 +109,4 @@ public static class RedisContext
             }
         }
     }
-
 }

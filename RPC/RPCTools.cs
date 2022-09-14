@@ -1,10 +1,10 @@
+using System.Diagnostics;
 using CUGOJ.RPC.Gen.Base;
 using Thrift;
 using Thrift.Protocol;
 using Thrift.Transport;
 using Thrift.Transport.Client;
 using CUGOJ.RPC.Gen.Services;
-using Thrift;
 
 namespace CUGOJ.CUGOJ_Tools.RPC;
 
@@ -44,7 +44,25 @@ public static class RPCTools
         if (activity != null)
         {
             res.Extra["TraceContext"] = activity.Id;
+            res.Extra["ServiceID"] = Context.Context.ServiceBaseInfo.ServiceID;
+            res.Extra["UserID"] = Context.Context.UserID;
         }
+        return res;
+    }
+
+    public static Base NewRootBase()
+    {
+        var res = new Base();
+        res.Extra = new();
+        using var activity = new Activity(RPCService.ServiceName);
+        activity.Start();
+        if (activity != null)
+        {
+            res.Extra["TraceContext"] = activity.Id;
+            res.Extra["ServiceID"] = Context.Context.ServiceBaseInfo.ServiceID;
+            res.Extra["UserID"] = Context.Context.UserID;
+        }
+        activity?.Stop();
         return res;
     }
 
@@ -87,7 +105,7 @@ public static class RPCTools
     {
         var startTime = Tools.CommonTools.UnixMili();
         var req = new PingRequest(startTime);
-        req.Base = NewBase();
+        req.Base = NewRootBase();
         PingResponse? resp;
         if (client is CUGOJ.RPC.Gen.Services.Base.BaseService.Client)
         {
@@ -98,7 +116,7 @@ public static class RPCTools
             }
             resp = await _client.Ping(req);
         }
-        if (client is CUGOJ.RPC.Gen.Services.Core.CoreService.Client)
+        else if (client is CUGOJ.RPC.Gen.Services.Core.CoreService.Client)
         {
             var _client = client as CUGOJ.RPC.Gen.Services.Core.CoreService.Client;
             if (_client == null)
@@ -107,7 +125,7 @@ public static class RPCTools
             }
             resp = await _client.Ping(req);
         }
-        if (client is CUGOJ.RPC.Gen.Services.Authentication.AuthenticationService.Client)
+        else if (client is CUGOJ.RPC.Gen.Services.Authentication.AuthenticationService.Client)
         {
             var _client = client as CUGOJ.RPC.Gen.Services.Authentication.AuthenticationService.Client;
             if (_client == null)
