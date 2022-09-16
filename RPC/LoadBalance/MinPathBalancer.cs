@@ -26,7 +26,7 @@ public class MinPathBalancer<T> : ILoadBalancer<T> where T : TBaseClient, IDispo
         private List<ServiceBaseInfo> _serviceInfos = new List<ServiceBaseInfo>();
         private IClientPool<T>? _curPool = null;
         private System.Threading.SemaphoreSlim _updateLock = new SemaphoreSlim(1, 1);
-        public virtual async void UpdateServiceInfo()
+        public virtual async Task UpdateServiceInfo()
         {
             if (!RPCService.Ready) return;
             if (_updateLock.CurrentCount == 0) return;
@@ -34,7 +34,7 @@ public class MinPathBalancer<T> : ILoadBalancer<T> where T : TBaseClient, IDispo
 
             try
             {
-                using var client = RPCClientManager.Center;
+                using var client = await RPCClientManager.GetCenter();
                 if (client == null)
                     throw new Exception("Center服务未连接");
                 var req = new CUGOJ.RPC.Gen.Services.Core.DiscoverServiceRequest(_serviceType);
@@ -85,7 +85,7 @@ public class MinPathBalancer<T> : ILoadBalancer<T> where T : TBaseClient, IDispo
             }
         }
         private System.Threading.SemaphoreSlim _pingLock = new System.Threading.SemaphoreSlim(1, 1);
-        public virtual async void Ping()
+        public virtual async Task Ping()
         {
             if (!RPCService.Ready) return;
             if (_pingLock.CurrentCount == 0) return;
@@ -98,7 +98,7 @@ public class MinPathBalancer<T> : ILoadBalancer<T> where T : TBaseClient, IDispo
                     var serviceInfo = _serviceInfos[i];
                     try
                     {
-                        using var client = _clientPools[i].Client;
+                        using var client = await _clientPools[i].GetClient();
                         if (client == null)
                             throw new Exception("未能获取连接");
                         var resp = await RPCTools.ExecPing(client);
@@ -133,30 +133,25 @@ public class MinPathBalancer<T> : ILoadBalancer<T> where T : TBaseClient, IDispo
                 _pingLock.Release();
             }
         }
-        public T? Client
+
+        public async Task<T?> GetClient()
         {
-            get
-            {
-                if (_curPool == null) return null;
-                return _curPool.Client;
-            }
+            if (_curPool == null) return null;
+            return await _curPool.GetClient();
         }
     }
     private MinPathBalancerProcessor _processor = new MinPathBalancerProcessor();
-    public T? Client
+    public async Task<T?> GetClient()
     {
-        get
-        {
-            return _processor.Client;
-        }
+        return await _processor.GetClient();
     }
-    public virtual void UpdateServiceInfo()
+    public virtual async Task UpdateServiceInfo()
     {
-        _processor.UpdateServiceInfo();
+        await _processor.UpdateServiceInfo();
     }
-    public virtual void Ping()
+    public virtual async Task Ping()
     {
-        _processor.Ping();
+        await _processor.Ping();
     }
     public MinPathBalancer()
     {

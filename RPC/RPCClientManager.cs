@@ -11,17 +11,16 @@ namespace CUGOJ.CUGOJ_Tools.RPC;
 public static class RPCClientManager
 {
     private static IClientPool<CUGOJ.RPC.Gen.Services.Core.CoreService.Client> _clientPool = new ClientPool<CUGOJ.RPC.Gen.Services.Core.CoreService.Client>();
-    public static CUGOJ.RPC.Gen.Services.Core.CoreService.Client? Center
+
+    public static async Task<CUGOJ.RPC.Gen.Services.Core.CoreService.Client?> GetCenter()
     {
-        get
+        if (_clientPool == null)
         {
-            if (_clientPool == null)
-            {
-                return null;
-            }
-            return _clientPool.Client;
+            return null;
         }
+        return await _clientPool.GetClient();
     }
+
     private static void ConnectCenter(string host, int port)
     {
         // Center = null;
@@ -74,10 +73,11 @@ public static class RPCClientManager
     private static string _connectionString = string.Empty;
     private static bool _lostCenter = false;
     private static SemaphoreSlim _pingCenterLock = new SemaphoreSlim(1, 1);
-    private static async void PingCenter()
+    private static async Task PingCenter()
     {
         if (!RPCService.Ready) return;
-        if (Center == null) return;
+        using var center = await GetCenter();
+        if (center == null) return;
         if (_pingCenterLock.CurrentCount == 0) return;
         await _pingCenterLock.WaitAsync();
         try
@@ -93,7 +93,7 @@ public static class RPCClientManager
                 var startTime = Tools.CommonTools.UnixMili();
                 var req = new CUGOJ.RPC.Gen.Base.PingRequest(startTime);
                 req.Base = RPCTools.NewRootBase();
-                var resp = await Center.Ping(req);
+                var resp = await center.Ping(req);
                 if (resp == null || resp.BaseResp.Status != ((int)RPCTools.RPCStatus.OK))
                 {
                     throw new Exception("Center服务异常");
@@ -116,7 +116,7 @@ public static class RPCClientManager
     }
     public static async Task<CUGOJ.RPC.Gen.Services.Core.RegisterServiceResponse> RegisterService(int port, string connectionString)
     {
-        using var client = Center;
+        using var client = await GetCenter();
         if (client == null)
             throw new Exception("Center服务未连接");
         _port = port;
