@@ -38,9 +38,12 @@ namespace CUGOJ.CUGOJ_Tools.Trace
         public override void Intercept(IInvocation invocation)
         {
             Base? baseReq = GetBase(invocation.Arguments);
-            if (baseReq != null && baseReq.Extra != null && baseReq.Extra.ContainsKey("TraceContext"))
+            if (baseReq != null && baseReq.Extra != null && baseReq.Extra.ContainsKey("TraceContext") && baseReq.Extra.ContainsKey("ServiceID"))
             {
                 var TraceContextData = baseReq.Extra["TraceContext"];
+                Context.Context.ServiceID = baseReq.Extra["ServiceID"];
+                if (baseReq.Extra.ContainsKey("UserID"))
+                    Context.Context.UserID = baseReq.Extra["UserID"];
                 ActivityContext context;
                 if (ActivityContext.TryParse(TraceContextData, null, out context))
                 {
@@ -77,8 +80,10 @@ namespace CUGOJ.CUGOJ_Tools.Trace
                     return;
                 }
             }
-            base.Intercept(invocation);
-
+            else
+            {
+                throw new Exception("未知的请求来源,拒绝访问");
+            }
         }
         internal override void PreProcess(Activity? activity, IInvocation invocation)
         {

@@ -13,14 +13,36 @@ public static partial class RPCService
 {
     public static bool Ready { get; private set; } = false;
     public static bool IsCenter { get; private set; } = false;
-    public static readonly string BaseServiceName = "CUGOJ.Base";
-    public static readonly string CoreServiceName = "CUGOJ.Core";
-    public static readonly string FileServiceName = "CUGOJ.File";
-    public static readonly string AuthenticationServiceName = "CUGOJ.Authentication";
+    public static CUGOJ.RPC.Gen.Base.ServiceTypeEnum ServiceType { get; private set; } = CUGOJ.RPC.Gen.Base.ServiceTypeEnum.Authentication;
     public static readonly int MIN_PORT = 18000;
     public static readonly int MAX_PORT = 18999;
     public static readonly int ERR_PORT = 0;
     public static readonly int NULL_PORT = 0;
+
+    private static readonly Dictionary<CUGOJ.RPC.Gen.Base.ServiceTypeEnum, string> _serviceName = new()
+    {
+        {CUGOJ.RPC.Gen.Base.ServiceTypeEnum.Authentication,"CUGOJ.Authentication"},
+        {CUGOJ.RPC.Gen.Base.ServiceTypeEnum.Base,"CUGOJ.Base"},
+        {CUGOJ.RPC.Gen.Base.ServiceTypeEnum.Core,"CUGOJ.Core"},
+        {CUGOJ.RPC.Gen.Base.ServiceTypeEnum.File,"CUGOJ.File"},
+        {CUGOJ.RPC.Gen.Base.ServiceTypeEnum.Gateway,"CUGOJ.Gateway"},
+        {CUGOJ.RPC.Gen.Base.ServiceTypeEnum.Judger,"CUGOJ.Judger"},
+        {CUGOJ.RPC.Gen.Base.ServiceTypeEnum.Sandbox,"CUGOJ.Sandbox"},
+    };
+    public static string ServiceName
+    {
+        get
+        {
+            if (_serviceName.ContainsKey(ServiceType))
+            {
+                return _serviceName[ServiceType];
+            }
+            else
+            {
+                return "CUGOJ.Unknown";
+            }
+        }
+    }
 
     private static async Task<string> GetInternetIP()
     {
@@ -105,9 +127,11 @@ public static partial class RPCService
         }
     }
 
-
-    private static async Task InitServices(string serviceName, string? connectionString, int port)
+    private static async Task InitServices(string? connectionString, int port)
     {
+        if (!Tools.DBTools.InitSqlite<Dao.RPCContext>())
+            throw new Exception("初始化数据库失败");
+        var serviceName = ServiceName;
         Console.WriteLine("正在初始化服务:" + serviceName);
         CUGOJ.CUGOJ_Tools.CronJob.CronJob.Init();
         Context.Context.ServiceName = serviceName;
@@ -120,16 +144,23 @@ public static partial class RPCService
             Context.Context.ServiceBaseInfo.ServicePort = port.ToString();
             Context.Context.ServiceBaseInfo.Env = "debug";
         }
-        else if (connectionString != null)
+        else if (!IsCenter)
         {
-            using var activity = new Activity(serviceName);
+            using var activity = new Activity(ServiceName);
             activity.Start();
             try
             {
+                var storedConnectionString = Dao.RPCDao.GetConnectionString();
+                if (storedConnectionString != null) connectionString = storedConnectionString;
+                if (connectionString == null)
+                {
+                    throw new Exception("非Core服务首次启动必须传入ConnectionString参数");
+                }
                 var serviceBaseInfo = await ConnectCore(connectionString, port);
                 Context.Context.ServiceBaseInfo = serviceBaseInfo;
                 Console.WriteLine("成功连接到Core服务");
                 Console.WriteLine("服务信息:\n" + System.Text.Json.JsonSerializer.Serialize<CUGOJ.RPC.Gen.Base.ServiceBaseInfo>(serviceBaseInfo));
+                Dao.RPCDao.SaveConnectionString(connectionString);
                 activity.Stop();
             }
             catch (Exception e)
@@ -141,8 +172,8 @@ public static partial class RPCService
         {
             RPCClientManager.Init(Context.Context.ServiceBaseInfo.ServiceIP, port);
         }
-        Interceptor.InitIntercepor(new(serviceName));
-        if (Context.Context.ServiceBaseInfo.LogAddress != string.Empty)
+        Interceptor.InitIntercepor(new(ServiceName));
+        if (!CUGOJ.CUGOJ_Tools.Tools.CommonTools.IsEmptyString(Context.Context.ServiceBaseInfo.LogAddress))
         {
             Log.Logger.InitLogger(Context.Context.ServiceBaseInfo.LogAddress);
         }
@@ -164,14 +195,14 @@ public static partial class RPCService
         Console.WriteLine("启动服务");
         Console.WriteLine("服务地址:" + Context.Context.ServiceBaseInfo.ServiceIP + ":" + Context.Context.ServiceBaseInfo.ServicePort);
 
-        Task.Delay(1000).ContinueWith((t) =>
+        CronJob.CronJob.AddJob(() =>
         {
             Ready = true;
             Console.WriteLine("服务启动成功");
-        });
+        }, 1, 5);
         await server.ServeAsync(new CancellationToken());
     }
-    private static async Task StartService(string serviceName, ITAsyncProcessor processor, string? connectionString, int port = 0, Action? preStart = null)
+    private static async Task StartService(ITAsyncProcessor processor, string? connectionString, int port = 0, Action? preStart = null)
     {
         try
         {
@@ -179,11 +210,11 @@ public static partial class RPCService
                 port = GetLegalPort();
             if (port == ERR_PORT)
                 throw new Exception("未找到18000到18999之间的空闲端口,服务未能正常启动");
-            await InitServices(serviceName, connectionString, port);
+            await InitServices(connectionString, port);
 
-            if (Context.Context.ServiceBaseInfo.TraceAddress != string.Empty)
+            if (!CUGOJ.CUGOJ_Tools.Tools.CommonTools.IsEmptyString(Context.Context.ServiceBaseInfo.TraceAddress))
             {
-                using var provider = InitTraceProvider(serviceName, Context.Context.ServiceBaseInfo.TraceAddress);
+                using var provider = InitTraceProvider(ServiceName, Context.Context.ServiceBaseInfo.TraceAddress);
                 Console.WriteLine("已初始化链路追踪");
                 if (preStart != null)
                     preStart();
@@ -210,7 +241,8 @@ public static partial class RPCService
         CUGOJ.RPC.Gen.Services.Base.BaseService.AsyncProcessor processor = new(handler);
         try
         {
-            await StartService(BaseServiceName, processor, connectionString, 0, preStart);
+            ServiceType = CUGOJ.RPC.Gen.Base.ServiceTypeEnum.Base;
+            await StartService(processor, connectionString, 0, preStart);
         }
         catch (Exception e)
         {
@@ -226,7 +258,8 @@ public static partial class RPCService
         CUGOJ.RPC.Gen.Services.Authentication.AuthenticationService.AsyncProcessor processor = new(handler);
         try
         {
-            await StartService(AuthenticationServiceName, processor, connectionString, 0, preStart);
+            ServiceType = CUGOJ.RPC.Gen.Base.ServiceTypeEnum.Authentication;
+            await StartService(processor, connectionString, 0, preStart);
         }
         catch (Exception e)
         {

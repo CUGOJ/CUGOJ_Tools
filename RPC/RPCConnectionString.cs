@@ -26,6 +26,7 @@ public class RPCRegisterInfo
         var connectionStringBytes = System.Text.Json.JsonSerializer.SerializeToUtf8Bytes<RPCRegisterInfo>(this);
         return Convert.ToBase64String(connectionStringBytes);
     }
+    public string ServiceID { get; set; } = string.Empty;
     public string CoreIP { get; set; } = string.Empty;
     public int CorePort { get; set; } = 0;
     public string Token { get; set; } = string.Empty;
