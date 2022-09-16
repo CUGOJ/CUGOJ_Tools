@@ -37,11 +37,13 @@ namespace CUGOJ.RPC.Gen.Common
   {
     private long _ID;
     private global::CUGOJ.RPC.Gen.Common.UserStruct _User;
+    private global::CUGOJ.RPC.Gen.Common.TeamStruct _Team;
     private global::CUGOJ.RPC.Gen.Common.ProblemStruct _Problem;
     private global::CUGOJ.RPC.Gen.Common.ContestStruct _Contest;
-    private string _Language;
-    private string _Code;
-    private string _Result;
+    private long _SubmitTime;
+    private int _Status;
+    private int _Type;
+    private string _Properties;
     private string _Content;
     private long _CreateTime;
     private long _UpdateTime;
@@ -72,6 +74,19 @@ namespace CUGOJ.RPC.Gen.Common
       }
     }
 
+    public global::CUGOJ.RPC.Gen.Common.TeamStruct Team
+    {
+      get
+      {
+        return _Team;
+      }
+      set
+      {
+        __isset.Team = true;
+        this._Team = value;
+      }
+    }
+
     public global::CUGOJ.RPC.Gen.Common.ProblemStruct Problem
     {
       get
@@ -98,42 +113,55 @@ namespace CUGOJ.RPC.Gen.Common
       }
     }
 
-    public string Language
+    public long SubmitTime
     {
       get
       {
-        return _Language;
+        return _SubmitTime;
       }
       set
       {
-        __isset.Language = true;
-        this._Language = value;
+        __isset.SubmitTime = true;
+        this._SubmitTime = value;
       }
     }
 
-    public string Code
+    public int Status
     {
       get
       {
-        return _Code;
+        return _Status;
       }
       set
       {
-        __isset.Code = true;
-        this._Code = value;
+        __isset.Status = true;
+        this._Status = value;
       }
     }
 
-    public string Result
+    public int Type
     {
       get
       {
-        return _Result;
+        return _Type;
       }
       set
       {
-        __isset.Result = true;
-        this._Result = value;
+        __isset.Type = true;
+        this._Type = value;
+      }
+    }
+
+    public string Properties
+    {
+      get
+      {
+        return _Properties;
+      }
+      set
+      {
+        __isset.Properties = true;
+        this._Properties = value;
       }
     }
 
@@ -182,11 +210,13 @@ namespace CUGOJ.RPC.Gen.Common
     {
       public bool ID;
       public bool User;
+      public bool Team;
       public bool Problem;
       public bool Contest;
-      public bool Language;
-      public bool Code;
-      public bool Result;
+      public bool SubmitTime;
+      public bool Status;
+      public bool Type;
+      public bool Properties;
       public bool Content;
       public bool CreateTime;
       public bool UpdateTime;
@@ -209,6 +239,11 @@ namespace CUGOJ.RPC.Gen.Common
         tmp69.User = (global::CUGOJ.RPC.Gen.Common.UserStruct)this.User.DeepCopy();
       }
       tmp69.__isset.User = this.__isset.User;
+      if((Team != null) && __isset.Team)
+      {
+        tmp69.Team = (global::CUGOJ.RPC.Gen.Common.TeamStruct)this.Team.DeepCopy();
+      }
+      tmp69.__isset.Team = this.__isset.Team;
       if((Problem != null) && __isset.Problem)
       {
         tmp69.Problem = (global::CUGOJ.RPC.Gen.Common.ProblemStruct)this.Problem.DeepCopy();
@@ -219,21 +254,26 @@ namespace CUGOJ.RPC.Gen.Common
         tmp69.Contest = (global::CUGOJ.RPC.Gen.Common.ContestStruct)this.Contest.DeepCopy();
       }
       tmp69.__isset.Contest = this.__isset.Contest;
-      if((Language != null) && __isset.Language)
+      if(__isset.SubmitTime)
       {
-        tmp69.Language = this.Language;
+        tmp69.SubmitTime = this.SubmitTime;
       }
-      tmp69.__isset.Language = this.__isset.Language;
-      if((Code != null) && __isset.Code)
+      tmp69.__isset.SubmitTime = this.__isset.SubmitTime;
+      if(__isset.Status)
       {
-        tmp69.Code = this.Code;
+        tmp69.Status = this.Status;
       }
-      tmp69.__isset.Code = this.__isset.Code;
-      if((Result != null) && __isset.Result)
+      tmp69.__isset.Status = this.__isset.Status;
+      if(__isset.Type)
       {
-        tmp69.Result = this.Result;
+        tmp69.Type = this.Type;
       }
-      tmp69.__isset.Result = this.__isset.Result;
+      tmp69.__isset.Type = this.__isset.Type;
+      if((Properties != null) && __isset.Properties)
+      {
+        tmp69.Properties = this.Properties;
+      }
+      tmp69.__isset.Properties = this.__isset.Properties;
       if((Content != null) && __isset.Content)
       {
         tmp69.Content = this.Content;
@@ -293,6 +333,17 @@ namespace CUGOJ.RPC.Gen.Common
             case 3:
               if (field.Type == TType.Struct)
               {
+                Team = new global::CUGOJ.RPC.Gen.Common.TeamStruct();
+                await Team.ReadAsync(iprot, cancellationToken);
+              }
+              else
+              {
+                await TProtocolUtil.SkipAsync(iprot, field.Type, cancellationToken);
+              }
+              break;
+            case 4:
+              if (field.Type == TType.Struct)
+              {
                 Problem = new global::CUGOJ.RPC.Gen.Common.ProblemStruct();
                 await Problem.ReadAsync(iprot, cancellationToken);
               }
@@ -301,7 +352,7 @@ namespace CUGOJ.RPC.Gen.Common
                 await TProtocolUtil.SkipAsync(iprot, field.Type, cancellationToken);
               }
               break;
-            case 4:
+            case 5:
               if (field.Type == TType.Struct)
               {
                 Contest = new global::CUGOJ.RPC.Gen.Common.ContestStruct();
@@ -312,20 +363,10 @@ namespace CUGOJ.RPC.Gen.Common
                 await TProtocolUtil.SkipAsync(iprot, field.Type, cancellationToken);
               }
               break;
-            case 5:
-              if (field.Type == TType.String)
-              {
-                Language = await iprot.ReadStringAsync(cancellationToken);
-              }
-              else
-              {
-                await TProtocolUtil.SkipAsync(iprot, field.Type, cancellationToken);
-              }
-              break;
             case 6:
-              if (field.Type == TType.String)
+              if (field.Type == TType.I64)
               {
-                Code = await iprot.ReadStringAsync(cancellationToken);
+                SubmitTime = await iprot.ReadI64Async(cancellationToken);
               }
               else
               {
@@ -333,9 +374,9 @@ namespace CUGOJ.RPC.Gen.Common
               }
               break;
             case 7:
-              if (field.Type == TType.String)
+              if (field.Type == TType.I32)
               {
-                Result = await iprot.ReadStringAsync(cancellationToken);
+                Status = await iprot.ReadI32Async(cancellationToken);
               }
               else
               {
@@ -343,6 +384,26 @@ namespace CUGOJ.RPC.Gen.Common
               }
               break;
             case 8:
+              if (field.Type == TType.I32)
+              {
+                Type = await iprot.ReadI32Async(cancellationToken);
+              }
+              else
+              {
+                await TProtocolUtil.SkipAsync(iprot, field.Type, cancellationToken);
+              }
+              break;
+            case 9:
+              if (field.Type == TType.String)
+              {
+                Properties = await iprot.ReadStringAsync(cancellationToken);
+              }
+              else
+              {
+                await TProtocolUtil.SkipAsync(iprot, field.Type, cancellationToken);
+              }
+              break;
+            case 10:
               if (field.Type == TType.String)
               {
                 Content = await iprot.ReadStringAsync(cancellationToken);
@@ -352,7 +413,7 @@ namespace CUGOJ.RPC.Gen.Common
                 await TProtocolUtil.SkipAsync(iprot, field.Type, cancellationToken);
               }
               break;
-            case 9:
+            case 11:
               if (field.Type == TType.I64)
               {
                 CreateTime = await iprot.ReadI64Async(cancellationToken);
@@ -362,7 +423,7 @@ namespace CUGOJ.RPC.Gen.Common
                 await TProtocolUtil.SkipAsync(iprot, field.Type, cancellationToken);
               }
               break;
-            case 10:
+            case 12:
               if (field.Type == TType.I64)
               {
                 UpdateTime = await iprot.ReadI64Async(cancellationToken);
@@ -414,11 +475,20 @@ namespace CUGOJ.RPC.Gen.Common
           await User.WriteAsync(oprot, cancellationToken);
           await oprot.WriteFieldEndAsync(cancellationToken);
         }
+        if((Team != null) && __isset.Team)
+        {
+          tmp71.Name = "Team";
+          tmp71.Type = TType.Struct;
+          tmp71.ID = 3;
+          await oprot.WriteFieldBeginAsync(tmp71, cancellationToken);
+          await Team.WriteAsync(oprot, cancellationToken);
+          await oprot.WriteFieldEndAsync(cancellationToken);
+        }
         if((Problem != null) && __isset.Problem)
         {
           tmp71.Name = "Problem";
           tmp71.Type = TType.Struct;
-          tmp71.ID = 3;
+          tmp71.ID = 4;
           await oprot.WriteFieldBeginAsync(tmp71, cancellationToken);
           await Problem.WriteAsync(oprot, cancellationToken);
           await oprot.WriteFieldEndAsync(cancellationToken);
@@ -427,43 +497,52 @@ namespace CUGOJ.RPC.Gen.Common
         {
           tmp71.Name = "Contest";
           tmp71.Type = TType.Struct;
-          tmp71.ID = 4;
+          tmp71.ID = 5;
           await oprot.WriteFieldBeginAsync(tmp71, cancellationToken);
           await Contest.WriteAsync(oprot, cancellationToken);
           await oprot.WriteFieldEndAsync(cancellationToken);
         }
-        if((Language != null) && __isset.Language)
+        if(__isset.SubmitTime)
         {
-          tmp71.Name = "Language";
-          tmp71.Type = TType.String;
-          tmp71.ID = 5;
-          await oprot.WriteFieldBeginAsync(tmp71, cancellationToken);
-          await oprot.WriteStringAsync(Language, cancellationToken);
-          await oprot.WriteFieldEndAsync(cancellationToken);
-        }
-        if((Code != null) && __isset.Code)
-        {
-          tmp71.Name = "Code";
-          tmp71.Type = TType.String;
+          tmp71.Name = "SubmitTime";
+          tmp71.Type = TType.I64;
           tmp71.ID = 6;
           await oprot.WriteFieldBeginAsync(tmp71, cancellationToken);
-          await oprot.WriteStringAsync(Code, cancellationToken);
+          await oprot.WriteI64Async(SubmitTime, cancellationToken);
           await oprot.WriteFieldEndAsync(cancellationToken);
         }
-        if((Result != null) && __isset.Result)
+        if(__isset.Status)
         {
-          tmp71.Name = "Result";
-          tmp71.Type = TType.String;
+          tmp71.Name = "Status";
+          tmp71.Type = TType.I32;
           tmp71.ID = 7;
           await oprot.WriteFieldBeginAsync(tmp71, cancellationToken);
-          await oprot.WriteStringAsync(Result, cancellationToken);
+          await oprot.WriteI32Async(Status, cancellationToken);
+          await oprot.WriteFieldEndAsync(cancellationToken);
+        }
+        if(__isset.Type)
+        {
+          tmp71.Name = "Type";
+          tmp71.Type = TType.I32;
+          tmp71.ID = 8;
+          await oprot.WriteFieldBeginAsync(tmp71, cancellationToken);
+          await oprot.WriteI32Async(Type, cancellationToken);
+          await oprot.WriteFieldEndAsync(cancellationToken);
+        }
+        if((Properties != null) && __isset.Properties)
+        {
+          tmp71.Name = "Properties";
+          tmp71.Type = TType.String;
+          tmp71.ID = 9;
+          await oprot.WriteFieldBeginAsync(tmp71, cancellationToken);
+          await oprot.WriteStringAsync(Properties, cancellationToken);
           await oprot.WriteFieldEndAsync(cancellationToken);
         }
         if((Content != null) && __isset.Content)
         {
           tmp71.Name = "Content";
           tmp71.Type = TType.String;
-          tmp71.ID = 8;
+          tmp71.ID = 10;
           await oprot.WriteFieldBeginAsync(tmp71, cancellationToken);
           await oprot.WriteStringAsync(Content, cancellationToken);
           await oprot.WriteFieldEndAsync(cancellationToken);
@@ -472,7 +551,7 @@ namespace CUGOJ.RPC.Gen.Common
         {
           tmp71.Name = "CreateTime";
           tmp71.Type = TType.I64;
-          tmp71.ID = 9;
+          tmp71.ID = 11;
           await oprot.WriteFieldBeginAsync(tmp71, cancellationToken);
           await oprot.WriteI64Async(CreateTime, cancellationToken);
           await oprot.WriteFieldEndAsync(cancellationToken);
@@ -481,7 +560,7 @@ namespace CUGOJ.RPC.Gen.Common
         {
           tmp71.Name = "UpdateTime";
           tmp71.Type = TType.I64;
-          tmp71.ID = 10;
+          tmp71.ID = 12;
           await oprot.WriteFieldBeginAsync(tmp71, cancellationToken);
           await oprot.WriteI64Async(UpdateTime, cancellationToken);
           await oprot.WriteFieldEndAsync(cancellationToken);
@@ -501,11 +580,13 @@ namespace CUGOJ.RPC.Gen.Common
       if (ReferenceEquals(this, other)) return true;
       return ((__isset.ID == other.__isset.ID) && ((!__isset.ID) || (global::System.Object.Equals(ID, other.ID))))
         && ((__isset.User == other.__isset.User) && ((!__isset.User) || (global::System.Object.Equals(User, other.User))))
+        && ((__isset.Team == other.__isset.Team) && ((!__isset.Team) || (global::System.Object.Equals(Team, other.Team))))
         && ((__isset.Problem == other.__isset.Problem) && ((!__isset.Problem) || (global::System.Object.Equals(Problem, other.Problem))))
         && ((__isset.Contest == other.__isset.Contest) && ((!__isset.Contest) || (global::System.Object.Equals(Contest, other.Contest))))
-        && ((__isset.Language == other.__isset.Language) && ((!__isset.Language) || (global::System.Object.Equals(Language, other.Language))))
-        && ((__isset.Code == other.__isset.Code) && ((!__isset.Code) || (global::System.Object.Equals(Code, other.Code))))
-        && ((__isset.Result == other.__isset.Result) && ((!__isset.Result) || (global::System.Object.Equals(Result, other.Result))))
+        && ((__isset.SubmitTime == other.__isset.SubmitTime) && ((!__isset.SubmitTime) || (global::System.Object.Equals(SubmitTime, other.SubmitTime))))
+        && ((__isset.Status == other.__isset.Status) && ((!__isset.Status) || (global::System.Object.Equals(Status, other.Status))))
+        && ((__isset.Type == other.__isset.Type) && ((!__isset.Type) || (global::System.Object.Equals(Type, other.Type))))
+        && ((__isset.Properties == other.__isset.Properties) && ((!__isset.Properties) || (global::System.Object.Equals(Properties, other.Properties))))
         && ((__isset.Content == other.__isset.Content) && ((!__isset.Content) || (global::System.Object.Equals(Content, other.Content))))
         && ((__isset.CreateTime == other.__isset.CreateTime) && ((!__isset.CreateTime) || (global::System.Object.Equals(CreateTime, other.CreateTime))))
         && ((__isset.UpdateTime == other.__isset.UpdateTime) && ((!__isset.UpdateTime) || (global::System.Object.Equals(UpdateTime, other.UpdateTime))));
@@ -522,6 +603,10 @@ namespace CUGOJ.RPC.Gen.Common
         {
           hashcode = (hashcode * 397) + User.GetHashCode();
         }
+        if((Team != null) && __isset.Team)
+        {
+          hashcode = (hashcode * 397) + Team.GetHashCode();
+        }
         if((Problem != null) && __isset.Problem)
         {
           hashcode = (hashcode * 397) + Problem.GetHashCode();
@@ -530,17 +615,21 @@ namespace CUGOJ.RPC.Gen.Common
         {
           hashcode = (hashcode * 397) + Contest.GetHashCode();
         }
-        if((Language != null) && __isset.Language)
+        if(__isset.SubmitTime)
         {
-          hashcode = (hashcode * 397) + Language.GetHashCode();
+          hashcode = (hashcode * 397) + SubmitTime.GetHashCode();
         }
-        if((Code != null) && __isset.Code)
+        if(__isset.Status)
         {
-          hashcode = (hashcode * 397) + Code.GetHashCode();
+          hashcode = (hashcode * 397) + Status.GetHashCode();
         }
-        if((Result != null) && __isset.Result)
+        if(__isset.Type)
         {
-          hashcode = (hashcode * 397) + Result.GetHashCode();
+          hashcode = (hashcode * 397) + Type.GetHashCode();
+        }
+        if((Properties != null) && __isset.Properties)
+        {
+          hashcode = (hashcode * 397) + Properties.GetHashCode();
         }
         if((Content != null) && __isset.Content)
         {
@@ -574,6 +663,12 @@ namespace CUGOJ.RPC.Gen.Common
         tmp72.Append("User: ");
         User.ToString(tmp72);
       }
+      if((Team != null) && __isset.Team)
+      {
+        if(0 < tmp73++) { tmp72.Append(", "); }
+        tmp72.Append("Team: ");
+        Team.ToString(tmp72);
+      }
       if((Problem != null) && __isset.Problem)
       {
         if(0 < tmp73++) { tmp72.Append(", "); }
@@ -586,23 +681,29 @@ namespace CUGOJ.RPC.Gen.Common
         tmp72.Append("Contest: ");
         Contest.ToString(tmp72);
       }
-      if((Language != null) && __isset.Language)
+      if(__isset.SubmitTime)
       {
         if(0 < tmp73++) { tmp72.Append(", "); }
-        tmp72.Append("Language: ");
-        Language.ToString(tmp72);
+        tmp72.Append("SubmitTime: ");
+        SubmitTime.ToString(tmp72);
       }
-      if((Code != null) && __isset.Code)
+      if(__isset.Status)
       {
         if(0 < tmp73++) { tmp72.Append(", "); }
-        tmp72.Append("Code: ");
-        Code.ToString(tmp72);
+        tmp72.Append("Status: ");
+        Status.ToString(tmp72);
       }
-      if((Result != null) && __isset.Result)
+      if(__isset.Type)
       {
         if(0 < tmp73++) { tmp72.Append(", "); }
-        tmp72.Append("Result: ");
-        Result.ToString(tmp72);
+        tmp72.Append("Type: ");
+        Type.ToString(tmp72);
+      }
+      if((Properties != null) && __isset.Properties)
+      {
+        if(0 < tmp73++) { tmp72.Append(", "); }
+        tmp72.Append("Properties: ");
+        Properties.ToString(tmp72);
       }
       if((Content != null) && __isset.Content)
       {
