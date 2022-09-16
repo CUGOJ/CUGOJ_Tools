@@ -68,7 +68,7 @@ public static class RPCTools
 
     public static async Task<T> CreateClient<T>(string host, int port) where T : TBaseClient
     {
-        TTransport transport = new TSocketTransport(host, port, new TConfiguration(), 1000);
+        TTransport transport = new TSocketTransport(System.Net.IPAddress.Parse(host), port, new TConfiguration(), 1000);
         TProtocol protocol = new TBinaryProtocol(transport);
         var clientType = typeof(T);
         var constructor = clientType.GetConstructor(new[] { typeof(TProtocol) });

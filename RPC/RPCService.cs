@@ -102,7 +102,7 @@ public static partial class RPCService
     {
         var registerInfo = RPCRegisterInfo.NewRPCRegisterInfoByConnectionString(connectionString);
         RPCClientManager.Init(registerInfo.CoreIP, registerInfo.CorePort);
-        if (RPCClientManager.Center == null)
+        if (RPCClientManager.GetCenter() == null)
         {
             throw new Exception("未能成功建立与Core服务的联系,请检查连接串的正确性");
         }
@@ -195,10 +195,13 @@ public static partial class RPCService
         Console.WriteLine("启动服务");
         Console.WriteLine("服务地址:" + Context.Context.ServiceBaseInfo.ServiceIP + ":" + Context.Context.ServiceBaseInfo.ServicePort);
 
-        CronJob.CronJob.AddJob(() =>
+        CronJob.CronJob.AddJob(async () =>
         {
-            Ready = true;
-            Console.WriteLine("服务启动成功");
+            await Task.Run(() =>
+            {
+                Ready = true;
+                Console.WriteLine("服务启动成功");
+            });
         }, 1, 5);
         await server.ServeAsync(new CancellationToken());
     }

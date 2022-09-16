@@ -6,5 +6,5 @@ using CUGOJ.RPC.Gen.Base;
 namespace CUGOJ.CUGOJ_Tools.RPC.LoadBalance;
 public interface ILoadBalancer<T> where T : TBaseClient
 {
-    public T? Client { get; }
+    public Task<T?> GetClient();
 }

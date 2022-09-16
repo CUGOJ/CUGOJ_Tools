@@ -16,7 +16,7 @@ public static class CronJob
             _processer.Init();
         }
     }
-    public static void AddJob(Action action, int repeatCount = 0, int repeatInterval = 5)
+    public static void AddJob(Func<Task> action, int repeatCount = 0, int repeatInterval = 5)
     {
         if (_processer == null)
             throw new Exception("调度器未初始化");
@@ -27,5 +27,5 @@ public static class CronJob
 public interface ICronJobProcesser
 {
     void Init();
-    void AddJob(Action action, int repeatCount = 0, int repeatInterval = 5);
+    void AddJob(Func<Task> action, int repeatCount = 0, int repeatInterval = 5);
 }
