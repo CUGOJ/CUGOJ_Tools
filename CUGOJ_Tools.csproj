@@ -5,8 +5,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <PackageId>CUGOJ_Tools</PackageId>
-    <Verison>1.0.8</Verison>
-    <PackageVersion>1.0.8</PackageVersion>
+    <Verison>1.0.9</Verison>
+    <PackageVersion>1.0.9</PackageVersion>
     <Authors>zhaoxiao,zhutianze</Authors>
     <Company>CUG</Company>
   </PropertyGroup>

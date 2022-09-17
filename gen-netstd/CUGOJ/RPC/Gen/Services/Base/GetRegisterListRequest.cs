@@ -30,22 +30,18 @@ using Thrift.Processor;
 #pragma warning disable IDE1006  // parts of the code use IDL spelling
 #pragma warning disable IDE0083  // pattern matching "that is not SomeType" requires net5.0 but we still support earlier versions
 
-namespace CUGOJ.RPC.Gen.Services.Core
+namespace CUGOJ.RPC.Gen.Services.Base
 {
 
-  public partial class SetupServiceRequest : TBase
+  public partial class GetRegisterListRequest : TBase
   {
     private global::CUGOJ.RPC.Gen.Base.@Base _Base;
 
-    public string ServiceID { get; set; }
+    public long ContestID { get; set; }
 
-    /// <summary>
-    /// 
-    /// <seealso cref="global::CUGOJ.RPC.Gen.Services.Core.SetupServiceTypeEnum"/>
-    /// </summary>
-    public global::CUGOJ.RPC.Gen.Services.Core.SetupServiceTypeEnum SetupServiceType { get; set; }
+    public long Cursor { get; set; }
 
-    public string SetupValue { get; set; }
+    public long Limit { get; set; }
 
     public global::CUGOJ.RPC.Gen.Base.@Base Base
     {
@@ -67,35 +63,29 @@ namespace CUGOJ.RPC.Gen.Services.Core
       public bool @Base;
     }
 
-    public SetupServiceRequest()
+    public GetRegisterListRequest()
     {
     }
 
-    public SetupServiceRequest(string ServiceID, global::CUGOJ.RPC.Gen.Services.Core.SetupServiceTypeEnum SetupServiceType, string SetupValue) : this()
+    public GetRegisterListRequest(long ContestID, long Cursor, long Limit) : this()
     {
-      this.ServiceID = ServiceID;
-      this.SetupServiceType = SetupServiceType;
-      this.SetupValue = SetupValue;
+      this.ContestID = ContestID;
+      this.Cursor = Cursor;
+      this.Limit = Limit;
     }
 
-    public SetupServiceRequest DeepCopy()
+    public GetRegisterListRequest DeepCopy()
     {
-      var tmp193 = new SetupServiceRequest();
-      if((ServiceID != null))
-      {
-        tmp193.ServiceID = this.ServiceID;
-      }
-      tmp193.SetupServiceType = this.SetupServiceType;
-      if((SetupValue != null))
-      {
-        tmp193.SetupValue = this.SetupValue;
-      }
+      var tmp174 = new GetRegisterListRequest();
+      tmp174.ContestID = this.ContestID;
+      tmp174.Cursor = this.Cursor;
+      tmp174.Limit = this.Limit;
       if((Base != null) && __isset.@Base)
       {
-        tmp193.Base = (global::CUGOJ.RPC.Gen.Base.@Base)this.Base.DeepCopy();
+        tmp174.Base = (global::CUGOJ.RPC.Gen.Base.@Base)this.Base.DeepCopy();
       }
-      tmp193.__isset.@Base = this.__isset.@Base;
-      return tmp193;
+      tmp174.__isset.@Base = this.__isset.@Base;
+      return tmp174;
     }
 
     public async global::System.Threading.Tasks.Task ReadAsync(TProtocol iprot, CancellationToken cancellationToken)
@@ -103,9 +93,9 @@ namespace CUGOJ.RPC.Gen.Services.Core
       iprot.IncrementRecursionDepth();
       try
       {
-        bool isset_ServiceID = false;
-        bool isset_SetupServiceType = false;
-        bool isset_SetupValue = false;
+        bool isset_ContestID = false;
+        bool isset_Cursor = false;
+        bool isset_Limit = false;
         TField field;
         await iprot.ReadStructBeginAsync(cancellationToken);
         while (true)
@@ -119,10 +109,10 @@ namespace CUGOJ.RPC.Gen.Services.Core
           switch (field.ID)
           {
             case 1:
-              if (field.Type == TType.String)
+              if (field.Type == TType.I64)
               {
-                ServiceID = await iprot.ReadStringAsync(cancellationToken);
-                isset_ServiceID = true;
+                ContestID = await iprot.ReadI64Async(cancellationToken);
+                isset_ContestID = true;
               }
               else
               {
@@ -130,10 +120,10 @@ namespace CUGOJ.RPC.Gen.Services.Core
               }
               break;
             case 2:
-              if (field.Type == TType.I32)
+              if (field.Type == TType.I64)
               {
-                SetupServiceType = (global::CUGOJ.RPC.Gen.Services.Core.SetupServiceTypeEnum)await iprot.ReadI32Async(cancellationToken);
-                isset_SetupServiceType = true;
+                Cursor = await iprot.ReadI64Async(cancellationToken);
+                isset_Cursor = true;
               }
               else
               {
@@ -141,10 +131,10 @@ namespace CUGOJ.RPC.Gen.Services.Core
               }
               break;
             case 3:
-              if (field.Type == TType.String)
+              if (field.Type == TType.I64)
               {
-                SetupValue = await iprot.ReadStringAsync(cancellationToken);
-                isset_SetupValue = true;
+                Limit = await iprot.ReadI64Async(cancellationToken);
+                isset_Limit = true;
               }
               else
               {
@@ -171,15 +161,15 @@ namespace CUGOJ.RPC.Gen.Services.Core
         }
 
         await iprot.ReadStructEndAsync(cancellationToken);
-        if (!isset_ServiceID)
+        if (!isset_ContestID)
         {
           throw new TProtocolException(TProtocolException.INVALID_DATA);
         }
-        if (!isset_SetupServiceType)
+        if (!isset_Cursor)
         {
           throw new TProtocolException(TProtocolException.INVALID_DATA);
         }
-        if (!isset_SetupValue)
+        if (!isset_Limit)
         {
           throw new TProtocolException(TProtocolException.INVALID_DATA);
         }
@@ -195,39 +185,33 @@ namespace CUGOJ.RPC.Gen.Services.Core
       oprot.IncrementRecursionDepth();
       try
       {
-        var tmp194 = new TStruct("SetupServiceRequest");
-        await oprot.WriteStructBeginAsync(tmp194, cancellationToken);
-        var tmp195 = new TField();
-        if((ServiceID != null))
-        {
-          tmp195.Name = "ServiceID";
-          tmp195.Type = TType.String;
-          tmp195.ID = 1;
-          await oprot.WriteFieldBeginAsync(tmp195, cancellationToken);
-          await oprot.WriteStringAsync(ServiceID, cancellationToken);
-          await oprot.WriteFieldEndAsync(cancellationToken);
-        }
-        tmp195.Name = "SetupServiceType";
-        tmp195.Type = TType.I32;
-        tmp195.ID = 2;
-        await oprot.WriteFieldBeginAsync(tmp195, cancellationToken);
-        await oprot.WriteI32Async((int)SetupServiceType, cancellationToken);
+        var tmp175 = new TStruct("GetRegisterListRequest");
+        await oprot.WriteStructBeginAsync(tmp175, cancellationToken);
+        var tmp176 = new TField();
+        tmp176.Name = "ContestID";
+        tmp176.Type = TType.I64;
+        tmp176.ID = 1;
+        await oprot.WriteFieldBeginAsync(tmp176, cancellationToken);
+        await oprot.WriteI64Async(ContestID, cancellationToken);
         await oprot.WriteFieldEndAsync(cancellationToken);
-        if((SetupValue != null))
-        {
-          tmp195.Name = "SetupValue";
-          tmp195.Type = TType.String;
-          tmp195.ID = 3;
-          await oprot.WriteFieldBeginAsync(tmp195, cancellationToken);
-          await oprot.WriteStringAsync(SetupValue, cancellationToken);
-          await oprot.WriteFieldEndAsync(cancellationToken);
-        }
+        tmp176.Name = "Cursor";
+        tmp176.Type = TType.I64;
+        tmp176.ID = 2;
+        await oprot.WriteFieldBeginAsync(tmp176, cancellationToken);
+        await oprot.WriteI64Async(Cursor, cancellationToken);
+        await oprot.WriteFieldEndAsync(cancellationToken);
+        tmp176.Name = "Limit";
+        tmp176.Type = TType.I64;
+        tmp176.ID = 3;
+        await oprot.WriteFieldBeginAsync(tmp176, cancellationToken);
+        await oprot.WriteI64Async(Limit, cancellationToken);
+        await oprot.WriteFieldEndAsync(cancellationToken);
         if((Base != null) && __isset.@Base)
         {
-          tmp195.Name = "Base";
-          tmp195.Type = TType.Struct;
-          tmp195.ID = 255;
-          await oprot.WriteFieldBeginAsync(tmp195, cancellationToken);
+          tmp176.Name = "Base";
+          tmp176.Type = TType.Struct;
+          tmp176.ID = 255;
+          await oprot.WriteFieldBeginAsync(tmp176, cancellationToken);
           await Base.WriteAsync(oprot, cancellationToken);
           await oprot.WriteFieldEndAsync(cancellationToken);
         }
@@ -242,26 +226,20 @@ namespace CUGOJ.RPC.Gen.Services.Core
 
     public override bool Equals(object that)
     {
-      if (!(that is SetupServiceRequest other)) return false;
+      if (!(that is GetRegisterListRequest other)) return false;
       if (ReferenceEquals(this, other)) return true;
-      return global::System.Object.Equals(ServiceID, other.ServiceID)
-        && global::System.Object.Equals(SetupServiceType, other.SetupServiceType)
-        && global::System.Object.Equals(SetupValue, other.SetupValue)
+      return global::System.Object.Equals(ContestID, other.ContestID)
+        && global::System.Object.Equals(Cursor, other.Cursor)
+        && global::System.Object.Equals(Limit, other.Limit)
         && ((__isset.@Base == other.__isset.@Base) && ((!__isset.@Base) || (global::System.Object.Equals(Base, other.Base))));
     }
 
     public override int GetHashCode() {
       int hashcode = 157;
       unchecked {
-        if((ServiceID != null))
-        {
-          hashcode = (hashcode * 397) + ServiceID.GetHashCode();
-        }
-        hashcode = (hashcode * 397) + SetupServiceType.GetHashCode();
-        if((SetupValue != null))
-        {
-          hashcode = (hashcode * 397) + SetupValue.GetHashCode();
-        }
+        hashcode = (hashcode * 397) + ContestID.GetHashCode();
+        hashcode = (hashcode * 397) + Cursor.GetHashCode();
+        hashcode = (hashcode * 397) + Limit.GetHashCode();
         if((Base != null) && __isset.@Base)
         {
           hashcode = (hashcode * 397) + Base.GetHashCode();
@@ -272,26 +250,20 @@ namespace CUGOJ.RPC.Gen.Services.Core
 
     public override string ToString()
     {
-      var tmp196 = new StringBuilder("SetupServiceRequest(");
-      if((ServiceID != null))
-      {
-        tmp196.Append(", ServiceID: ");
-        ServiceID.ToString(tmp196);
-      }
-      tmp196.Append(", SetupServiceType: ");
-      SetupServiceType.ToString(tmp196);
-      if((SetupValue != null))
-      {
-        tmp196.Append(", SetupValue: ");
-        SetupValue.ToString(tmp196);
-      }
+      var tmp177 = new StringBuilder("GetRegisterListRequest(");
+      tmp177.Append(", ContestID: ");
+      ContestID.ToString(tmp177);
+      tmp177.Append(", Cursor: ");
+      Cursor.ToString(tmp177);
+      tmp177.Append(", Limit: ");
+      Limit.ToString(tmp177);
       if((Base != null) && __isset.@Base)
       {
-        tmp196.Append(", Base: ");
-        Base.ToString(tmp196);
+        tmp177.Append(", Base: ");
+        Base.ToString(tmp177);
       }
-      tmp196.Append(')');
-      return tmp196.ToString();
+      tmp177.Append(')');
+      return tmp177.ToString();
     }
   }
 
