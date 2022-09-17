@@ -35,7 +35,7 @@ namespace CUGOJ.RPC.Gen.Services.Core
 
   public partial class SetupServiceRequest : TBase
   {
-    private global::CUGOJ.RPC.Gen.Base.BaseResp _BaseResp;
+    private global::CUGOJ.RPC.Gen.Base.@Base _Base;
 
     public string ServiceID { get; set; }
 
@@ -47,16 +47,16 @@ namespace CUGOJ.RPC.Gen.Services.Core
 
     public string SetupValue { get; set; }
 
-    public global::CUGOJ.RPC.Gen.Base.BaseResp BaseResp
+    public global::CUGOJ.RPC.Gen.Base.@Base Base
     {
       get
       {
-        return _BaseResp;
+        return _Base;
       }
       set
       {
-        __isset.BaseResp = true;
-        this._BaseResp = value;
+        __isset.@Base = true;
+        this._Base = value;
       }
     }
 
@@ -64,7 +64,7 @@ namespace CUGOJ.RPC.Gen.Services.Core
     public Isset __isset;
     public struct Isset
     {
-      public bool BaseResp;
+      public bool @Base;
     }
 
     public SetupServiceRequest()
@@ -90,11 +90,11 @@ namespace CUGOJ.RPC.Gen.Services.Core
       {
         tmp193.SetupValue = this.SetupValue;
       }
-      if((BaseResp != null) && __isset.BaseResp)
+      if((Base != null) && __isset.@Base)
       {
-        tmp193.BaseResp = (global::CUGOJ.RPC.Gen.Base.BaseResp)this.BaseResp.DeepCopy();
+        tmp193.Base = (global::CUGOJ.RPC.Gen.Base.@Base)this.Base.DeepCopy();
       }
-      tmp193.__isset.BaseResp = this.__isset.BaseResp;
+      tmp193.__isset.@Base = this.__isset.@Base;
       return tmp193;
     }
 
@@ -154,8 +154,8 @@ namespace CUGOJ.RPC.Gen.Services.Core
             case 255:
               if (field.Type == TType.Struct)
               {
-                BaseResp = new global::CUGOJ.RPC.Gen.Base.BaseResp();
-                await BaseResp.ReadAsync(iprot, cancellationToken);
+                Base = new global::CUGOJ.RPC.Gen.Base.@Base();
+                await Base.ReadAsync(iprot, cancellationToken);
               }
               else
               {
@@ -222,13 +222,13 @@ namespace CUGOJ.RPC.Gen.Services.Core
           await oprot.WriteStringAsync(SetupValue, cancellationToken);
           await oprot.WriteFieldEndAsync(cancellationToken);
         }
-        if((BaseResp != null) && __isset.BaseResp)
+        if((Base != null) && __isset.@Base)
         {
-          tmp195.Name = "BaseResp";
+          tmp195.Name = "Base";
           tmp195.Type = TType.Struct;
           tmp195.ID = 255;
           await oprot.WriteFieldBeginAsync(tmp195, cancellationToken);
-          await BaseResp.WriteAsync(oprot, cancellationToken);
+          await Base.WriteAsync(oprot, cancellationToken);
           await oprot.WriteFieldEndAsync(cancellationToken);
         }
         await oprot.WriteFieldStopAsync(cancellationToken);
@@ -247,7 +247,7 @@ namespace CUGOJ.RPC.Gen.Services.Core
       return global::System.Object.Equals(ServiceID, other.ServiceID)
         && global::System.Object.Equals(SetupServiceType, other.SetupServiceType)
         && global::System.Object.Equals(SetupValue, other.SetupValue)
-        && ((__isset.BaseResp == other.__isset.BaseResp) && ((!__isset.BaseResp) || (global::System.Object.Equals(BaseResp, other.BaseResp))));
+        && ((__isset.@Base == other.__isset.@Base) && ((!__isset.@Base) || (global::System.Object.Equals(Base, other.Base))));
     }
 
     public override int GetHashCode() {
@@ -262,9 +262,9 @@ namespace CUGOJ.RPC.Gen.Services.Core
         {
           hashcode = (hashcode * 397) + SetupValue.GetHashCode();
         }
-        if((BaseResp != null) && __isset.BaseResp)
+        if((Base != null) && __isset.@Base)
         {
-          hashcode = (hashcode * 397) + BaseResp.GetHashCode();
+          hashcode = (hashcode * 397) + Base.GetHashCode();
         }
       }
       return hashcode;
@@ -285,10 +285,10 @@ namespace CUGOJ.RPC.Gen.Services.Core
         tmp196.Append(", SetupValue: ");
         SetupValue.ToString(tmp196);
       }
-      if((BaseResp != null) && __isset.BaseResp)
+      if((Base != null) && __isset.@Base)
       {
-        tmp196.Append(", BaseResp: ");
-        BaseResp.ToString(tmp196);
+        tmp196.Append(", Base: ");
+        Base.ToString(tmp196);
       }
       tmp196.Append(')');
       return tmp196.ToString();

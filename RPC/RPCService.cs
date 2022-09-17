@@ -1,3 +1,4 @@
+using System.Net.Mime;
 using Thrift;
 using Thrift.Server;
 using Thrift.Processor;
@@ -183,7 +184,17 @@ public static partial class RPCService
         }
     }
 
-
+    private static TServer server = null!;
+    private static bool _restarting = false;
+    public static void StopService()
+    {
+        server.Stop();
+    }
+    public static void RestartService()
+    {
+        _restarting = true;
+        server.Stop();
+    }
     private static async Task StartService(ITAsyncProcessor processor, int port)
     {
         Thrift.Transport.Server.TServerSocketTransport transport = new(
@@ -191,7 +202,7 @@ public static partial class RPCService
             new TConfiguration(),
             1000);
         ProcessorProxy proxy = new(processor);
-        TServer server = new Thrift.Server.TThreadPoolAsyncServer(proxy, transport);
+        server = new Thrift.Server.TThreadPoolAsyncServer(proxy, transport);
         Console.WriteLine("启动服务");
         Console.WriteLine("服务地址:" + Context.Context.ServiceBaseInfo.ServiceIP + ":" + Context.Context.ServiceBaseInfo.ServicePort);
 
@@ -201,6 +212,17 @@ public static partial class RPCService
             Console.WriteLine("服务启动成功");
         }, 1, 5);
         await server.ServeAsync(new CancellationToken());
+        if (_restarting)
+        {
+            var path = System.AppDomain.CurrentDomain.BaseDirectory;
+            var shellPath = path + "restart.sh";
+            if (!File.Exists(shellPath))
+            {
+                Console.WriteLine($"未找到重启脚本:{shellPath},请手动重启服务");
+                return;
+            }
+            Process.Start("sh", shellPath + " " + System.Diagnostics.Process.GetCurrentProcess().Id.ToString());
+        }
     }
     private static async Task StartService(ITAsyncProcessor processor, string? connectionString, int port = 0, Action? preStart = null)
     {

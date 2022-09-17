@@ -12,5 +12,9 @@ cd ../CUGOJ_Base
 pwd
 sh update_nuget.sh
 
+cd ../CUGOJ_Tester
+pwd
+sh update_nuget.sh
+
 cd ../CUGOJ_Tools
 pwd
