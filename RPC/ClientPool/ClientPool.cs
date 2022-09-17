@@ -6,27 +6,24 @@ namespace CUGOJ.CUGOJ_Tools.RPC.ClientPool;
 
 public class ClientPool<T> : IClientPool<T> where T : TBaseClient, IDisposable
 {
-    public T? Client
+    public async Task<T?> GetClient()
     {
-        get
+        if (_host != string.Empty && _constructor != null)
         {
-            if (_host != string.Empty && _constructor != null)
+            try
             {
-                try
-                {
-                    TTransport transport = new TSocketTransport(_host, _port, new TConfiguration(), 1000);
-                    TProtocol protocol = new TBinaryProtocol(transport);
-                    var client = _constructor.Invoke(new object[] { protocol }) as T;
-                    transport.OpenAsync();
-                    return client;
-                }
-                catch (Exception e)
-                {
-                    Log.Logger.Warn("未能连接到RPC服务器,Exception={0}", e.Message);
-                }
+                TTransport transport = new TSocketTransport(System.Net.IPAddress.Parse(_host), _port, new TConfiguration(), 1000);
+                TProtocol protocol = new TBinaryProtocol(transport);
+                var client = _constructor.Invoke(new object[] { protocol }) as T;
+                await transport.OpenAsync();
+                return client;
             }
-            return null;
+            catch (Exception e)
+            {
+                Log.Logger.Warn("未能连接到RPC服务器,Exception={0}", e.Message);
+            }
         }
+        return null;
     }
     public ClientPool()
     {

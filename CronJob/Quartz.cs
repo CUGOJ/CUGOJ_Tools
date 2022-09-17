@@ -10,14 +10,11 @@ public class QuartzProcessor : ICronJobProcesser
 
         public async Task Execute(IJobExecutionContext context)
         {
-            await Task.Run(() =>
-                {
-                    var Action = context.JobDetail.JobDataMap.Get("Action") as Action;
-                    if (Action != null)
-                    {
-                        Action();
-                    }
-                });
+            var Action = context.JobDetail.JobDataMap.Get("Action") as Func<Task>;
+            if (Action != null)
+            {
+                await Action();
+            }
         }
     }
     private IScheduler? _scheduler;
@@ -29,7 +26,7 @@ public class QuartzProcessor : ICronJobProcesser
         await _scheduler.Start();
     }
 
-    public void AddJob(Action action, int repeatCount = 0, int repeatInterval = 0)
+    public void AddJob(Func<Task> action, int repeatCount = 0, int repeatInterval = 0)
     {
         var job = JobBuilder.Create<TimeJob>()
         .SetJobData(new JobDataMap(){
