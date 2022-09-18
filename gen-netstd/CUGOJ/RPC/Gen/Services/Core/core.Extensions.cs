@@ -46,10 +46,10 @@ namespace CUGOJ.RPC.Gen.Services.Core
       if (source == null)
         return null;
 
-      var tmp593 = new Dictionary<string, string>(source.Count);
+      var tmp688 = new Dictionary<string, string>(source.Count);
       foreach (var pair in source)
-        tmp593.Add((pair.Key != null) ? pair.Key : null, (pair.Value != null) ? pair.Value : null);
-      return tmp593;
+        tmp688.Add((pair.Key != null) ? pair.Key : null, (pair.Value != null) ? pair.Value : null);
+      return tmp688;
     }
 
 
@@ -73,10 +73,10 @@ namespace CUGOJ.RPC.Gen.Services.Core
       if (source == null)
         return null;
 
-      var tmp594 = new List<global::CUGOJ.RPC.Gen.Base.ServiceBaseInfo>(source.Count);
+      var tmp689 = new List<global::CUGOJ.RPC.Gen.Base.ServiceBaseInfo>(source.Count);
       foreach (var elem in source)
-        tmp594.Add((elem != null) ? elem.DeepCopy() : null);
-      return tmp594;
+        tmp689.Add((elem != null) ? elem.DeepCopy() : null);
+      return tmp689;
     }
 
 
@@ -100,10 +100,10 @@ namespace CUGOJ.RPC.Gen.Services.Core
       if (source == null)
         return null;
 
-      var tmp595 = new List<global::CUGOJ.RPC.Gen.Common.ContestStruct>(source.Count);
+      var tmp690 = new List<global::CUGOJ.RPC.Gen.Common.ContestStruct>(source.Count);
       foreach (var elem in source)
-        tmp595.Add((elem != null) ? elem.DeepCopy() : null);
-      return tmp595;
+        tmp690.Add((elem != null) ? elem.DeepCopy() : null);
+      return tmp690;
     }
 
 
@@ -127,10 +127,10 @@ namespace CUGOJ.RPC.Gen.Services.Core
       if (source == null)
         return null;
 
-      var tmp596 = new List<global::CUGOJ.RPC.Gen.Common.ProblemStruct>(source.Count);
+      var tmp691 = new List<global::CUGOJ.RPC.Gen.Common.ProblemStruct>(source.Count);
       foreach (var elem in source)
-        tmp596.Add((elem != null) ? elem.DeepCopy() : null);
-      return tmp596;
+        tmp691.Add((elem != null) ? elem.DeepCopy() : null);
+      return tmp691;
     }
 
 
@@ -154,10 +154,10 @@ namespace CUGOJ.RPC.Gen.Services.Core
       if (source == null)
         return null;
 
-      var tmp597 = new List<global::CUGOJ.RPC.Gen.Common.SubmissionStruct>(source.Count);
+      var tmp692 = new List<global::CUGOJ.RPC.Gen.Common.SubmissionStruct>(source.Count);
       foreach (var elem in source)
-        tmp597.Add((elem != null) ? elem.DeepCopy() : null);
-      return tmp597;
+        tmp692.Add((elem != null) ? elem.DeepCopy() : null);
+      return tmp692;
     }
 
 
@@ -181,10 +181,10 @@ namespace CUGOJ.RPC.Gen.Services.Core
       if (source == null)
         return null;
 
-      var tmp598 = new List<string>(source.Count);
+      var tmp693 = new List<string>(source.Count);
       foreach (var elem in source)
-        tmp598.Add((elem != null) ? elem : null);
-      return tmp598;
+        tmp693.Add((elem != null) ? elem : null);
+      return tmp693;
     }
 
 
