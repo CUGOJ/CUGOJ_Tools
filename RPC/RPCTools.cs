@@ -60,6 +60,10 @@ public static class RPCTools
         {
             res.Extra["TraceContext"] = activity.Id;
             res.Extra["ServiceID"] = Context.Context.ServiceBaseInfo.ServiceID;
+            if (res.Extra["ServiceID"] == null!)
+            {
+                res.Extra["ServiceID"] = "unknown";
+            }
             res.Extra["UserID"] = Context.Context.UserID;
         }
         activity?.Stop();

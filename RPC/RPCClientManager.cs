@@ -122,7 +122,7 @@ public static class RPCClientManager
         _port = port;
         _connectionString = connectionString;
         var registerReq = new CUGOJ.RPC.Gen.Services.Core.RegisterServiceRequest(connectionString, port);
-        registerReq.Base = RPCTools.NewBase();
+        registerReq.Base = RPCTools.NewRootBase();
         return await client.RegisterService(registerReq);
     }
 

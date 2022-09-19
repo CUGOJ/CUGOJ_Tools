@@ -22,9 +22,9 @@ public static class RPCDao
     public static void SaveConnectionString(string connectionString)
     {
         using var context = new RPCContext();
-        var ServiceInfo = (from s in context.ServiceInfos select s).FirstOrDefault();
+        var storedServiceInfo = (from s in context.ServiceInfos select s).FirstOrDefault();
         var serviceInfo = RPC.RPCRegisterInfo.NewRPCRegisterInfoByConnectionString(connectionString);
-        if (ServiceInfo == null)
+        if (storedServiceInfo == null)
         {
             context.ServiceInfos.Add(new ServiceInfo()
             {
