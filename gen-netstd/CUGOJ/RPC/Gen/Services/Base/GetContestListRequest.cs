@@ -73,15 +73,15 @@ namespace CUGOJ.RPC.Gen.Services.Base
 
     public GetContestListRequest DeepCopy()
     {
-      var tmp140 = new GetContestListRequest();
-      tmp140.Cursor = this.Cursor;
-      tmp140.Limit = this.Limit;
+      var tmp150 = new GetContestListRequest();
+      tmp150.Cursor = this.Cursor;
+      tmp150.Limit = this.Limit;
       if((Base != null) && __isset.@Base)
       {
-        tmp140.Base = (global::CUGOJ.RPC.Gen.Base.@Base)this.Base.DeepCopy();
+        tmp150.Base = (global::CUGOJ.RPC.Gen.Base.@Base)this.Base.DeepCopy();
       }
-      tmp140.__isset.@Base = this.__isset.@Base;
-      return tmp140;
+      tmp150.__isset.@Base = this.__isset.@Base;
+      return tmp150;
     }
 
     public async global::System.Threading.Tasks.Task ReadAsync(TProtocol iprot, CancellationToken cancellationToken)
@@ -165,27 +165,27 @@ namespace CUGOJ.RPC.Gen.Services.Base
       oprot.IncrementRecursionDepth();
       try
       {
-        var tmp141 = new TStruct("GetContestListRequest");
-        await oprot.WriteStructBeginAsync(tmp141, cancellationToken);
-        var tmp142 = new TField();
-        tmp142.Name = "Cursor";
-        tmp142.Type = TType.I64;
-        tmp142.ID = 1;
-        await oprot.WriteFieldBeginAsync(tmp142, cancellationToken);
+        var tmp151 = new TStruct("GetContestListRequest");
+        await oprot.WriteStructBeginAsync(tmp151, cancellationToken);
+        var tmp152 = new TField();
+        tmp152.Name = "Cursor";
+        tmp152.Type = TType.I64;
+        tmp152.ID = 1;
+        await oprot.WriteFieldBeginAsync(tmp152, cancellationToken);
         await oprot.WriteI64Async(Cursor, cancellationToken);
         await oprot.WriteFieldEndAsync(cancellationToken);
-        tmp142.Name = "Limit";
-        tmp142.Type = TType.I64;
-        tmp142.ID = 2;
-        await oprot.WriteFieldBeginAsync(tmp142, cancellationToken);
+        tmp152.Name = "Limit";
+        tmp152.Type = TType.I64;
+        tmp152.ID = 2;
+        await oprot.WriteFieldBeginAsync(tmp152, cancellationToken);
         await oprot.WriteI64Async(Limit, cancellationToken);
         await oprot.WriteFieldEndAsync(cancellationToken);
         if((Base != null) && __isset.@Base)
         {
-          tmp142.Name = "Base";
-          tmp142.Type = TType.Struct;
-          tmp142.ID = 255;
-          await oprot.WriteFieldBeginAsync(tmp142, cancellationToken);
+          tmp152.Name = "Base";
+          tmp152.Type = TType.Struct;
+          tmp152.ID = 255;
+          await oprot.WriteFieldBeginAsync(tmp152, cancellationToken);
           await Base.WriteAsync(oprot, cancellationToken);
           await oprot.WriteFieldEndAsync(cancellationToken);
         }
@@ -222,18 +222,18 @@ namespace CUGOJ.RPC.Gen.Services.Base
 
     public override string ToString()
     {
-      var tmp143 = new StringBuilder("GetContestListRequest(");
-      tmp143.Append(", Cursor: ");
-      Cursor.ToString(tmp143);
-      tmp143.Append(", Limit: ");
-      Limit.ToString(tmp143);
+      var tmp153 = new StringBuilder("GetContestListRequest(");
+      tmp153.Append(", Cursor: ");
+      Cursor.ToString(tmp153);
+      tmp153.Append(", Limit: ");
+      Limit.ToString(tmp153);
       if((Base != null) && __isset.@Base)
       {
-        tmp143.Append(", Base: ");
-        Base.ToString(tmp143);
+        tmp153.Append(", Base: ");
+        Base.ToString(tmp153);
       }
-      tmp143.Append(')');
-      return tmp143.ToString();
+      tmp153.Append(')');
+      return tmp153.ToString();
     }
   }
 

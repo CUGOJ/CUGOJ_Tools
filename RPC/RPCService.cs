@@ -291,5 +291,36 @@ public static partial class RPCService
             throw e;
         }
     }
+    public static async Task StartJudgerService<T>(string connectionString, Action? preStart = null) where T : class, CUGOJ.RPC.Gen.Services.Judger.JudgerService.IAsync
+    {
+        Console.WriteLine("正在启动Judger服务");
 
+        var handler = Trace.TraceFactory.CreateTracableObject<T>(new ServiceInterceptor());
+        CUGOJ.RPC.Gen.Services.Judger.JudgerService.AsyncProcessor processor = new(handler);
+        try
+        {
+            ServiceType = CUGOJ.RPC.Gen.Base.ServiceTypeEnum.Judger;
+            await StartService(processor, connectionString, 0, preStart);
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+    }
+    public static async Task StartGatewayService<T>(string connectionString, Action? preStart = null) where T : class, CUGOJ.RPC.Gen.Services.Gateway.GatewayService.IAsync
+    {
+        Console.WriteLine("正在启动Gateway服务");
+
+        var handler = Trace.TraceFactory.CreateTracableObject<T>(new ServiceInterceptor());
+        CUGOJ.RPC.Gen.Services.Gateway.GatewayService.AsyncProcessor processor = new(handler);
+        try
+        {
+            ServiceType = CUGOJ.RPC.Gen.Base.ServiceTypeEnum.Gateway;
+            await StartService(processor, connectionString, 0, preStart);
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+    }
 }

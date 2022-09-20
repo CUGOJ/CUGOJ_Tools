@@ -46,10 +46,10 @@ namespace CUGOJ.RPC.Gen.Services.Base
       if (source == null)
         return null;
 
-      var tmp416 = new Dictionary<string, string>(source.Count);
+      var tmp426 = new Dictionary<string, string>(source.Count);
       foreach (var pair in source)
-        tmp416.Add((pair.Key != null) ? pair.Key : null, (pair.Value != null) ? pair.Value : null);
-      return tmp416;
+        tmp426.Add((pair.Key != null) ? pair.Key : null, (pair.Value != null) ? pair.Value : null);
+      return tmp426;
     }
 
 
@@ -73,10 +73,10 @@ namespace CUGOJ.RPC.Gen.Services.Base
       if (source == null)
         return null;
 
-      var tmp417 = new List<global::CUGOJ.RPC.Gen.Common.ContestProblemStruct>(source.Count);
+      var tmp427 = new List<global::CUGOJ.RPC.Gen.Common.ContestProblemStruct>(source.Count);
       foreach (var elem in source)
-        tmp417.Add((elem != null) ? elem.DeepCopy() : null);
-      return tmp417;
+        tmp427.Add((elem != null) ? elem.DeepCopy() : null);
+      return tmp427;
     }
 
 
@@ -100,10 +100,10 @@ namespace CUGOJ.RPC.Gen.Services.Base
       if (source == null)
         return null;
 
-      var tmp418 = new List<global::CUGOJ.RPC.Gen.Common.ContestStruct>(source.Count);
+      var tmp428 = new List<global::CUGOJ.RPC.Gen.Common.ContestStruct>(source.Count);
       foreach (var elem in source)
-        tmp418.Add((elem != null) ? elem.DeepCopy() : null);
-      return tmp418;
+        tmp428.Add((elem != null) ? elem.DeepCopy() : null);
+      return tmp428;
     }
 
 
@@ -127,10 +127,10 @@ namespace CUGOJ.RPC.Gen.Services.Base
       if (source == null)
         return null;
 
-      var tmp419 = new List<global::CUGOJ.RPC.Gen.Common.ProblemStruct>(source.Count);
+      var tmp429 = new List<global::CUGOJ.RPC.Gen.Common.ProblemStruct>(source.Count);
       foreach (var elem in source)
-        tmp419.Add((elem != null) ? elem.DeepCopy() : null);
-      return tmp419;
+        tmp429.Add((elem != null) ? elem.DeepCopy() : null);
+      return tmp429;
     }
 
 
@@ -154,10 +154,10 @@ namespace CUGOJ.RPC.Gen.Services.Base
       if (source == null)
         return null;
 
-      var tmp420 = new List<global::CUGOJ.RPC.Gen.Common.RegisterStruct>(source.Count);
+      var tmp430 = new List<global::CUGOJ.RPC.Gen.Common.RegisterStruct>(source.Count);
       foreach (var elem in source)
-        tmp420.Add((elem != null) ? elem.DeepCopy() : null);
-      return tmp420;
+        tmp430.Add((elem != null) ? elem.DeepCopy() : null);
+      return tmp430;
     }
 
 
@@ -181,10 +181,10 @@ namespace CUGOJ.RPC.Gen.Services.Base
       if (source == null)
         return null;
 
-      var tmp421 = new List<global::CUGOJ.RPC.Gen.Common.SubmissionStruct>(source.Count);
+      var tmp431 = new List<global::CUGOJ.RPC.Gen.Common.SubmissionStruct>(source.Count);
       foreach (var elem in source)
-        tmp421.Add((elem != null) ? elem.DeepCopy() : null);
-      return tmp421;
+        tmp431.Add((elem != null) ? elem.DeepCopy() : null);
+      return tmp431;
     }
 
 
@@ -208,10 +208,10 @@ namespace CUGOJ.RPC.Gen.Services.Base
       if (source == null)
         return null;
 
-      var tmp422 = new List<global::CUGOJ.RPC.Gen.Common.UserStruct>(source.Count);
+      var tmp432 = new List<global::CUGOJ.RPC.Gen.Common.UserStruct>(source.Count);
       foreach (var elem in source)
-        tmp422.Add((elem != null) ? elem.DeepCopy() : null);
-      return tmp422;
+        tmp432.Add((elem != null) ? elem.DeepCopy() : null);
+      return tmp432;
     }
 
 
@@ -235,10 +235,10 @@ namespace CUGOJ.RPC.Gen.Services.Base
       if (source == null)
         return null;
 
-      var tmp423 = new List<long>(source.Count);
+      var tmp433 = new List<long>(source.Count);
       foreach (var elem in source)
-        tmp423.Add(elem);
-      return tmp423;
+        tmp433.Add(elem);
+      return tmp433;
     }
 
 
@@ -262,10 +262,10 @@ namespace CUGOJ.RPC.Gen.Services.Base
       if (source == null)
         return null;
 
-      var tmp424 = new List<string>(source.Count);
+      var tmp434 = new List<string>(source.Count);
       foreach (var elem in source)
-        tmp424.Add((elem != null) ? elem : null);
-      return tmp424;
+        tmp434.Add((elem != null) ? elem : null);
+      return tmp434;
     }
 
 

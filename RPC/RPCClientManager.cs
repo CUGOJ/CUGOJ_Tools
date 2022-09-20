@@ -59,7 +59,6 @@ public static class RPCClientManager
             _authenticationService = CUGOJ.CUGOJ_Tools.Trace.TraceFactory.CreateTracableObject<MinPathBalancer<CUGOJ.RPC.Gen.Services.Authentication.AuthenticationService.Client>>(false, false);
             _coreService = CUGOJ.CUGOJ_Tools.Trace.TraceFactory.CreateTracableObject<MinPathBalancer<CUGOJ.RPC.Gen.Services.Core.CoreService.Client>>(false, false);
             _baseService = CUGOJ.CUGOJ_Tools.Trace.TraceFactory.CreateTracableObject<MinPathBalancer<CUGOJ.RPC.Gen.Services.Base.BaseService.Client>>(false, false);
-
         }
     }
     private static ILoadBalancer<CUGOJ.RPC.Gen.Services.Authentication.AuthenticationService.Client>? _authenticationService;

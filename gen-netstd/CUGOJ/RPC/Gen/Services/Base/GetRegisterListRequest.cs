@@ -76,16 +76,16 @@ namespace CUGOJ.RPC.Gen.Services.Base
 
     public GetRegisterListRequest DeepCopy()
     {
-      var tmp174 = new GetRegisterListRequest();
-      tmp174.ContestID = this.ContestID;
-      tmp174.Cursor = this.Cursor;
-      tmp174.Limit = this.Limit;
+      var tmp184 = new GetRegisterListRequest();
+      tmp184.ContestID = this.ContestID;
+      tmp184.Cursor = this.Cursor;
+      tmp184.Limit = this.Limit;
       if((Base != null) && __isset.@Base)
       {
-        tmp174.Base = (global::CUGOJ.RPC.Gen.Base.@Base)this.Base.DeepCopy();
+        tmp184.Base = (global::CUGOJ.RPC.Gen.Base.@Base)this.Base.DeepCopy();
       }
-      tmp174.__isset.@Base = this.__isset.@Base;
-      return tmp174;
+      tmp184.__isset.@Base = this.__isset.@Base;
+      return tmp184;
     }
 
     public async global::System.Threading.Tasks.Task ReadAsync(TProtocol iprot, CancellationToken cancellationToken)
@@ -185,33 +185,33 @@ namespace CUGOJ.RPC.Gen.Services.Base
       oprot.IncrementRecursionDepth();
       try
       {
-        var tmp175 = new TStruct("GetRegisterListRequest");
-        await oprot.WriteStructBeginAsync(tmp175, cancellationToken);
-        var tmp176 = new TField();
-        tmp176.Name = "ContestID";
-        tmp176.Type = TType.I64;
-        tmp176.ID = 1;
-        await oprot.WriteFieldBeginAsync(tmp176, cancellationToken);
+        var tmp185 = new TStruct("GetRegisterListRequest");
+        await oprot.WriteStructBeginAsync(tmp185, cancellationToken);
+        var tmp186 = new TField();
+        tmp186.Name = "ContestID";
+        tmp186.Type = TType.I64;
+        tmp186.ID = 1;
+        await oprot.WriteFieldBeginAsync(tmp186, cancellationToken);
         await oprot.WriteI64Async(ContestID, cancellationToken);
         await oprot.WriteFieldEndAsync(cancellationToken);
-        tmp176.Name = "Cursor";
-        tmp176.Type = TType.I64;
-        tmp176.ID = 2;
-        await oprot.WriteFieldBeginAsync(tmp176, cancellationToken);
+        tmp186.Name = "Cursor";
+        tmp186.Type = TType.I64;
+        tmp186.ID = 2;
+        await oprot.WriteFieldBeginAsync(tmp186, cancellationToken);
         await oprot.WriteI64Async(Cursor, cancellationToken);
         await oprot.WriteFieldEndAsync(cancellationToken);
-        tmp176.Name = "Limit";
-        tmp176.Type = TType.I64;
-        tmp176.ID = 3;
-        await oprot.WriteFieldBeginAsync(tmp176, cancellationToken);
+        tmp186.Name = "Limit";
+        tmp186.Type = TType.I64;
+        tmp186.ID = 3;
+        await oprot.WriteFieldBeginAsync(tmp186, cancellationToken);
         await oprot.WriteI64Async(Limit, cancellationToken);
         await oprot.WriteFieldEndAsync(cancellationToken);
         if((Base != null) && __isset.@Base)
         {
-          tmp176.Name = "Base";
-          tmp176.Type = TType.Struct;
-          tmp176.ID = 255;
-          await oprot.WriteFieldBeginAsync(tmp176, cancellationToken);
+          tmp186.Name = "Base";
+          tmp186.Type = TType.Struct;
+          tmp186.ID = 255;
+          await oprot.WriteFieldBeginAsync(tmp186, cancellationToken);
           await Base.WriteAsync(oprot, cancellationToken);
           await oprot.WriteFieldEndAsync(cancellationToken);
         }
@@ -250,20 +250,20 @@ namespace CUGOJ.RPC.Gen.Services.Base
 
     public override string ToString()
     {
-      var tmp177 = new StringBuilder("GetRegisterListRequest(");
-      tmp177.Append(", ContestID: ");
-      ContestID.ToString(tmp177);
-      tmp177.Append(", Cursor: ");
-      Cursor.ToString(tmp177);
-      tmp177.Append(", Limit: ");
-      Limit.ToString(tmp177);
+      var tmp187 = new StringBuilder("GetRegisterListRequest(");
+      tmp187.Append(", ContestID: ");
+      ContestID.ToString(tmp187);
+      tmp187.Append(", Cursor: ");
+      Cursor.ToString(tmp187);
+      tmp187.Append(", Limit: ");
+      Limit.ToString(tmp187);
       if((Base != null) && __isset.@Base)
       {
-        tmp177.Append(", Base: ");
-        Base.ToString(tmp177);
+        tmp187.Append(", Base: ");
+        Base.ToString(tmp187);
       }
-      tmp177.Append(')');
-      return tmp177.ToString();
+      tmp187.Append(')');
+      return tmp187.ToString();
     }
   }
 

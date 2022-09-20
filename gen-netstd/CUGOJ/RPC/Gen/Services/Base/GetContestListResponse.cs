@@ -73,18 +73,18 @@ namespace CUGOJ.RPC.Gen.Services.Base
 
     public GetContestListResponse DeepCopy()
     {
-      var tmp145 = new GetContestListResponse();
+      var tmp155 = new GetContestListResponse();
       if((ContestList != null))
       {
-        tmp145.ContestList = this.ContestList.DeepCopy();
+        tmp155.ContestList = this.ContestList.DeepCopy();
       }
-      tmp145.NextCursor = this.NextCursor;
+      tmp155.NextCursor = this.NextCursor;
       if((BaseResp != null) && __isset.BaseResp)
       {
-        tmp145.BaseResp = (global::CUGOJ.RPC.Gen.Base.BaseResp)this.BaseResp.DeepCopy();
+        tmp155.BaseResp = (global::CUGOJ.RPC.Gen.Base.BaseResp)this.BaseResp.DeepCopy();
       }
-      tmp145.__isset.BaseResp = this.__isset.BaseResp;
-      return tmp145;
+      tmp155.__isset.BaseResp = this.__isset.BaseResp;
+      return tmp155;
     }
 
     public async global::System.Threading.Tasks.Task ReadAsync(TProtocol iprot, CancellationToken cancellationToken)
@@ -110,14 +110,14 @@ namespace CUGOJ.RPC.Gen.Services.Base
               if (field.Type == TType.List)
               {
                 {
-                  TList _list146 = await iprot.ReadListBeginAsync(cancellationToken);
-                  ContestList = new List<global::CUGOJ.RPC.Gen.Common.ContestStruct>(_list146.Count);
-                  for(int _i147 = 0; _i147 < _list146.Count; ++_i147)
+                  TList _list156 = await iprot.ReadListBeginAsync(cancellationToken);
+                  ContestList = new List<global::CUGOJ.RPC.Gen.Common.ContestStruct>(_list156.Count);
+                  for(int _i157 = 0; _i157 < _list156.Count; ++_i157)
                   {
-                    global::CUGOJ.RPC.Gen.Common.ContestStruct _elem148;
-                    _elem148 = new global::CUGOJ.RPC.Gen.Common.ContestStruct();
-                    await _elem148.ReadAsync(iprot, cancellationToken);
-                    ContestList.Add(_elem148);
+                    global::CUGOJ.RPC.Gen.Common.ContestStruct _elem158;
+                    _elem158 = new global::CUGOJ.RPC.Gen.Common.ContestStruct();
+                    await _elem158.ReadAsync(iprot, cancellationToken);
+                    ContestList.Add(_elem158);
                   }
                   await iprot.ReadListEndAsync(cancellationToken);
                 }
@@ -179,37 +179,37 @@ namespace CUGOJ.RPC.Gen.Services.Base
       oprot.IncrementRecursionDepth();
       try
       {
-        var tmp149 = new TStruct("GetContestListResponse");
-        await oprot.WriteStructBeginAsync(tmp149, cancellationToken);
-        var tmp150 = new TField();
+        var tmp159 = new TStruct("GetContestListResponse");
+        await oprot.WriteStructBeginAsync(tmp159, cancellationToken);
+        var tmp160 = new TField();
         if((ContestList != null))
         {
-          tmp150.Name = "ContestList";
-          tmp150.Type = TType.List;
-          tmp150.ID = 1;
-          await oprot.WriteFieldBeginAsync(tmp150, cancellationToken);
+          tmp160.Name = "ContestList";
+          tmp160.Type = TType.List;
+          tmp160.ID = 1;
+          await oprot.WriteFieldBeginAsync(tmp160, cancellationToken);
           {
             await oprot.WriteListBeginAsync(new TList(TType.Struct, ContestList.Count), cancellationToken);
-            foreach (global::CUGOJ.RPC.Gen.Common.ContestStruct _iter151 in ContestList)
+            foreach (global::CUGOJ.RPC.Gen.Common.ContestStruct _iter161 in ContestList)
             {
-              await _iter151.WriteAsync(oprot, cancellationToken);
+              await _iter161.WriteAsync(oprot, cancellationToken);
             }
             await oprot.WriteListEndAsync(cancellationToken);
           }
           await oprot.WriteFieldEndAsync(cancellationToken);
         }
-        tmp150.Name = "NextCursor";
-        tmp150.Type = TType.I64;
-        tmp150.ID = 2;
-        await oprot.WriteFieldBeginAsync(tmp150, cancellationToken);
+        tmp160.Name = "NextCursor";
+        tmp160.Type = TType.I64;
+        tmp160.ID = 2;
+        await oprot.WriteFieldBeginAsync(tmp160, cancellationToken);
         await oprot.WriteI64Async(NextCursor, cancellationToken);
         await oprot.WriteFieldEndAsync(cancellationToken);
         if((BaseResp != null) && __isset.BaseResp)
         {
-          tmp150.Name = "BaseResp";
-          tmp150.Type = TType.Struct;
-          tmp150.ID = 255;
-          await oprot.WriteFieldBeginAsync(tmp150, cancellationToken);
+          tmp160.Name = "BaseResp";
+          tmp160.Type = TType.Struct;
+          tmp160.ID = 255;
+          await oprot.WriteFieldBeginAsync(tmp160, cancellationToken);
           await BaseResp.WriteAsync(oprot, cancellationToken);
           await oprot.WriteFieldEndAsync(cancellationToken);
         }
@@ -249,21 +249,21 @@ namespace CUGOJ.RPC.Gen.Services.Base
 
     public override string ToString()
     {
-      var tmp152 = new StringBuilder("GetContestListResponse(");
+      var tmp162 = new StringBuilder("GetContestListResponse(");
       if((ContestList != null))
       {
-        tmp152.Append(", ContestList: ");
-        ContestList.ToString(tmp152);
+        tmp162.Append(", ContestList: ");
+        ContestList.ToString(tmp162);
       }
-      tmp152.Append(", NextCursor: ");
-      NextCursor.ToString(tmp152);
+      tmp162.Append(", NextCursor: ");
+      NextCursor.ToString(tmp162);
       if((BaseResp != null) && __isset.BaseResp)
       {
-        tmp152.Append(", BaseResp: ");
-        BaseResp.ToString(tmp152);
+        tmp162.Append(", BaseResp: ");
+        BaseResp.ToString(tmp162);
       }
-      tmp152.Append(')');
-      return tmp152.ToString();
+      tmp162.Append(')');
+      return tmp162.ToString();
     }
   }
 

@@ -73,18 +73,18 @@ namespace CUGOJ.RPC.Gen.Services.Base
 
     public GetRegisterListResponse DeepCopy()
     {
-      var tmp179 = new GetRegisterListResponse();
+      var tmp189 = new GetRegisterListResponse();
       if((RegisterList != null))
       {
-        tmp179.RegisterList = this.RegisterList.DeepCopy();
+        tmp189.RegisterList = this.RegisterList.DeepCopy();
       }
-      tmp179.NextCursor = this.NextCursor;
+      tmp189.NextCursor = this.NextCursor;
       if((BaseResp != null) && __isset.BaseResp)
       {
-        tmp179.BaseResp = (global::CUGOJ.RPC.Gen.Base.BaseResp)this.BaseResp.DeepCopy();
+        tmp189.BaseResp = (global::CUGOJ.RPC.Gen.Base.BaseResp)this.BaseResp.DeepCopy();
       }
-      tmp179.__isset.BaseResp = this.__isset.BaseResp;
-      return tmp179;
+      tmp189.__isset.BaseResp = this.__isset.BaseResp;
+      return tmp189;
     }
 
     public async global::System.Threading.Tasks.Task ReadAsync(TProtocol iprot, CancellationToken cancellationToken)
@@ -110,14 +110,14 @@ namespace CUGOJ.RPC.Gen.Services.Base
               if (field.Type == TType.List)
               {
                 {
-                  TList _list180 = await iprot.ReadListBeginAsync(cancellationToken);
-                  RegisterList = new List<global::CUGOJ.RPC.Gen.Common.RegisterStruct>(_list180.Count);
-                  for(int _i181 = 0; _i181 < _list180.Count; ++_i181)
+                  TList _list190 = await iprot.ReadListBeginAsync(cancellationToken);
+                  RegisterList = new List<global::CUGOJ.RPC.Gen.Common.RegisterStruct>(_list190.Count);
+                  for(int _i191 = 0; _i191 < _list190.Count; ++_i191)
                   {
-                    global::CUGOJ.RPC.Gen.Common.RegisterStruct _elem182;
-                    _elem182 = new global::CUGOJ.RPC.Gen.Common.RegisterStruct();
-                    await _elem182.ReadAsync(iprot, cancellationToken);
-                    RegisterList.Add(_elem182);
+                    global::CUGOJ.RPC.Gen.Common.RegisterStruct _elem192;
+                    _elem192 = new global::CUGOJ.RPC.Gen.Common.RegisterStruct();
+                    await _elem192.ReadAsync(iprot, cancellationToken);
+                    RegisterList.Add(_elem192);
                   }
                   await iprot.ReadListEndAsync(cancellationToken);
                 }
@@ -179,37 +179,37 @@ namespace CUGOJ.RPC.Gen.Services.Base
       oprot.IncrementRecursionDepth();
       try
       {
-        var tmp183 = new TStruct("GetRegisterListResponse");
-        await oprot.WriteStructBeginAsync(tmp183, cancellationToken);
-        var tmp184 = new TField();
+        var tmp193 = new TStruct("GetRegisterListResponse");
+        await oprot.WriteStructBeginAsync(tmp193, cancellationToken);
+        var tmp194 = new TField();
         if((RegisterList != null))
         {
-          tmp184.Name = "RegisterList";
-          tmp184.Type = TType.List;
-          tmp184.ID = 1;
-          await oprot.WriteFieldBeginAsync(tmp184, cancellationToken);
+          tmp194.Name = "RegisterList";
+          tmp194.Type = TType.List;
+          tmp194.ID = 1;
+          await oprot.WriteFieldBeginAsync(tmp194, cancellationToken);
           {
             await oprot.WriteListBeginAsync(new TList(TType.Struct, RegisterList.Count), cancellationToken);
-            foreach (global::CUGOJ.RPC.Gen.Common.RegisterStruct _iter185 in RegisterList)
+            foreach (global::CUGOJ.RPC.Gen.Common.RegisterStruct _iter195 in RegisterList)
             {
-              await _iter185.WriteAsync(oprot, cancellationToken);
+              await _iter195.WriteAsync(oprot, cancellationToken);
             }
             await oprot.WriteListEndAsync(cancellationToken);
           }
           await oprot.WriteFieldEndAsync(cancellationToken);
         }
-        tmp184.Name = "NextCursor";
-        tmp184.Type = TType.I64;
-        tmp184.ID = 2;
-        await oprot.WriteFieldBeginAsync(tmp184, cancellationToken);
+        tmp194.Name = "NextCursor";
+        tmp194.Type = TType.I64;
+        tmp194.ID = 2;
+        await oprot.WriteFieldBeginAsync(tmp194, cancellationToken);
         await oprot.WriteI64Async(NextCursor, cancellationToken);
         await oprot.WriteFieldEndAsync(cancellationToken);
         if((BaseResp != null) && __isset.BaseResp)
         {
-          tmp184.Name = "BaseResp";
-          tmp184.Type = TType.Struct;
-          tmp184.ID = 255;
-          await oprot.WriteFieldBeginAsync(tmp184, cancellationToken);
+          tmp194.Name = "BaseResp";
+          tmp194.Type = TType.Struct;
+          tmp194.ID = 255;
+          await oprot.WriteFieldBeginAsync(tmp194, cancellationToken);
           await BaseResp.WriteAsync(oprot, cancellationToken);
           await oprot.WriteFieldEndAsync(cancellationToken);
         }
@@ -249,21 +249,21 @@ namespace CUGOJ.RPC.Gen.Services.Base
 
     public override string ToString()
     {
-      var tmp186 = new StringBuilder("GetRegisterListResponse(");
+      var tmp196 = new StringBuilder("GetRegisterListResponse(");
       if((RegisterList != null))
       {
-        tmp186.Append(", RegisterList: ");
-        RegisterList.ToString(tmp186);
+        tmp196.Append(", RegisterList: ");
+        RegisterList.ToString(tmp196);
       }
-      tmp186.Append(", NextCursor: ");
-      NextCursor.ToString(tmp186);
+      tmp196.Append(", NextCursor: ");
+      NextCursor.ToString(tmp196);
       if((BaseResp != null) && __isset.BaseResp)
       {
-        tmp186.Append(", BaseResp: ");
-        BaseResp.ToString(tmp186);
+        tmp196.Append(", BaseResp: ");
+        BaseResp.ToString(tmp196);
       }
-      tmp186.Append(')');
-      return tmp186.ToString();
+      tmp196.Append(')');
+      return tmp196.ToString();
     }
   }
 

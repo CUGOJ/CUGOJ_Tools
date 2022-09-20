@@ -16,5 +16,13 @@ cd ../CUGOJ_Tester
 pwd
 sh update_nuget.sh
 
+cd ../CUGOJ_Gateway
+pwd
+sh update_nuget.sh
+
+cd ../CUGOJ_Judger
+pwd
+sh update_nuget.sh
+
 cd ../CUGOJ_Tools
 pwd

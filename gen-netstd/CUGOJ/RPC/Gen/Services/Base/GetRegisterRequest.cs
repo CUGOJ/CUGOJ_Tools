@@ -73,15 +73,15 @@ namespace CUGOJ.RPC.Gen.Services.Base
 
     public GetRegisterRequest DeepCopy()
     {
-      var tmp164 = new GetRegisterRequest();
-      tmp164.ContestID = this.ContestID;
-      tmp164.UserID = this.UserID;
+      var tmp174 = new GetRegisterRequest();
+      tmp174.ContestID = this.ContestID;
+      tmp174.UserID = this.UserID;
       if((Base != null) && __isset.@Base)
       {
-        tmp164.Base = (global::CUGOJ.RPC.Gen.Base.@Base)this.Base.DeepCopy();
+        tmp174.Base = (global::CUGOJ.RPC.Gen.Base.@Base)this.Base.DeepCopy();
       }
-      tmp164.__isset.@Base = this.__isset.@Base;
-      return tmp164;
+      tmp174.__isset.@Base = this.__isset.@Base;
+      return tmp174;
     }
 
     public async global::System.Threading.Tasks.Task ReadAsync(TProtocol iprot, CancellationToken cancellationToken)
@@ -165,27 +165,27 @@ namespace CUGOJ.RPC.Gen.Services.Base
       oprot.IncrementRecursionDepth();
       try
       {
-        var tmp165 = new TStruct("GetRegisterRequest");
-        await oprot.WriteStructBeginAsync(tmp165, cancellationToken);
-        var tmp166 = new TField();
-        tmp166.Name = "ContestID";
-        tmp166.Type = TType.I64;
-        tmp166.ID = 1;
-        await oprot.WriteFieldBeginAsync(tmp166, cancellationToken);
+        var tmp175 = new TStruct("GetRegisterRequest");
+        await oprot.WriteStructBeginAsync(tmp175, cancellationToken);
+        var tmp176 = new TField();
+        tmp176.Name = "ContestID";
+        tmp176.Type = TType.I64;
+        tmp176.ID = 1;
+        await oprot.WriteFieldBeginAsync(tmp176, cancellationToken);
         await oprot.WriteI64Async(ContestID, cancellationToken);
         await oprot.WriteFieldEndAsync(cancellationToken);
-        tmp166.Name = "UserID";
-        tmp166.Type = TType.I64;
-        tmp166.ID = 2;
-        await oprot.WriteFieldBeginAsync(tmp166, cancellationToken);
+        tmp176.Name = "UserID";
+        tmp176.Type = TType.I64;
+        tmp176.ID = 2;
+        await oprot.WriteFieldBeginAsync(tmp176, cancellationToken);
         await oprot.WriteI64Async(UserID, cancellationToken);
         await oprot.WriteFieldEndAsync(cancellationToken);
         if((Base != null) && __isset.@Base)
         {
-          tmp166.Name = "Base";
-          tmp166.Type = TType.Struct;
-          tmp166.ID = 255;
-          await oprot.WriteFieldBeginAsync(tmp166, cancellationToken);
+          tmp176.Name = "Base";
+          tmp176.Type = TType.Struct;
+          tmp176.ID = 255;
+          await oprot.WriteFieldBeginAsync(tmp176, cancellationToken);
           await Base.WriteAsync(oprot, cancellationToken);
           await oprot.WriteFieldEndAsync(cancellationToken);
         }
@@ -222,18 +222,18 @@ namespace CUGOJ.RPC.Gen.Services.Base
 
     public override string ToString()
     {
-      var tmp167 = new StringBuilder("GetRegisterRequest(");
-      tmp167.Append(", ContestID: ");
-      ContestID.ToString(tmp167);
-      tmp167.Append(", UserID: ");
-      UserID.ToString(tmp167);
+      var tmp177 = new StringBuilder("GetRegisterRequest(");
+      tmp177.Append(", ContestID: ");
+      ContestID.ToString(tmp177);
+      tmp177.Append(", UserID: ");
+      UserID.ToString(tmp177);
       if((Base != null) && __isset.@Base)
       {
-        tmp167.Append(", Base: ");
-        Base.ToString(tmp167);
+        tmp177.Append(", Base: ");
+        Base.ToString(tmp177);
       }
-      tmp167.Append(')');
-      return tmp167.ToString();
+      tmp177.Append(')');
+      return tmp177.ToString();
     }
   }
 

@@ -33,9 +33,11 @@ using Thrift.Processor;
 namespace CUGOJ.RPC.Gen.Services.Base
 {
 
-  public partial class SaveRegisterResponse : TBase
+  public partial class GetSubmissionDetailResponse : TBase
   {
     private global::CUGOJ.RPC.Gen.Base.BaseResp _BaseResp;
+
+    public global::CUGOJ.RPC.Gen.Common.SubmissionStruct Submission { get; set; }
 
     public global::CUGOJ.RPC.Gen.Base.BaseResp BaseResp
     {
@@ -57,19 +59,28 @@ namespace CUGOJ.RPC.Gen.Services.Base
       public bool BaseResp;
     }
 
-    public SaveRegisterResponse()
+    public GetSubmissionDetailResponse()
     {
     }
 
-    public SaveRegisterResponse DeepCopy()
+    public GetSubmissionDetailResponse(global::CUGOJ.RPC.Gen.Common.SubmissionStruct Submission) : this()
     {
-      var tmp169 = new SaveRegisterResponse();
+      this.Submission = Submission;
+    }
+
+    public GetSubmissionDetailResponse DeepCopy()
+    {
+      var tmp135 = new GetSubmissionDetailResponse();
+      if((Submission != null))
+      {
+        tmp135.Submission = (global::CUGOJ.RPC.Gen.Common.SubmissionStruct)this.Submission.DeepCopy();
+      }
       if((BaseResp != null) && __isset.BaseResp)
       {
-        tmp169.BaseResp = (global::CUGOJ.RPC.Gen.Base.BaseResp)this.BaseResp.DeepCopy();
+        tmp135.BaseResp = (global::CUGOJ.RPC.Gen.Base.BaseResp)this.BaseResp.DeepCopy();
       }
-      tmp169.__isset.BaseResp = this.__isset.BaseResp;
-      return tmp169;
+      tmp135.__isset.BaseResp = this.__isset.BaseResp;
+      return tmp135;
     }
 
     public async global::System.Threading.Tasks.Task ReadAsync(TProtocol iprot, CancellationToken cancellationToken)
@@ -77,6 +88,7 @@ namespace CUGOJ.RPC.Gen.Services.Base
       iprot.IncrementRecursionDepth();
       try
       {
+        bool isset_Submission = false;
         TField field;
         await iprot.ReadStructBeginAsync(cancellationToken);
         while (true)
@@ -89,6 +101,18 @@ namespace CUGOJ.RPC.Gen.Services.Base
 
           switch (field.ID)
           {
+            case 1:
+              if (field.Type == TType.Struct)
+              {
+                Submission = new global::CUGOJ.RPC.Gen.Common.SubmissionStruct();
+                await Submission.ReadAsync(iprot, cancellationToken);
+                isset_Submission = true;
+              }
+              else
+              {
+                await TProtocolUtil.SkipAsync(iprot, field.Type, cancellationToken);
+              }
+              break;
             case 255:
               if (field.Type == TType.Struct)
               {
@@ -109,6 +133,10 @@ namespace CUGOJ.RPC.Gen.Services.Base
         }
 
         await iprot.ReadStructEndAsync(cancellationToken);
+        if (!isset_Submission)
+        {
+          throw new TProtocolException(TProtocolException.INVALID_DATA);
+        }
       }
       finally
       {
@@ -121,15 +149,24 @@ namespace CUGOJ.RPC.Gen.Services.Base
       oprot.IncrementRecursionDepth();
       try
       {
-        var tmp170 = new TStruct("SaveRegisterResponse");
-        await oprot.WriteStructBeginAsync(tmp170, cancellationToken);
-        var tmp171 = new TField();
+        var tmp136 = new TStruct("GetSubmissionDetailResponse");
+        await oprot.WriteStructBeginAsync(tmp136, cancellationToken);
+        var tmp137 = new TField();
+        if((Submission != null))
+        {
+          tmp137.Name = "Submission";
+          tmp137.Type = TType.Struct;
+          tmp137.ID = 1;
+          await oprot.WriteFieldBeginAsync(tmp137, cancellationToken);
+          await Submission.WriteAsync(oprot, cancellationToken);
+          await oprot.WriteFieldEndAsync(cancellationToken);
+        }
         if((BaseResp != null) && __isset.BaseResp)
         {
-          tmp171.Name = "BaseResp";
-          tmp171.Type = TType.Struct;
-          tmp171.ID = 255;
-          await oprot.WriteFieldBeginAsync(tmp171, cancellationToken);
+          tmp137.Name = "BaseResp";
+          tmp137.Type = TType.Struct;
+          tmp137.ID = 255;
+          await oprot.WriteFieldBeginAsync(tmp137, cancellationToken);
           await BaseResp.WriteAsync(oprot, cancellationToken);
           await oprot.WriteFieldEndAsync(cancellationToken);
         }
@@ -144,14 +181,19 @@ namespace CUGOJ.RPC.Gen.Services.Base
 
     public override bool Equals(object that)
     {
-      if (!(that is SaveRegisterResponse other)) return false;
+      if (!(that is GetSubmissionDetailResponse other)) return false;
       if (ReferenceEquals(this, other)) return true;
-      return ((__isset.BaseResp == other.__isset.BaseResp) && ((!__isset.BaseResp) || (global::System.Object.Equals(BaseResp, other.BaseResp))));
+      return global::System.Object.Equals(Submission, other.Submission)
+        && ((__isset.BaseResp == other.__isset.BaseResp) && ((!__isset.BaseResp) || (global::System.Object.Equals(BaseResp, other.BaseResp))));
     }
 
     public override int GetHashCode() {
       int hashcode = 157;
       unchecked {
+        if((Submission != null))
+        {
+          hashcode = (hashcode * 397) + Submission.GetHashCode();
+        }
         if((BaseResp != null) && __isset.BaseResp)
         {
           hashcode = (hashcode * 397) + BaseResp.GetHashCode();
@@ -162,16 +204,19 @@ namespace CUGOJ.RPC.Gen.Services.Base
 
     public override string ToString()
     {
-      var tmp172 = new StringBuilder("SaveRegisterResponse(");
-      int tmp173 = 0;
+      var tmp138 = new StringBuilder("GetSubmissionDetailResponse(");
+      if((Submission != null))
+      {
+        tmp138.Append(", Submission: ");
+        Submission.ToString(tmp138);
+      }
       if((BaseResp != null) && __isset.BaseResp)
       {
-        if(0 < tmp173++) { tmp172.Append(", "); }
-        tmp172.Append("BaseResp: ");
-        BaseResp.ToString(tmp172);
+        tmp138.Append(", BaseResp: ");
+        BaseResp.ToString(tmp138);
       }
-      tmp172.Append(')');
-      return tmp172.ToString();
+      tmp138.Append(')');
+      return tmp138.ToString();
     }
   }
 

@@ -57,6 +57,12 @@ public static class ParamsTool
         {"trace","trace"},
         {"log","log"},
     };
+    private static Dictionary<string, string> _judgerArgs = new Dictionary<string, string>()
+    {
+        {"connectionString","connectionString"},
+        {"c","connectionString"},
+        {"debug","-debug"},
+    };
 
     public static Dictionary<string, string> ParseArgs(string[] args, ServiceTypeEnum type)
     {
@@ -68,6 +74,7 @@ public static class ParamsTool
             case ServiceTypeEnum.Authentication: keys = _authenticationArgs; break;
             case ServiceTypeEnum.Base: keys = _baseArgs; break;
             case ServiceTypeEnum.Gateway: keys = _gatewayArgs; break;
+            case ServiceTypeEnum.Judger: keys = _judgerArgs; break;
             default:
                 return new Dictionary<string, string>();
         }
