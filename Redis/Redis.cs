@@ -1,5 +1,5 @@
-using System.Runtime.InteropServices;
 using ServiceStack.Redis;
+using CUGOJ.CUGOJ_Tools.Log;
 namespace CUGOJ.CUGOJ_Tools.Redis;
 
 public class RedisProcessor
@@ -44,10 +44,18 @@ public class RedisProcessor
     {
         await Task.Run(() =>
         {
-            using var client = _client;
-            if (client == null) return;
-            var json = System.Text.Json.JsonSerializer.Serialize<T>(value);
-            client.Set(key, json, expireTime);
+            try
+            {
+                using var client = _client;
+                if (client == null) return;
+                var json = System.Text.Json.JsonSerializer.Serialize<T>(value);
+                client.Set(key, json, expireTime);
+            }
+            catch (Exception e)
+            {
+                Logger.Warn("Redis: Set抛出异常, {0}.", e);
+                return;
+            }
         });
     }
     public virtual async Task<T?> Get<T>(string key) where T : class
@@ -61,11 +69,97 @@ public class RedisProcessor
             return System.Text.Json.JsonSerializer.Deserialize<T>(json);
         });
     }
-    public delegate Task<T?> QueryDBFunction<T, E>(E req);
-    public virtual async Task<T?> GetWithCache<T, E>(QueryDBFunction<T, E> queryDBFunction, E req, string cacheKey, int expireSeconds = 5) where T : class
+
+    public virtual async Task AddToZSet<T>(string key, T obj, double score, TimeSpan expireTime = new TimeSpan())
     {
-        string lockKey = "cache_lock_" + cacheKey;
-        string contentKey = "cache_content_" + cacheKey;
+        await Task.Run(() =>
+        {
+            using var client = _client;
+            if (client == null)
+            {
+                return;
+            }
+            var json = System.Text.Json.JsonSerializer.Serialize<T>(obj);
+            client.AddItemToSortedSet(key, json, score);
+            if (expireTime != TimeSpan.Zero)
+            {
+                client.ExpireEntryIn(key, expireTime);
+            }
+        });
+    }
+
+    public virtual async Task<List<T>?> GetFromZSet<T>(string key, long cursor, long limit)
+    {
+        return await Task.Run(() =>
+        {
+            try
+            {
+                using var client = _client;
+                if (client == null)
+                {
+                    return null;
+                }
+                List<string> jsonList = client.GetRangeFromSortedSet(key, (int)cursor, (int)(cursor + limit - 1));
+                List<T> res = new();
+                foreach (string json in jsonList)
+                {
+                    T? obj = System.Text.Json.JsonSerializer.Deserialize<T>(json);
+                    if (obj == null)
+                    {
+                        Logger.Warn("Redis查询ZSet返回值包含null.");
+                        return null;
+                    }
+                    res.Add(obj);
+                }
+                return res;
+            }
+            catch (Exception e)
+            {
+                Logger.Warn("Redis: GetFromZSet抛出异常, {0}.", e);
+                return null;
+            }
+        });
+    }
+
+    public virtual async Task<List<T>?> GetFromZSet<T>(string key, double low, double up, long cursor, long limit)
+    {
+        return await Task.Run(() =>
+        {
+            try
+            {
+                using var client = _client;
+                if (client == null)
+                {
+                    return null;
+                }
+                List<string> jsonList = client.GetRangeFromSortedSetByHighestScore(key, low, up, (int)cursor, (int)limit);
+                List<T> res = new();
+                foreach (string json in jsonList)
+                {
+                    T? obj = System.Text.Json.JsonSerializer.Deserialize<T>(json);
+                    if (obj == null)
+                    {
+                        Logger.Warn("Redis查询ZSet返回值包含null.");
+                        return null;
+                    }
+                    res.Add(obj);
+                }
+                return res;
+            }
+            catch (Exception e)
+            {
+                Logger.Warn("Redis: GetFromZSet抛出异常, {0}.", e);
+                return null;
+            }
+        });
+    }
+
+    public delegate Task<T?> QueryDBFunction<T, E>(E req);
+
+    public virtual async Task<T?> GetWithCacheKey<T, E>(QueryDBFunction<T, E> queryDBFunction, E req, string key, int expireSeconds = 5) where T : class
+    {
+        string lockKey = "cache_lock_" + key;
+        string contentKey = key;
         using var client = _client;
         if (client == null)
         {
@@ -84,6 +178,66 @@ public class RedisProcessor
             if (res == null)
             {
                 res = await queryDBFunction(req);
+            }
+            return res;
+        }
+    }
+
+    public delegate Task<List<T>> MulQueryDBFunction<T, E>(E req);
+    public delegate double GetScoreFunction<T>(T obj);
+    public virtual async Task<List<T>> GetWithZSetCache<T, E>(MulQueryDBFunction<T, E> mulQueryDBFunction, GetScoreFunction<T> getScoreFunction, E req, string key, long cursor, long limit, int expireSeconds = 20) where T : class
+    {
+        string lockKey = "cache_lock_" + key;
+        string contentKey = key;
+        using var client = _client;
+        if (client == null)
+        {
+            return await mulQueryDBFunction(req);
+        }
+        if (client.SetValueIfNotExists(lockKey, "1", TimeSpan.FromSeconds(expireSeconds)))
+        {
+            List<T> res = await mulQueryDBFunction(req);
+            foreach (T obj in res)
+            {
+                await AddToZSet<T>(contentKey, obj, getScoreFunction(obj), TimeSpan.FromSeconds(expireSeconds + 2));
+            }
+            return res;
+        }
+        else
+        {
+            List<T>? res = await GetFromZSet<T>(contentKey, cursor, limit);
+            if (res == null)
+            {
+                return await mulQueryDBFunction(req);
+            }
+            return res;
+        }
+    }
+
+    public virtual async Task<List<T>> GetWithZSetCache<T, E>(MulQueryDBFunction<T, E> mulQueryDBFunction, GetScoreFunction<T> getScoreFunction, E req, string key, double low, double up, long cursor, long limit, int expireSeconds = 20) where T : class
+    {
+        string lockKey = "cache_lock_" + key;
+        string contentKey = key;
+        using var client = _client;
+        if (client == null)
+        {
+            return await mulQueryDBFunction(req);
+        }
+        if (client.SetValueIfNotExists(lockKey, "1", TimeSpan.FromSeconds(expireSeconds)))
+        {
+            List<T> res = await mulQueryDBFunction(req);
+            foreach (T obj in res)
+            {
+                await AddToZSet<T>(contentKey, obj, getScoreFunction(obj), TimeSpan.FromSeconds(expireSeconds + 2));
+            }
+            return res;
+        }
+        else
+        {
+            List<T>? res = await GetFromZSet<T>(contentKey, low, up, cursor, limit);
+            if (res == null)
+            {
+                return await mulQueryDBFunction(req);
             }
             return res;
         }
