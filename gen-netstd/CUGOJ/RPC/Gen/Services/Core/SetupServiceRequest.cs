@@ -80,22 +80,22 @@ namespace CUGOJ.RPC.Gen.Services.Core
 
     public SetupServiceRequest DeepCopy()
     {
-      var tmp193 = new SetupServiceRequest();
+      var tmp198 = new SetupServiceRequest();
       if((ServiceID != null))
       {
-        tmp193.ServiceID = this.ServiceID;
+        tmp198.ServiceID = this.ServiceID;
       }
-      tmp193.SetupServiceType = this.SetupServiceType;
+      tmp198.SetupServiceType = this.SetupServiceType;
       if((SetupValue != null))
       {
-        tmp193.SetupValue = this.SetupValue;
+        tmp198.SetupValue = this.SetupValue;
       }
       if((Base != null) && __isset.@Base)
       {
-        tmp193.Base = (global::CUGOJ.RPC.Gen.Base.@Base)this.Base.DeepCopy();
+        tmp198.Base = (global::CUGOJ.RPC.Gen.Base.@Base)this.Base.DeepCopy();
       }
-      tmp193.__isset.@Base = this.__isset.@Base;
-      return tmp193;
+      tmp198.__isset.@Base = this.__isset.@Base;
+      return tmp198;
     }
 
     public async global::System.Threading.Tasks.Task ReadAsync(TProtocol iprot, CancellationToken cancellationToken)
@@ -195,39 +195,39 @@ namespace CUGOJ.RPC.Gen.Services.Core
       oprot.IncrementRecursionDepth();
       try
       {
-        var tmp194 = new TStruct("SetupServiceRequest");
-        await oprot.WriteStructBeginAsync(tmp194, cancellationToken);
-        var tmp195 = new TField();
+        var tmp199 = new TStruct("SetupServiceRequest");
+        await oprot.WriteStructBeginAsync(tmp199, cancellationToken);
+        var tmp200 = new TField();
         if((ServiceID != null))
         {
-          tmp195.Name = "ServiceID";
-          tmp195.Type = TType.String;
-          tmp195.ID = 1;
-          await oprot.WriteFieldBeginAsync(tmp195, cancellationToken);
+          tmp200.Name = "ServiceID";
+          tmp200.Type = TType.String;
+          tmp200.ID = 1;
+          await oprot.WriteFieldBeginAsync(tmp200, cancellationToken);
           await oprot.WriteStringAsync(ServiceID, cancellationToken);
           await oprot.WriteFieldEndAsync(cancellationToken);
         }
-        tmp195.Name = "SetupServiceType";
-        tmp195.Type = TType.I32;
-        tmp195.ID = 2;
-        await oprot.WriteFieldBeginAsync(tmp195, cancellationToken);
+        tmp200.Name = "SetupServiceType";
+        tmp200.Type = TType.I32;
+        tmp200.ID = 2;
+        await oprot.WriteFieldBeginAsync(tmp200, cancellationToken);
         await oprot.WriteI32Async((int)SetupServiceType, cancellationToken);
         await oprot.WriteFieldEndAsync(cancellationToken);
         if((SetupValue != null))
         {
-          tmp195.Name = "SetupValue";
-          tmp195.Type = TType.String;
-          tmp195.ID = 3;
-          await oprot.WriteFieldBeginAsync(tmp195, cancellationToken);
+          tmp200.Name = "SetupValue";
+          tmp200.Type = TType.String;
+          tmp200.ID = 3;
+          await oprot.WriteFieldBeginAsync(tmp200, cancellationToken);
           await oprot.WriteStringAsync(SetupValue, cancellationToken);
           await oprot.WriteFieldEndAsync(cancellationToken);
         }
         if((Base != null) && __isset.@Base)
         {
-          tmp195.Name = "Base";
-          tmp195.Type = TType.Struct;
-          tmp195.ID = 255;
-          await oprot.WriteFieldBeginAsync(tmp195, cancellationToken);
+          tmp200.Name = "Base";
+          tmp200.Type = TType.Struct;
+          tmp200.ID = 255;
+          await oprot.WriteFieldBeginAsync(tmp200, cancellationToken);
           await Base.WriteAsync(oprot, cancellationToken);
           await oprot.WriteFieldEndAsync(cancellationToken);
         }
@@ -272,26 +272,26 @@ namespace CUGOJ.RPC.Gen.Services.Core
 
     public override string ToString()
     {
-      var tmp196 = new StringBuilder("SetupServiceRequest(");
+      var tmp201 = new StringBuilder("SetupServiceRequest(");
       if((ServiceID != null))
       {
-        tmp196.Append(", ServiceID: ");
-        ServiceID.ToString(tmp196);
+        tmp201.Append(", ServiceID: ");
+        ServiceID.ToString(tmp201);
       }
-      tmp196.Append(", SetupServiceType: ");
-      SetupServiceType.ToString(tmp196);
+      tmp201.Append(", SetupServiceType: ");
+      SetupServiceType.ToString(tmp201);
       if((SetupValue != null))
       {
-        tmp196.Append(", SetupValue: ");
-        SetupValue.ToString(tmp196);
+        tmp201.Append(", SetupValue: ");
+        SetupValue.ToString(tmp201);
       }
       if((Base != null) && __isset.@Base)
       {
-        tmp196.Append(", Base: ");
-        Base.ToString(tmp196);
+        tmp201.Append(", Base: ");
+        Base.ToString(tmp201);
       }
-      tmp196.Append(')');
-      return tmp196.ToString();
+      tmp201.Append(')');
+      return tmp201.ToString();
     }
   }
 

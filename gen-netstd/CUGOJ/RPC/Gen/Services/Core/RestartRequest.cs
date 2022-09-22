@@ -63,13 +63,13 @@ namespace CUGOJ.RPC.Gen.Services.Core
 
     public RestartRequest DeepCopy()
     {
-      var tmp203 = new RestartRequest();
+      var tmp208 = new RestartRequest();
       if((Base != null) && __isset.@Base)
       {
-        tmp203.Base = (global::CUGOJ.RPC.Gen.Base.@Base)this.Base.DeepCopy();
+        tmp208.Base = (global::CUGOJ.RPC.Gen.Base.@Base)this.Base.DeepCopy();
       }
-      tmp203.__isset.@Base = this.__isset.@Base;
-      return tmp203;
+      tmp208.__isset.@Base = this.__isset.@Base;
+      return tmp208;
     }
 
     public async global::System.Threading.Tasks.Task ReadAsync(TProtocol iprot, CancellationToken cancellationToken)
@@ -121,15 +121,15 @@ namespace CUGOJ.RPC.Gen.Services.Core
       oprot.IncrementRecursionDepth();
       try
       {
-        var tmp204 = new TStruct("RestartRequest");
-        await oprot.WriteStructBeginAsync(tmp204, cancellationToken);
-        var tmp205 = new TField();
+        var tmp209 = new TStruct("RestartRequest");
+        await oprot.WriteStructBeginAsync(tmp209, cancellationToken);
+        var tmp210 = new TField();
         if((Base != null) && __isset.@Base)
         {
-          tmp205.Name = "Base";
-          tmp205.Type = TType.Struct;
-          tmp205.ID = 255;
-          await oprot.WriteFieldBeginAsync(tmp205, cancellationToken);
+          tmp210.Name = "Base";
+          tmp210.Type = TType.Struct;
+          tmp210.ID = 255;
+          await oprot.WriteFieldBeginAsync(tmp210, cancellationToken);
           await Base.WriteAsync(oprot, cancellationToken);
           await oprot.WriteFieldEndAsync(cancellationToken);
         }
@@ -162,16 +162,16 @@ namespace CUGOJ.RPC.Gen.Services.Core
 
     public override string ToString()
     {
-      var tmp206 = new StringBuilder("RestartRequest(");
-      int tmp207 = 0;
+      var tmp211 = new StringBuilder("RestartRequest(");
+      int tmp212 = 0;
       if((Base != null) && __isset.@Base)
       {
-        if(0 < tmp207++) { tmp206.Append(", "); }
-        tmp206.Append("Base: ");
-        Base.ToString(tmp206);
+        if(0 < tmp212++) { tmp211.Append(", "); }
+        tmp211.Append("Base: ");
+        Base.ToString(tmp211);
       }
-      tmp206.Append(')');
-      return tmp206.ToString();
+      tmp211.Append(')');
+      return tmp211.ToString();
     }
   }
 

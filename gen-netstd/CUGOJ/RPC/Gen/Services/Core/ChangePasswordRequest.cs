@@ -79,26 +79,26 @@ namespace CUGOJ.RPC.Gen.Services.Core
 
     public ChangePasswordRequest DeepCopy()
     {
-      var tmp116 = new ChangePasswordRequest();
-      tmp116.UserID = this.UserID;
+      var tmp121 = new ChangePasswordRequest();
+      tmp121.UserID = this.UserID;
       if((OldPassword != null))
       {
-        tmp116.OldPassword = this.OldPassword;
+        tmp121.OldPassword = this.OldPassword;
       }
       if((NewPassword != null))
       {
-        tmp116.NewPassword = this.NewPassword;
+        tmp121.NewPassword = this.NewPassword;
       }
       if((Code != null))
       {
-        tmp116.Code = this.Code;
+        tmp121.Code = this.Code;
       }
       if((Base != null) && __isset.@Base)
       {
-        tmp116.Base = (global::CUGOJ.RPC.Gen.Base.@Base)this.Base.DeepCopy();
+        tmp121.Base = (global::CUGOJ.RPC.Gen.Base.@Base)this.Base.DeepCopy();
       }
-      tmp116.__isset.@Base = this.__isset.@Base;
-      return tmp116;
+      tmp121.__isset.@Base = this.__isset.@Base;
+      return tmp121;
     }
 
     public async global::System.Threading.Tasks.Task ReadAsync(TProtocol iprot, CancellationToken cancellationToken)
@@ -214,48 +214,48 @@ namespace CUGOJ.RPC.Gen.Services.Core
       oprot.IncrementRecursionDepth();
       try
       {
-        var tmp117 = new TStruct("ChangePasswordRequest");
-        await oprot.WriteStructBeginAsync(tmp117, cancellationToken);
-        var tmp118 = new TField();
-        tmp118.Name = "UserID";
-        tmp118.Type = TType.I64;
-        tmp118.ID = 1;
-        await oprot.WriteFieldBeginAsync(tmp118, cancellationToken);
+        var tmp122 = new TStruct("ChangePasswordRequest");
+        await oprot.WriteStructBeginAsync(tmp122, cancellationToken);
+        var tmp123 = new TField();
+        tmp123.Name = "UserID";
+        tmp123.Type = TType.I64;
+        tmp123.ID = 1;
+        await oprot.WriteFieldBeginAsync(tmp123, cancellationToken);
         await oprot.WriteI64Async(UserID, cancellationToken);
         await oprot.WriteFieldEndAsync(cancellationToken);
         if((OldPassword != null))
         {
-          tmp118.Name = "OldPassword";
-          tmp118.Type = TType.String;
-          tmp118.ID = 2;
-          await oprot.WriteFieldBeginAsync(tmp118, cancellationToken);
+          tmp123.Name = "OldPassword";
+          tmp123.Type = TType.String;
+          tmp123.ID = 2;
+          await oprot.WriteFieldBeginAsync(tmp123, cancellationToken);
           await oprot.WriteStringAsync(OldPassword, cancellationToken);
           await oprot.WriteFieldEndAsync(cancellationToken);
         }
         if((NewPassword != null))
         {
-          tmp118.Name = "NewPassword";
-          tmp118.Type = TType.String;
-          tmp118.ID = 3;
-          await oprot.WriteFieldBeginAsync(tmp118, cancellationToken);
+          tmp123.Name = "NewPassword";
+          tmp123.Type = TType.String;
+          tmp123.ID = 3;
+          await oprot.WriteFieldBeginAsync(tmp123, cancellationToken);
           await oprot.WriteStringAsync(NewPassword, cancellationToken);
           await oprot.WriteFieldEndAsync(cancellationToken);
         }
         if((Code != null))
         {
-          tmp118.Name = "Code";
-          tmp118.Type = TType.String;
-          tmp118.ID = 4;
-          await oprot.WriteFieldBeginAsync(tmp118, cancellationToken);
+          tmp123.Name = "Code";
+          tmp123.Type = TType.String;
+          tmp123.ID = 4;
+          await oprot.WriteFieldBeginAsync(tmp123, cancellationToken);
           await oprot.WriteStringAsync(Code, cancellationToken);
           await oprot.WriteFieldEndAsync(cancellationToken);
         }
         if((Base != null) && __isset.@Base)
         {
-          tmp118.Name = "Base";
-          tmp118.Type = TType.Struct;
-          tmp118.ID = 255;
-          await oprot.WriteFieldBeginAsync(tmp118, cancellationToken);
+          tmp123.Name = "Base";
+          tmp123.Type = TType.Struct;
+          tmp123.ID = 255;
+          await oprot.WriteFieldBeginAsync(tmp123, cancellationToken);
           await Base.WriteAsync(oprot, cancellationToken);
           await oprot.WriteFieldEndAsync(cancellationToken);
         }
@@ -305,31 +305,31 @@ namespace CUGOJ.RPC.Gen.Services.Core
 
     public override string ToString()
     {
-      var tmp119 = new StringBuilder("ChangePasswordRequest(");
-      tmp119.Append(", UserID: ");
-      UserID.ToString(tmp119);
+      var tmp124 = new StringBuilder("ChangePasswordRequest(");
+      tmp124.Append(", UserID: ");
+      UserID.ToString(tmp124);
       if((OldPassword != null))
       {
-        tmp119.Append(", OldPassword: ");
-        OldPassword.ToString(tmp119);
+        tmp124.Append(", OldPassword: ");
+        OldPassword.ToString(tmp124);
       }
       if((NewPassword != null))
       {
-        tmp119.Append(", NewPassword: ");
-        NewPassword.ToString(tmp119);
+        tmp124.Append(", NewPassword: ");
+        NewPassword.ToString(tmp124);
       }
       if((Code != null))
       {
-        tmp119.Append(", Code: ");
-        Code.ToString(tmp119);
+        tmp124.Append(", Code: ");
+        Code.ToString(tmp124);
       }
       if((Base != null) && __isset.@Base)
       {
-        tmp119.Append(", Base: ");
-        Base.ToString(tmp119);
+        tmp124.Append(", Base: ");
+        Base.ToString(tmp124);
       }
-      tmp119.Append(')');
-      return tmp119.ToString();
+      tmp124.Append(')');
+      return tmp124.ToString();
     }
   }
 

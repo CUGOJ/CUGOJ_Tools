@@ -26,6 +26,33 @@ namespace CUGOJ.RPC.Gen.Services.Core
 {
   public static class coreExtensions
   {
+    public static bool Equals(this Dictionary<long, global::CUGOJ.RPC.Gen.OJCommon.SubmissionStatus> instance, object that)
+    {
+      if (!(that is Dictionary<long, global::CUGOJ.RPC.Gen.OJCommon.SubmissionStatus> other)) return false;
+      if (ReferenceEquals(instance, other)) return true;
+
+      return TCollections.Equals(instance, other);
+    }
+
+
+    public static int GetHashCode(this Dictionary<long, global::CUGOJ.RPC.Gen.OJCommon.SubmissionStatus> instance)
+    {
+      return TCollections.GetHashCode(instance);
+    }
+
+
+    public static Dictionary<long, global::CUGOJ.RPC.Gen.OJCommon.SubmissionStatus> DeepCopy(this Dictionary<long, global::CUGOJ.RPC.Gen.OJCommon.SubmissionStatus> source)
+    {
+      if (source == null)
+        return null;
+
+      var tmp693 = new Dictionary<long, global::CUGOJ.RPC.Gen.OJCommon.SubmissionStatus>(source.Count);
+      foreach (var pair in source)
+        tmp693.Add(pair.Key, pair.Value);
+      return tmp693;
+    }
+
+
     public static bool Equals(this Dictionary<string, string> instance, object that)
     {
       if (!(that is Dictionary<string, string> other)) return false;
@@ -46,10 +73,10 @@ namespace CUGOJ.RPC.Gen.Services.Core
       if (source == null)
         return null;
 
-      var tmp688 = new Dictionary<string, string>(source.Count);
+      var tmp694 = new Dictionary<string, string>(source.Count);
       foreach (var pair in source)
-        tmp688.Add((pair.Key != null) ? pair.Key : null, (pair.Value != null) ? pair.Value : null);
-      return tmp688;
+        tmp694.Add((pair.Key != null) ? pair.Key : null, (pair.Value != null) ? pair.Value : null);
+      return tmp694;
     }
 
 
@@ -73,10 +100,10 @@ namespace CUGOJ.RPC.Gen.Services.Core
       if (source == null)
         return null;
 
-      var tmp689 = new List<global::CUGOJ.RPC.Gen.Base.ServiceBaseInfo>(source.Count);
+      var tmp695 = new List<global::CUGOJ.RPC.Gen.Base.ServiceBaseInfo>(source.Count);
       foreach (var elem in source)
-        tmp689.Add((elem != null) ? elem.DeepCopy() : null);
-      return tmp689;
+        tmp695.Add((elem != null) ? elem.DeepCopy() : null);
+      return tmp695;
     }
 
 
@@ -100,10 +127,10 @@ namespace CUGOJ.RPC.Gen.Services.Core
       if (source == null)
         return null;
 
-      var tmp690 = new List<global::CUGOJ.RPC.Gen.Common.ContestStruct>(source.Count);
+      var tmp696 = new List<global::CUGOJ.RPC.Gen.Common.ContestStruct>(source.Count);
       foreach (var elem in source)
-        tmp690.Add((elem != null) ? elem.DeepCopy() : null);
-      return tmp690;
+        tmp696.Add((elem != null) ? elem.DeepCopy() : null);
+      return tmp696;
     }
 
 
@@ -127,10 +154,10 @@ namespace CUGOJ.RPC.Gen.Services.Core
       if (source == null)
         return null;
 
-      var tmp691 = new List<global::CUGOJ.RPC.Gen.Common.ProblemStruct>(source.Count);
+      var tmp697 = new List<global::CUGOJ.RPC.Gen.Common.ProblemStruct>(source.Count);
       foreach (var elem in source)
-        tmp691.Add((elem != null) ? elem.DeepCopy() : null);
-      return tmp691;
+        tmp697.Add((elem != null) ? elem.DeepCopy() : null);
+      return tmp697;
     }
 
 
@@ -154,10 +181,10 @@ namespace CUGOJ.RPC.Gen.Services.Core
       if (source == null)
         return null;
 
-      var tmp692 = new List<global::CUGOJ.RPC.Gen.Common.SubmissionStruct>(source.Count);
+      var tmp698 = new List<global::CUGOJ.RPC.Gen.Common.SubmissionStruct>(source.Count);
       foreach (var elem in source)
-        tmp692.Add((elem != null) ? elem.DeepCopy() : null);
-      return tmp692;
+        tmp698.Add((elem != null) ? elem.DeepCopy() : null);
+      return tmp698;
     }
 
 
@@ -181,10 +208,10 @@ namespace CUGOJ.RPC.Gen.Services.Core
       if (source == null)
         return null;
 
-      var tmp693 = new List<string>(source.Count);
+      var tmp699 = new List<string>(source.Count);
       foreach (var elem in source)
-        tmp693.Add((elem != null) ? elem : null);
-      return tmp693;
+        tmp699.Add((elem != null) ? elem : null);
+      return tmp699;
     }
 
 

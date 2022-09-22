@@ -73,21 +73,21 @@ namespace CUGOJ.RPC.Gen.Services.Core
 
     public SaveContestInfoRequest DeepCopy()
     {
-      var tmp82 = new SaveContestInfoRequest();
+      var tmp87 = new SaveContestInfoRequest();
       if((Contest != null))
       {
-        tmp82.Contest = (global::CUGOJ.RPC.Gen.Common.ContestStruct)this.Contest.DeepCopy();
+        tmp87.Contest = (global::CUGOJ.RPC.Gen.Common.ContestStruct)this.Contest.DeepCopy();
       }
       if((Problems != null))
       {
-        tmp82.Problems = this.Problems.DeepCopy();
+        tmp87.Problems = this.Problems.DeepCopy();
       }
       if((Base != null) && __isset.@Base)
       {
-        tmp82.Base = (global::CUGOJ.RPC.Gen.Base.@Base)this.Base.DeepCopy();
+        tmp87.Base = (global::CUGOJ.RPC.Gen.Base.@Base)this.Base.DeepCopy();
       }
-      tmp82.__isset.@Base = this.__isset.@Base;
-      return tmp82;
+      tmp87.__isset.@Base = this.__isset.@Base;
+      return tmp87;
     }
 
     public async global::System.Threading.Tasks.Task ReadAsync(TProtocol iprot, CancellationToken cancellationToken)
@@ -125,14 +125,14 @@ namespace CUGOJ.RPC.Gen.Services.Core
               if (field.Type == TType.List)
               {
                 {
-                  TList _list83 = await iprot.ReadListBeginAsync(cancellationToken);
-                  Problems = new List<global::CUGOJ.RPC.Gen.Common.ProblemStruct>(_list83.Count);
-                  for(int _i84 = 0; _i84 < _list83.Count; ++_i84)
+                  TList _list88 = await iprot.ReadListBeginAsync(cancellationToken);
+                  Problems = new List<global::CUGOJ.RPC.Gen.Common.ProblemStruct>(_list88.Count);
+                  for(int _i89 = 0; _i89 < _list88.Count; ++_i89)
                   {
-                    global::CUGOJ.RPC.Gen.Common.ProblemStruct _elem85;
-                    _elem85 = new global::CUGOJ.RPC.Gen.Common.ProblemStruct();
-                    await _elem85.ReadAsync(iprot, cancellationToken);
-                    Problems.Add(_elem85);
+                    global::CUGOJ.RPC.Gen.Common.ProblemStruct _elem90;
+                    _elem90 = new global::CUGOJ.RPC.Gen.Common.ProblemStruct();
+                    await _elem90.ReadAsync(iprot, cancellationToken);
+                    Problems.Add(_elem90);
                   }
                   await iprot.ReadListEndAsync(cancellationToken);
                 }
@@ -183,29 +183,29 @@ namespace CUGOJ.RPC.Gen.Services.Core
       oprot.IncrementRecursionDepth();
       try
       {
-        var tmp86 = new TStruct("SaveContestInfoRequest");
-        await oprot.WriteStructBeginAsync(tmp86, cancellationToken);
-        var tmp87 = new TField();
+        var tmp91 = new TStruct("SaveContestInfoRequest");
+        await oprot.WriteStructBeginAsync(tmp91, cancellationToken);
+        var tmp92 = new TField();
         if((Contest != null))
         {
-          tmp87.Name = "Contest";
-          tmp87.Type = TType.Struct;
-          tmp87.ID = 1;
-          await oprot.WriteFieldBeginAsync(tmp87, cancellationToken);
+          tmp92.Name = "Contest";
+          tmp92.Type = TType.Struct;
+          tmp92.ID = 1;
+          await oprot.WriteFieldBeginAsync(tmp92, cancellationToken);
           await Contest.WriteAsync(oprot, cancellationToken);
           await oprot.WriteFieldEndAsync(cancellationToken);
         }
         if((Problems != null))
         {
-          tmp87.Name = "Problems";
-          tmp87.Type = TType.List;
-          tmp87.ID = 2;
-          await oprot.WriteFieldBeginAsync(tmp87, cancellationToken);
+          tmp92.Name = "Problems";
+          tmp92.Type = TType.List;
+          tmp92.ID = 2;
+          await oprot.WriteFieldBeginAsync(tmp92, cancellationToken);
           {
             await oprot.WriteListBeginAsync(new TList(TType.Struct, Problems.Count), cancellationToken);
-            foreach (global::CUGOJ.RPC.Gen.Common.ProblemStruct _iter88 in Problems)
+            foreach (global::CUGOJ.RPC.Gen.Common.ProblemStruct _iter93 in Problems)
             {
-              await _iter88.WriteAsync(oprot, cancellationToken);
+              await _iter93.WriteAsync(oprot, cancellationToken);
             }
             await oprot.WriteListEndAsync(cancellationToken);
           }
@@ -213,10 +213,10 @@ namespace CUGOJ.RPC.Gen.Services.Core
         }
         if((Base != null) && __isset.@Base)
         {
-          tmp87.Name = "Base";
-          tmp87.Type = TType.Struct;
-          tmp87.ID = 255;
-          await oprot.WriteFieldBeginAsync(tmp87, cancellationToken);
+          tmp92.Name = "Base";
+          tmp92.Type = TType.Struct;
+          tmp92.ID = 255;
+          await oprot.WriteFieldBeginAsync(tmp92, cancellationToken);
           await Base.WriteAsync(oprot, cancellationToken);
           await oprot.WriteFieldEndAsync(cancellationToken);
         }
@@ -259,24 +259,24 @@ namespace CUGOJ.RPC.Gen.Services.Core
 
     public override string ToString()
     {
-      var tmp89 = new StringBuilder("SaveContestInfoRequest(");
+      var tmp94 = new StringBuilder("SaveContestInfoRequest(");
       if((Contest != null))
       {
-        tmp89.Append(", Contest: ");
-        Contest.ToString(tmp89);
+        tmp94.Append(", Contest: ");
+        Contest.ToString(tmp94);
       }
       if((Problems != null))
       {
-        tmp89.Append(", Problems: ");
-        Problems.ToString(tmp89);
+        tmp94.Append(", Problems: ");
+        Problems.ToString(tmp94);
       }
       if((Base != null) && __isset.@Base)
       {
-        tmp89.Append(", Base: ");
-        Base.ToString(tmp89);
+        tmp94.Append(", Base: ");
+        Base.ToString(tmp94);
       }
-      tmp89.Append(')');
-      return tmp89.ToString();
+      tmp94.Append(')');
+      return tmp94.ToString();
     }
   }
 

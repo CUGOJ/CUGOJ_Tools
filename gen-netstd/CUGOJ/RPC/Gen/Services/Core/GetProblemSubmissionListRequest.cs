@@ -76,16 +76,16 @@ namespace CUGOJ.RPC.Gen.Services.Core
 
     public GetProblemSubmissionListRequest DeepCopy()
     {
-      var tmp155 = new GetProblemSubmissionListRequest();
-      tmp155.Cursor = this.Cursor;
-      tmp155.Limit = this.Limit;
-      tmp155.ProblemID = this.ProblemID;
+      var tmp160 = new GetProblemSubmissionListRequest();
+      tmp160.Cursor = this.Cursor;
+      tmp160.Limit = this.Limit;
+      tmp160.ProblemID = this.ProblemID;
       if((Base != null) && __isset.@Base)
       {
-        tmp155.Base = (global::CUGOJ.RPC.Gen.Base.@Base)this.Base.DeepCopy();
+        tmp160.Base = (global::CUGOJ.RPC.Gen.Base.@Base)this.Base.DeepCopy();
       }
-      tmp155.__isset.@Base = this.__isset.@Base;
-      return tmp155;
+      tmp160.__isset.@Base = this.__isset.@Base;
+      return tmp160;
     }
 
     public async global::System.Threading.Tasks.Task ReadAsync(TProtocol iprot, CancellationToken cancellationToken)
@@ -185,33 +185,33 @@ namespace CUGOJ.RPC.Gen.Services.Core
       oprot.IncrementRecursionDepth();
       try
       {
-        var tmp156 = new TStruct("GetProblemSubmissionListRequest");
-        await oprot.WriteStructBeginAsync(tmp156, cancellationToken);
-        var tmp157 = new TField();
-        tmp157.Name = "Cursor";
-        tmp157.Type = TType.I64;
-        tmp157.ID = 1;
-        await oprot.WriteFieldBeginAsync(tmp157, cancellationToken);
+        var tmp161 = new TStruct("GetProblemSubmissionListRequest");
+        await oprot.WriteStructBeginAsync(tmp161, cancellationToken);
+        var tmp162 = new TField();
+        tmp162.Name = "Cursor";
+        tmp162.Type = TType.I64;
+        tmp162.ID = 1;
+        await oprot.WriteFieldBeginAsync(tmp162, cancellationToken);
         await oprot.WriteI64Async(Cursor, cancellationToken);
         await oprot.WriteFieldEndAsync(cancellationToken);
-        tmp157.Name = "Limit";
-        tmp157.Type = TType.I32;
-        tmp157.ID = 2;
-        await oprot.WriteFieldBeginAsync(tmp157, cancellationToken);
+        tmp162.Name = "Limit";
+        tmp162.Type = TType.I32;
+        tmp162.ID = 2;
+        await oprot.WriteFieldBeginAsync(tmp162, cancellationToken);
         await oprot.WriteI32Async(Limit, cancellationToken);
         await oprot.WriteFieldEndAsync(cancellationToken);
-        tmp157.Name = "ProblemID";
-        tmp157.Type = TType.I64;
-        tmp157.ID = 3;
-        await oprot.WriteFieldBeginAsync(tmp157, cancellationToken);
+        tmp162.Name = "ProblemID";
+        tmp162.Type = TType.I64;
+        tmp162.ID = 3;
+        await oprot.WriteFieldBeginAsync(tmp162, cancellationToken);
         await oprot.WriteI64Async(ProblemID, cancellationToken);
         await oprot.WriteFieldEndAsync(cancellationToken);
         if((Base != null) && __isset.@Base)
         {
-          tmp157.Name = "Base";
-          tmp157.Type = TType.Struct;
-          tmp157.ID = 255;
-          await oprot.WriteFieldBeginAsync(tmp157, cancellationToken);
+          tmp162.Name = "Base";
+          tmp162.Type = TType.Struct;
+          tmp162.ID = 255;
+          await oprot.WriteFieldBeginAsync(tmp162, cancellationToken);
           await Base.WriteAsync(oprot, cancellationToken);
           await oprot.WriteFieldEndAsync(cancellationToken);
         }
@@ -250,20 +250,20 @@ namespace CUGOJ.RPC.Gen.Services.Core
 
     public override string ToString()
     {
-      var tmp158 = new StringBuilder("GetProblemSubmissionListRequest(");
-      tmp158.Append(", Cursor: ");
-      Cursor.ToString(tmp158);
-      tmp158.Append(", Limit: ");
-      Limit.ToString(tmp158);
-      tmp158.Append(", ProblemID: ");
-      ProblemID.ToString(tmp158);
+      var tmp163 = new StringBuilder("GetProblemSubmissionListRequest(");
+      tmp163.Append(", Cursor: ");
+      Cursor.ToString(tmp163);
+      tmp163.Append(", Limit: ");
+      Limit.ToString(tmp163);
+      tmp163.Append(", ProblemID: ");
+      ProblemID.ToString(tmp163);
       if((Base != null) && __isset.@Base)
       {
-        tmp158.Append(", Base: ");
-        Base.ToString(tmp158);
+        tmp163.Append(", Base: ");
+        Base.ToString(tmp163);
       }
-      tmp158.Append(')');
-      return tmp158.ToString();
+      tmp163.Append(')');
+      return tmp163.ToString();
     }
   }
 

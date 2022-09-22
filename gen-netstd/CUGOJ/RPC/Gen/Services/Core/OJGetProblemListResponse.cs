@@ -33,11 +33,13 @@ using Thrift.Processor;
 namespace CUGOJ.RPC.Gen.Services.Core
 {
 
-  public partial class GetProblemListResponse : TBase
+  public partial class OJGetProblemListResponse : TBase
   {
     private global::CUGOJ.RPC.Gen.Base.BaseResp _BaseResp;
 
     public List<global::CUGOJ.RPC.Gen.Common.ProblemStruct> ProblemList { get; set; }
+
+    public Dictionary<long, global::CUGOJ.RPC.Gen.OJCommon.SubmissionStatus> ProblemStatus { get; set; }
 
     public long Cursor { get; set; }
 
@@ -61,30 +63,35 @@ namespace CUGOJ.RPC.Gen.Services.Core
       public bool BaseResp;
     }
 
-    public GetProblemListResponse()
+    public OJGetProblemListResponse()
     {
     }
 
-    public GetProblemListResponse(List<global::CUGOJ.RPC.Gen.Common.ProblemStruct> ProblemList, long Cursor) : this()
+    public OJGetProblemListResponse(List<global::CUGOJ.RPC.Gen.Common.ProblemStruct> ProblemList, Dictionary<long, global::CUGOJ.RPC.Gen.OJCommon.SubmissionStatus> ProblemStatus, long Cursor) : this()
     {
       this.ProblemList = ProblemList;
+      this.ProblemStatus = ProblemStatus;
       this.Cursor = Cursor;
     }
 
-    public GetProblemListResponse DeepCopy()
+    public OJGetProblemListResponse DeepCopy()
     {
-      var tmp29 = new GetProblemListResponse();
+      var tmp5 = new OJGetProblemListResponse();
       if((ProblemList != null))
       {
-        tmp29.ProblemList = this.ProblemList.DeepCopy();
+        tmp5.ProblemList = this.ProblemList.DeepCopy();
       }
-      tmp29.Cursor = this.Cursor;
+      if((ProblemStatus != null))
+      {
+        tmp5.ProblemStatus = this.ProblemStatus.DeepCopy();
+      }
+      tmp5.Cursor = this.Cursor;
       if((BaseResp != null) && __isset.BaseResp)
       {
-        tmp29.BaseResp = (global::CUGOJ.RPC.Gen.Base.BaseResp)this.BaseResp.DeepCopy();
+        tmp5.BaseResp = (global::CUGOJ.RPC.Gen.Base.BaseResp)this.BaseResp.DeepCopy();
       }
-      tmp29.__isset.BaseResp = this.__isset.BaseResp;
-      return tmp29;
+      tmp5.__isset.BaseResp = this.__isset.BaseResp;
+      return tmp5;
     }
 
     public async global::System.Threading.Tasks.Task ReadAsync(TProtocol iprot, CancellationToken cancellationToken)
@@ -93,6 +100,7 @@ namespace CUGOJ.RPC.Gen.Services.Core
       try
       {
         bool isset_ProblemList = false;
+        bool isset_ProblemStatus = false;
         bool isset_Cursor = false;
         TField field;
         await iprot.ReadStructBeginAsync(cancellationToken);
@@ -110,14 +118,14 @@ namespace CUGOJ.RPC.Gen.Services.Core
               if (field.Type == TType.List)
               {
                 {
-                  TList _list30 = await iprot.ReadListBeginAsync(cancellationToken);
-                  ProblemList = new List<global::CUGOJ.RPC.Gen.Common.ProblemStruct>(_list30.Count);
-                  for(int _i31 = 0; _i31 < _list30.Count; ++_i31)
+                  TList _list6 = await iprot.ReadListBeginAsync(cancellationToken);
+                  ProblemList = new List<global::CUGOJ.RPC.Gen.Common.ProblemStruct>(_list6.Count);
+                  for(int _i7 = 0; _i7 < _list6.Count; ++_i7)
                   {
-                    global::CUGOJ.RPC.Gen.Common.ProblemStruct _elem32;
-                    _elem32 = new global::CUGOJ.RPC.Gen.Common.ProblemStruct();
-                    await _elem32.ReadAsync(iprot, cancellationToken);
-                    ProblemList.Add(_elem32);
+                    global::CUGOJ.RPC.Gen.Common.ProblemStruct _elem8;
+                    _elem8 = new global::CUGOJ.RPC.Gen.Common.ProblemStruct();
+                    await _elem8.ReadAsync(iprot, cancellationToken);
+                    ProblemList.Add(_elem8);
                   }
                   await iprot.ReadListEndAsync(cancellationToken);
                 }
@@ -129,6 +137,29 @@ namespace CUGOJ.RPC.Gen.Services.Core
               }
               break;
             case 2:
+              if (field.Type == TType.Map)
+              {
+                {
+                  TMap _map9 = await iprot.ReadMapBeginAsync(cancellationToken);
+                  ProblemStatus = new Dictionary<long, global::CUGOJ.RPC.Gen.OJCommon.SubmissionStatus>(_map9.Count);
+                  for(int _i10 = 0; _i10 < _map9.Count; ++_i10)
+                  {
+                    long _key11;
+                    global::CUGOJ.RPC.Gen.OJCommon.SubmissionStatus _val12;
+                    _key11 = await iprot.ReadI64Async(cancellationToken);
+                    _val12 = (global::CUGOJ.RPC.Gen.OJCommon.SubmissionStatus)await iprot.ReadI32Async(cancellationToken);
+                    ProblemStatus[_key11] = _val12;
+                  }
+                  await iprot.ReadMapEndAsync(cancellationToken);
+                }
+                isset_ProblemStatus = true;
+              }
+              else
+              {
+                await TProtocolUtil.SkipAsync(iprot, field.Type, cancellationToken);
+              }
+              break;
+            case 3:
               if (field.Type == TType.I64)
               {
                 Cursor = await iprot.ReadI64Async(cancellationToken);
@@ -163,6 +194,10 @@ namespace CUGOJ.RPC.Gen.Services.Core
         {
           throw new TProtocolException(TProtocolException.INVALID_DATA);
         }
+        if (!isset_ProblemStatus)
+        {
+          throw new TProtocolException(TProtocolException.INVALID_DATA);
+        }
         if (!isset_Cursor)
         {
           throw new TProtocolException(TProtocolException.INVALID_DATA);
@@ -179,37 +214,54 @@ namespace CUGOJ.RPC.Gen.Services.Core
       oprot.IncrementRecursionDepth();
       try
       {
-        var tmp33 = new TStruct("GetProblemListResponse");
-        await oprot.WriteStructBeginAsync(tmp33, cancellationToken);
-        var tmp34 = new TField();
+        var tmp13 = new TStruct("OJGetProblemListResponse");
+        await oprot.WriteStructBeginAsync(tmp13, cancellationToken);
+        var tmp14 = new TField();
         if((ProblemList != null))
         {
-          tmp34.Name = "ProblemList";
-          tmp34.Type = TType.List;
-          tmp34.ID = 1;
-          await oprot.WriteFieldBeginAsync(tmp34, cancellationToken);
+          tmp14.Name = "ProblemList";
+          tmp14.Type = TType.List;
+          tmp14.ID = 1;
+          await oprot.WriteFieldBeginAsync(tmp14, cancellationToken);
           {
             await oprot.WriteListBeginAsync(new TList(TType.Struct, ProblemList.Count), cancellationToken);
-            foreach (global::CUGOJ.RPC.Gen.Common.ProblemStruct _iter35 in ProblemList)
+            foreach (global::CUGOJ.RPC.Gen.Common.ProblemStruct _iter15 in ProblemList)
             {
-              await _iter35.WriteAsync(oprot, cancellationToken);
+              await _iter15.WriteAsync(oprot, cancellationToken);
             }
             await oprot.WriteListEndAsync(cancellationToken);
           }
           await oprot.WriteFieldEndAsync(cancellationToken);
         }
-        tmp34.Name = "Cursor";
-        tmp34.Type = TType.I64;
-        tmp34.ID = 2;
-        await oprot.WriteFieldBeginAsync(tmp34, cancellationToken);
+        if((ProblemStatus != null))
+        {
+          tmp14.Name = "ProblemStatus";
+          tmp14.Type = TType.Map;
+          tmp14.ID = 2;
+          await oprot.WriteFieldBeginAsync(tmp14, cancellationToken);
+          {
+            await oprot.WriteMapBeginAsync(new TMap(TType.I64, TType.I32, ProblemStatus.Count), cancellationToken);
+            foreach (long _iter16 in ProblemStatus.Keys)
+            {
+              await oprot.WriteI64Async(_iter16, cancellationToken);
+              await oprot.WriteI32Async((int)ProblemStatus[_iter16], cancellationToken);
+            }
+            await oprot.WriteMapEndAsync(cancellationToken);
+          }
+          await oprot.WriteFieldEndAsync(cancellationToken);
+        }
+        tmp14.Name = "Cursor";
+        tmp14.Type = TType.I64;
+        tmp14.ID = 3;
+        await oprot.WriteFieldBeginAsync(tmp14, cancellationToken);
         await oprot.WriteI64Async(Cursor, cancellationToken);
         await oprot.WriteFieldEndAsync(cancellationToken);
         if((BaseResp != null) && __isset.BaseResp)
         {
-          tmp34.Name = "BaseResp";
-          tmp34.Type = TType.Struct;
-          tmp34.ID = 255;
-          await oprot.WriteFieldBeginAsync(tmp34, cancellationToken);
+          tmp14.Name = "BaseResp";
+          tmp14.Type = TType.Struct;
+          tmp14.ID = 255;
+          await oprot.WriteFieldBeginAsync(tmp14, cancellationToken);
           await BaseResp.WriteAsync(oprot, cancellationToken);
           await oprot.WriteFieldEndAsync(cancellationToken);
         }
@@ -224,9 +276,10 @@ namespace CUGOJ.RPC.Gen.Services.Core
 
     public override bool Equals(object that)
     {
-      if (!(that is GetProblemListResponse other)) return false;
+      if (!(that is OJGetProblemListResponse other)) return false;
       if (ReferenceEquals(this, other)) return true;
       return TCollections.Equals(ProblemList, other.ProblemList)
+        && TCollections.Equals(ProblemStatus, other.ProblemStatus)
         && global::System.Object.Equals(Cursor, other.Cursor)
         && ((__isset.BaseResp == other.__isset.BaseResp) && ((!__isset.BaseResp) || (global::System.Object.Equals(BaseResp, other.BaseResp))));
     }
@@ -237,6 +290,10 @@ namespace CUGOJ.RPC.Gen.Services.Core
         if((ProblemList != null))
         {
           hashcode = (hashcode * 397) + TCollections.GetHashCode(ProblemList);
+        }
+        if((ProblemStatus != null))
+        {
+          hashcode = (hashcode * 397) + TCollections.GetHashCode(ProblemStatus);
         }
         hashcode = (hashcode * 397) + Cursor.GetHashCode();
         if((BaseResp != null) && __isset.BaseResp)
@@ -249,21 +306,26 @@ namespace CUGOJ.RPC.Gen.Services.Core
 
     public override string ToString()
     {
-      var tmp36 = new StringBuilder("GetProblemListResponse(");
+      var tmp17 = new StringBuilder("OJGetProblemListResponse(");
       if((ProblemList != null))
       {
-        tmp36.Append(", ProblemList: ");
-        ProblemList.ToString(tmp36);
+        tmp17.Append(", ProblemList: ");
+        ProblemList.ToString(tmp17);
       }
-      tmp36.Append(", Cursor: ");
-      Cursor.ToString(tmp36);
+      if((ProblemStatus != null))
+      {
+        tmp17.Append(", ProblemStatus: ");
+        ProblemStatus.ToString(tmp17);
+      }
+      tmp17.Append(", Cursor: ");
+      Cursor.ToString(tmp17);
       if((BaseResp != null) && __isset.BaseResp)
       {
-        tmp36.Append(", BaseResp: ");
-        BaseResp.ToString(tmp36);
+        tmp17.Append(", BaseResp: ");
+        BaseResp.ToString(tmp17);
       }
-      tmp36.Append(')');
-      return tmp36.ToString();
+      tmp17.Append(')');
+      return tmp17.ToString();
     }
   }
 

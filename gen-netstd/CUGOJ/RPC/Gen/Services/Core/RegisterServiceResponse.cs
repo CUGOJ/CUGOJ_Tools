@@ -70,17 +70,17 @@ namespace CUGOJ.RPC.Gen.Services.Core
 
     public RegisterServiceResponse DeepCopy()
     {
-      var tmp5 = new RegisterServiceResponse();
+      var tmp24 = new RegisterServiceResponse();
       if((ServiceBaseInfo != null))
       {
-        tmp5.ServiceBaseInfo = (global::CUGOJ.RPC.Gen.Base.ServiceBaseInfo)this.ServiceBaseInfo.DeepCopy();
+        tmp24.ServiceBaseInfo = (global::CUGOJ.RPC.Gen.Base.ServiceBaseInfo)this.ServiceBaseInfo.DeepCopy();
       }
       if((BaseResp != null) && __isset.BaseResp)
       {
-        tmp5.BaseResp = (global::CUGOJ.RPC.Gen.Base.BaseResp)this.BaseResp.DeepCopy();
+        tmp24.BaseResp = (global::CUGOJ.RPC.Gen.Base.BaseResp)this.BaseResp.DeepCopy();
       }
-      tmp5.__isset.BaseResp = this.__isset.BaseResp;
-      return tmp5;
+      tmp24.__isset.BaseResp = this.__isset.BaseResp;
+      return tmp24;
     }
 
     public async global::System.Threading.Tasks.Task ReadAsync(TProtocol iprot, CancellationToken cancellationToken)
@@ -149,24 +149,24 @@ namespace CUGOJ.RPC.Gen.Services.Core
       oprot.IncrementRecursionDepth();
       try
       {
-        var tmp6 = new TStruct("RegisterServiceResponse");
-        await oprot.WriteStructBeginAsync(tmp6, cancellationToken);
-        var tmp7 = new TField();
+        var tmp25 = new TStruct("RegisterServiceResponse");
+        await oprot.WriteStructBeginAsync(tmp25, cancellationToken);
+        var tmp26 = new TField();
         if((ServiceBaseInfo != null))
         {
-          tmp7.Name = "ServiceBaseInfo";
-          tmp7.Type = TType.Struct;
-          tmp7.ID = 1;
-          await oprot.WriteFieldBeginAsync(tmp7, cancellationToken);
+          tmp26.Name = "ServiceBaseInfo";
+          tmp26.Type = TType.Struct;
+          tmp26.ID = 1;
+          await oprot.WriteFieldBeginAsync(tmp26, cancellationToken);
           await ServiceBaseInfo.WriteAsync(oprot, cancellationToken);
           await oprot.WriteFieldEndAsync(cancellationToken);
         }
         if((BaseResp != null) && __isset.BaseResp)
         {
-          tmp7.Name = "BaseResp";
-          tmp7.Type = TType.Struct;
-          tmp7.ID = 255;
-          await oprot.WriteFieldBeginAsync(tmp7, cancellationToken);
+          tmp26.Name = "BaseResp";
+          tmp26.Type = TType.Struct;
+          tmp26.ID = 255;
+          await oprot.WriteFieldBeginAsync(tmp26, cancellationToken);
           await BaseResp.WriteAsync(oprot, cancellationToken);
           await oprot.WriteFieldEndAsync(cancellationToken);
         }
@@ -204,19 +204,19 @@ namespace CUGOJ.RPC.Gen.Services.Core
 
     public override string ToString()
     {
-      var tmp8 = new StringBuilder("RegisterServiceResponse(");
+      var tmp27 = new StringBuilder("RegisterServiceResponse(");
       if((ServiceBaseInfo != null))
       {
-        tmp8.Append(", ServiceBaseInfo: ");
-        ServiceBaseInfo.ToString(tmp8);
+        tmp27.Append(", ServiceBaseInfo: ");
+        ServiceBaseInfo.ToString(tmp27);
       }
       if((BaseResp != null) && __isset.BaseResp)
       {
-        tmp8.Append(", BaseResp: ");
-        BaseResp.ToString(tmp8);
+        tmp27.Append(", BaseResp: ");
+        BaseResp.ToString(tmp27);
       }
-      tmp8.Append(')');
-      return tmp8.ToString();
+      tmp27.Append(')');
+      return tmp27.ToString();
     }
   }
 

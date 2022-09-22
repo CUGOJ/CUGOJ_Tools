@@ -33,7 +33,7 @@ using Thrift.Processor;
 namespace CUGOJ.RPC.Gen.Services.Core
 {
 
-  public partial class GetProblemListRequest : TBase
+  public partial class OJGetProblemListRequest : TBase
   {
     private global::CUGOJ.RPC.Gen.Base.@Base _Base;
 
@@ -61,27 +61,27 @@ namespace CUGOJ.RPC.Gen.Services.Core
       public bool @Base;
     }
 
-    public GetProblemListRequest()
+    public OJGetProblemListRequest()
     {
     }
 
-    public GetProblemListRequest(long Cursor, int Limit) : this()
+    public OJGetProblemListRequest(long Cursor, int Limit) : this()
     {
       this.Cursor = Cursor;
       this.Limit = Limit;
     }
 
-    public GetProblemListRequest DeepCopy()
+    public OJGetProblemListRequest DeepCopy()
     {
-      var tmp24 = new GetProblemListRequest();
-      tmp24.Cursor = this.Cursor;
-      tmp24.Limit = this.Limit;
+      var tmp0 = new OJGetProblemListRequest();
+      tmp0.Cursor = this.Cursor;
+      tmp0.Limit = this.Limit;
       if((Base != null) && __isset.@Base)
       {
-        tmp24.Base = (global::CUGOJ.RPC.Gen.Base.@Base)this.Base.DeepCopy();
+        tmp0.Base = (global::CUGOJ.RPC.Gen.Base.@Base)this.Base.DeepCopy();
       }
-      tmp24.__isset.@Base = this.__isset.@Base;
-      return tmp24;
+      tmp0.__isset.@Base = this.__isset.@Base;
+      return tmp0;
     }
 
     public async global::System.Threading.Tasks.Task ReadAsync(TProtocol iprot, CancellationToken cancellationToken)
@@ -165,27 +165,27 @@ namespace CUGOJ.RPC.Gen.Services.Core
       oprot.IncrementRecursionDepth();
       try
       {
-        var tmp25 = new TStruct("GetProblemListRequest");
-        await oprot.WriteStructBeginAsync(tmp25, cancellationToken);
-        var tmp26 = new TField();
-        tmp26.Name = "Cursor";
-        tmp26.Type = TType.I64;
-        tmp26.ID = 1;
-        await oprot.WriteFieldBeginAsync(tmp26, cancellationToken);
+        var tmp1 = new TStruct("OJGetProblemListRequest");
+        await oprot.WriteStructBeginAsync(tmp1, cancellationToken);
+        var tmp2 = new TField();
+        tmp2.Name = "Cursor";
+        tmp2.Type = TType.I64;
+        tmp2.ID = 1;
+        await oprot.WriteFieldBeginAsync(tmp2, cancellationToken);
         await oprot.WriteI64Async(Cursor, cancellationToken);
         await oprot.WriteFieldEndAsync(cancellationToken);
-        tmp26.Name = "Limit";
-        tmp26.Type = TType.I32;
-        tmp26.ID = 2;
-        await oprot.WriteFieldBeginAsync(tmp26, cancellationToken);
+        tmp2.Name = "Limit";
+        tmp2.Type = TType.I32;
+        tmp2.ID = 2;
+        await oprot.WriteFieldBeginAsync(tmp2, cancellationToken);
         await oprot.WriteI32Async(Limit, cancellationToken);
         await oprot.WriteFieldEndAsync(cancellationToken);
         if((Base != null) && __isset.@Base)
         {
-          tmp26.Name = "Base";
-          tmp26.Type = TType.Struct;
-          tmp26.ID = 255;
-          await oprot.WriteFieldBeginAsync(tmp26, cancellationToken);
+          tmp2.Name = "Base";
+          tmp2.Type = TType.Struct;
+          tmp2.ID = 255;
+          await oprot.WriteFieldBeginAsync(tmp2, cancellationToken);
           await Base.WriteAsync(oprot, cancellationToken);
           await oprot.WriteFieldEndAsync(cancellationToken);
         }
@@ -200,7 +200,7 @@ namespace CUGOJ.RPC.Gen.Services.Core
 
     public override bool Equals(object that)
     {
-      if (!(that is GetProblemListRequest other)) return false;
+      if (!(that is OJGetProblemListRequest other)) return false;
       if (ReferenceEquals(this, other)) return true;
       return global::System.Object.Equals(Cursor, other.Cursor)
         && global::System.Object.Equals(Limit, other.Limit)
@@ -222,18 +222,18 @@ namespace CUGOJ.RPC.Gen.Services.Core
 
     public override string ToString()
     {
-      var tmp27 = new StringBuilder("GetProblemListRequest(");
-      tmp27.Append(", Cursor: ");
-      Cursor.ToString(tmp27);
-      tmp27.Append(", Limit: ");
-      Limit.ToString(tmp27);
+      var tmp3 = new StringBuilder("OJGetProblemListRequest(");
+      tmp3.Append(", Cursor: ");
+      Cursor.ToString(tmp3);
+      tmp3.Append(", Limit: ");
+      Limit.ToString(tmp3);
       if((Base != null) && __isset.@Base)
       {
-        tmp27.Append(", Base: ");
-        Base.ToString(tmp27);
+        tmp3.Append(", Base: ");
+        Base.ToString(tmp3);
       }
-      tmp27.Append(')');
-      return tmp27.ToString();
+      tmp3.Append(')');
+      return tmp3.ToString();
     }
   }
 

@@ -65,8 +65,22 @@ public static class RPCClientManager
     private static ILoadBalancer<CUGOJ.RPC.Gen.Services.Core.CoreService.Client>? _coreService;
     private static ILoadBalancer<CUGOJ.RPC.Gen.Services.Base.BaseService.Client>? _baseService;
 
-    public static CUGOJ.RPC.Gen.Services.Authentication.AuthenticationService.Client? AuthenticationClient
-    { get; set; }
+    public static async Task<CUGOJ.RPC.Gen.Services.Authentication.AuthenticationService.Client?> GetAuthenticationClient()
+    {
+        if (_authenticationService == null) return null;
+        return await _authenticationService.GetClient();
+    }
+
+    public static async Task<CUGOJ.RPC.Gen.Services.Core.CoreService.Client?> GetCoreClient()
+    {
+        if (_coreService == null) return null;
+        return await _coreService.GetClient();
+    }
+    public static async Task<CUGOJ.RPC.Gen.Services.Base.BaseService.Client?> GetBaseClient()
+    {
+        if (_baseService == null) return null;
+        return await _baseService.GetClient();
+    }
 
     private static int _port;
     private static string _connectionString = string.Empty;

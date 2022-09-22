@@ -63,13 +63,13 @@ namespace CUGOJ.RPC.Gen.Services.Core
 
     public SetupServiceResponse DeepCopy()
     {
-      var tmp198 = new SetupServiceResponse();
+      var tmp203 = new SetupServiceResponse();
       if((BaseResp != null) && __isset.BaseResp)
       {
-        tmp198.BaseResp = (global::CUGOJ.RPC.Gen.Base.BaseResp)this.BaseResp.DeepCopy();
+        tmp203.BaseResp = (global::CUGOJ.RPC.Gen.Base.BaseResp)this.BaseResp.DeepCopy();
       }
-      tmp198.__isset.BaseResp = this.__isset.BaseResp;
-      return tmp198;
+      tmp203.__isset.BaseResp = this.__isset.BaseResp;
+      return tmp203;
     }
 
     public async global::System.Threading.Tasks.Task ReadAsync(TProtocol iprot, CancellationToken cancellationToken)
@@ -121,15 +121,15 @@ namespace CUGOJ.RPC.Gen.Services.Core
       oprot.IncrementRecursionDepth();
       try
       {
-        var tmp199 = new TStruct("SetupServiceResponse");
-        await oprot.WriteStructBeginAsync(tmp199, cancellationToken);
-        var tmp200 = new TField();
+        var tmp204 = new TStruct("SetupServiceResponse");
+        await oprot.WriteStructBeginAsync(tmp204, cancellationToken);
+        var tmp205 = new TField();
         if((BaseResp != null) && __isset.BaseResp)
         {
-          tmp200.Name = "BaseResp";
-          tmp200.Type = TType.Struct;
-          tmp200.ID = 255;
-          await oprot.WriteFieldBeginAsync(tmp200, cancellationToken);
+          tmp205.Name = "BaseResp";
+          tmp205.Type = TType.Struct;
+          tmp205.ID = 255;
+          await oprot.WriteFieldBeginAsync(tmp205, cancellationToken);
           await BaseResp.WriteAsync(oprot, cancellationToken);
           await oprot.WriteFieldEndAsync(cancellationToken);
         }
@@ -162,16 +162,16 @@ namespace CUGOJ.RPC.Gen.Services.Core
 
     public override string ToString()
     {
-      var tmp201 = new StringBuilder("SetupServiceResponse(");
-      int tmp202 = 0;
+      var tmp206 = new StringBuilder("SetupServiceResponse(");
+      int tmp207 = 0;
       if((BaseResp != null) && __isset.BaseResp)
       {
-        if(0 < tmp202++) { tmp201.Append(", "); }
-        tmp201.Append("BaseResp: ");
-        BaseResp.ToString(tmp201);
+        if(0 < tmp207++) { tmp206.Append(", "); }
+        tmp206.Append("BaseResp: ");
+        BaseResp.ToString(tmp206);
       }
-      tmp201.Append(')');
-      return tmp201.ToString();
+      tmp206.Append(')');
+      return tmp206.ToString();
     }
   }
 

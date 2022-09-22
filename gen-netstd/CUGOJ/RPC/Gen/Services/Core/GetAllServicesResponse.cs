@@ -70,17 +70,17 @@ namespace CUGOJ.RPC.Gen.Services.Core
 
     public GetAllServicesResponse DeepCopy()
     {
-      var tmp184 = new GetAllServicesResponse();
+      var tmp189 = new GetAllServicesResponse();
       if((Services != null))
       {
-        tmp184.Services = this.Services.DeepCopy();
+        tmp189.Services = this.Services.DeepCopy();
       }
       if((BaseResp != null) && __isset.BaseResp)
       {
-        tmp184.BaseResp = (global::CUGOJ.RPC.Gen.Base.BaseResp)this.BaseResp.DeepCopy();
+        tmp189.BaseResp = (global::CUGOJ.RPC.Gen.Base.BaseResp)this.BaseResp.DeepCopy();
       }
-      tmp184.__isset.BaseResp = this.__isset.BaseResp;
-      return tmp184;
+      tmp189.__isset.BaseResp = this.__isset.BaseResp;
+      return tmp189;
     }
 
     public async global::System.Threading.Tasks.Task ReadAsync(TProtocol iprot, CancellationToken cancellationToken)
@@ -105,14 +105,14 @@ namespace CUGOJ.RPC.Gen.Services.Core
               if (field.Type == TType.List)
               {
                 {
-                  TList _list185 = await iprot.ReadListBeginAsync(cancellationToken);
-                  Services = new List<global::CUGOJ.RPC.Gen.Base.ServiceBaseInfo>(_list185.Count);
-                  for(int _i186 = 0; _i186 < _list185.Count; ++_i186)
+                  TList _list190 = await iprot.ReadListBeginAsync(cancellationToken);
+                  Services = new List<global::CUGOJ.RPC.Gen.Base.ServiceBaseInfo>(_list190.Count);
+                  for(int _i191 = 0; _i191 < _list190.Count; ++_i191)
                   {
-                    global::CUGOJ.RPC.Gen.Base.ServiceBaseInfo _elem187;
-                    _elem187 = new global::CUGOJ.RPC.Gen.Base.ServiceBaseInfo();
-                    await _elem187.ReadAsync(iprot, cancellationToken);
-                    Services.Add(_elem187);
+                    global::CUGOJ.RPC.Gen.Base.ServiceBaseInfo _elem192;
+                    _elem192 = new global::CUGOJ.RPC.Gen.Base.ServiceBaseInfo();
+                    await _elem192.ReadAsync(iprot, cancellationToken);
+                    Services.Add(_elem192);
                   }
                   await iprot.ReadListEndAsync(cancellationToken);
                 }
@@ -159,20 +159,20 @@ namespace CUGOJ.RPC.Gen.Services.Core
       oprot.IncrementRecursionDepth();
       try
       {
-        var tmp188 = new TStruct("GetAllServicesResponse");
-        await oprot.WriteStructBeginAsync(tmp188, cancellationToken);
-        var tmp189 = new TField();
+        var tmp193 = new TStruct("GetAllServicesResponse");
+        await oprot.WriteStructBeginAsync(tmp193, cancellationToken);
+        var tmp194 = new TField();
         if((Services != null))
         {
-          tmp189.Name = "Services";
-          tmp189.Type = TType.List;
-          tmp189.ID = 1;
-          await oprot.WriteFieldBeginAsync(tmp189, cancellationToken);
+          tmp194.Name = "Services";
+          tmp194.Type = TType.List;
+          tmp194.ID = 1;
+          await oprot.WriteFieldBeginAsync(tmp194, cancellationToken);
           {
             await oprot.WriteListBeginAsync(new TList(TType.Struct, Services.Count), cancellationToken);
-            foreach (global::CUGOJ.RPC.Gen.Base.ServiceBaseInfo _iter190 in Services)
+            foreach (global::CUGOJ.RPC.Gen.Base.ServiceBaseInfo _iter195 in Services)
             {
-              await _iter190.WriteAsync(oprot, cancellationToken);
+              await _iter195.WriteAsync(oprot, cancellationToken);
             }
             await oprot.WriteListEndAsync(cancellationToken);
           }
@@ -180,10 +180,10 @@ namespace CUGOJ.RPC.Gen.Services.Core
         }
         if((BaseResp != null) && __isset.BaseResp)
         {
-          tmp189.Name = "BaseResp";
-          tmp189.Type = TType.Struct;
-          tmp189.ID = 255;
-          await oprot.WriteFieldBeginAsync(tmp189, cancellationToken);
+          tmp194.Name = "BaseResp";
+          tmp194.Type = TType.Struct;
+          tmp194.ID = 255;
+          await oprot.WriteFieldBeginAsync(tmp194, cancellationToken);
           await BaseResp.WriteAsync(oprot, cancellationToken);
           await oprot.WriteFieldEndAsync(cancellationToken);
         }
@@ -221,19 +221,19 @@ namespace CUGOJ.RPC.Gen.Services.Core
 
     public override string ToString()
     {
-      var tmp191 = new StringBuilder("GetAllServicesResponse(");
+      var tmp196 = new StringBuilder("GetAllServicesResponse(");
       if((Services != null))
       {
-        tmp191.Append(", Services: ");
-        Services.ToString(tmp191);
+        tmp196.Append(", Services: ");
+        Services.ToString(tmp196);
       }
       if((BaseResp != null) && __isset.BaseResp)
       {
-        tmp191.Append(", BaseResp: ");
-        BaseResp.ToString(tmp191);
+        tmp196.Append(", BaseResp: ");
+        BaseResp.ToString(tmp196);
       }
-      tmp191.Append(')');
-      return tmp191.ToString();
+      tmp196.Append(')');
+      return tmp196.ToString();
     }
   }
 

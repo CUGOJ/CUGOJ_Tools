@@ -73,21 +73,21 @@ namespace CUGOJ.RPC.Gen.Services.Core
 
     public LogupRequest DeepCopy()
     {
-      var tmp121 = new LogupRequest();
+      var tmp126 = new LogupRequest();
       if((User != null))
       {
-        tmp121.User = (global::CUGOJ.RPC.Gen.Common.UserStruct)this.User.DeepCopy();
+        tmp126.User = (global::CUGOJ.RPC.Gen.Common.UserStruct)this.User.DeepCopy();
       }
       if((UserLoginInfo != null))
       {
-        tmp121.UserLoginInfo = (global::CUGOJ.RPC.Gen.Common.UserLoginInfoStruct)this.UserLoginInfo.DeepCopy();
+        tmp126.UserLoginInfo = (global::CUGOJ.RPC.Gen.Common.UserLoginInfoStruct)this.UserLoginInfo.DeepCopy();
       }
       if((Base != null) && __isset.@Base)
       {
-        tmp121.Base = (global::CUGOJ.RPC.Gen.Base.@Base)this.Base.DeepCopy();
+        tmp126.Base = (global::CUGOJ.RPC.Gen.Base.@Base)this.Base.DeepCopy();
       }
-      tmp121.__isset.@Base = this.__isset.@Base;
-      return tmp121;
+      tmp126.__isset.@Base = this.__isset.@Base;
+      return tmp126;
     }
 
     public async global::System.Threading.Tasks.Task ReadAsync(TProtocol iprot, CancellationToken cancellationToken)
@@ -173,33 +173,33 @@ namespace CUGOJ.RPC.Gen.Services.Core
       oprot.IncrementRecursionDepth();
       try
       {
-        var tmp122 = new TStruct("LogupRequest");
-        await oprot.WriteStructBeginAsync(tmp122, cancellationToken);
-        var tmp123 = new TField();
+        var tmp127 = new TStruct("LogupRequest");
+        await oprot.WriteStructBeginAsync(tmp127, cancellationToken);
+        var tmp128 = new TField();
         if((User != null))
         {
-          tmp123.Name = "User";
-          tmp123.Type = TType.Struct;
-          tmp123.ID = 1;
-          await oprot.WriteFieldBeginAsync(tmp123, cancellationToken);
+          tmp128.Name = "User";
+          tmp128.Type = TType.Struct;
+          tmp128.ID = 1;
+          await oprot.WriteFieldBeginAsync(tmp128, cancellationToken);
           await User.WriteAsync(oprot, cancellationToken);
           await oprot.WriteFieldEndAsync(cancellationToken);
         }
         if((UserLoginInfo != null))
         {
-          tmp123.Name = "UserLoginInfo";
-          tmp123.Type = TType.Struct;
-          tmp123.ID = 2;
-          await oprot.WriteFieldBeginAsync(tmp123, cancellationToken);
+          tmp128.Name = "UserLoginInfo";
+          tmp128.Type = TType.Struct;
+          tmp128.ID = 2;
+          await oprot.WriteFieldBeginAsync(tmp128, cancellationToken);
           await UserLoginInfo.WriteAsync(oprot, cancellationToken);
           await oprot.WriteFieldEndAsync(cancellationToken);
         }
         if((Base != null) && __isset.@Base)
         {
-          tmp123.Name = "Base";
-          tmp123.Type = TType.Struct;
-          tmp123.ID = 255;
-          await oprot.WriteFieldBeginAsync(tmp123, cancellationToken);
+          tmp128.Name = "Base";
+          tmp128.Type = TType.Struct;
+          tmp128.ID = 255;
+          await oprot.WriteFieldBeginAsync(tmp128, cancellationToken);
           await Base.WriteAsync(oprot, cancellationToken);
           await oprot.WriteFieldEndAsync(cancellationToken);
         }
@@ -242,24 +242,24 @@ namespace CUGOJ.RPC.Gen.Services.Core
 
     public override string ToString()
     {
-      var tmp124 = new StringBuilder("LogupRequest(");
+      var tmp129 = new StringBuilder("LogupRequest(");
       if((User != null))
       {
-        tmp124.Append(", User: ");
-        User.ToString(tmp124);
+        tmp129.Append(", User: ");
+        User.ToString(tmp129);
       }
       if((UserLoginInfo != null))
       {
-        tmp124.Append(", UserLoginInfo: ");
-        UserLoginInfo.ToString(tmp124);
+        tmp129.Append(", UserLoginInfo: ");
+        UserLoginInfo.ToString(tmp129);
       }
       if((Base != null) && __isset.@Base)
       {
-        tmp124.Append(", Base: ");
-        Base.ToString(tmp124);
+        tmp129.Append(", Base: ");
+        Base.ToString(tmp129);
       }
-      tmp124.Append(')');
-      return tmp124.ToString();
+      tmp129.Append(')');
+      return tmp129.ToString();
     }
   }
 

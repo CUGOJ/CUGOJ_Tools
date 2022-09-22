@@ -94,22 +94,22 @@ namespace CUGOJ.RPC.Gen.Services.Core
 
     public GetContestSubmissionListRequest DeepCopy()
     {
-      var tmp141 = new GetContestSubmissionListRequest();
-      tmp141.Cursor = this.Cursor;
-      tmp141.Limit = this.Limit;
-      tmp141.ContestID = this.ContestID;
-      tmp141.MaxStoredTimestamp = this.MaxStoredTimestamp;
+      var tmp146 = new GetContestSubmissionListRequest();
+      tmp146.Cursor = this.Cursor;
+      tmp146.Limit = this.Limit;
+      tmp146.ContestID = this.ContestID;
+      tmp146.MaxStoredTimestamp = this.MaxStoredTimestamp;
       if(__isset.NewSubmissionFirst)
       {
-        tmp141.NewSubmissionFirst = this.NewSubmissionFirst;
+        tmp146.NewSubmissionFirst = this.NewSubmissionFirst;
       }
-      tmp141.__isset.NewSubmissionFirst = this.__isset.NewSubmissionFirst;
+      tmp146.__isset.NewSubmissionFirst = this.__isset.NewSubmissionFirst;
       if((Base != null) && __isset.@Base)
       {
-        tmp141.Base = (global::CUGOJ.RPC.Gen.Base.@Base)this.Base.DeepCopy();
+        tmp146.Base = (global::CUGOJ.RPC.Gen.Base.@Base)this.Base.DeepCopy();
       }
-      tmp141.__isset.@Base = this.__isset.@Base;
-      return tmp141;
+      tmp146.__isset.@Base = this.__isset.@Base;
+      return tmp146;
     }
 
     public async global::System.Threading.Tasks.Task ReadAsync(TProtocol iprot, CancellationToken cancellationToken)
@@ -235,48 +235,48 @@ namespace CUGOJ.RPC.Gen.Services.Core
       oprot.IncrementRecursionDepth();
       try
       {
-        var tmp142 = new TStruct("GetContestSubmissionListRequest");
-        await oprot.WriteStructBeginAsync(tmp142, cancellationToken);
-        var tmp143 = new TField();
-        tmp143.Name = "Cursor";
-        tmp143.Type = TType.I64;
-        tmp143.ID = 1;
-        await oprot.WriteFieldBeginAsync(tmp143, cancellationToken);
+        var tmp147 = new TStruct("GetContestSubmissionListRequest");
+        await oprot.WriteStructBeginAsync(tmp147, cancellationToken);
+        var tmp148 = new TField();
+        tmp148.Name = "Cursor";
+        tmp148.Type = TType.I64;
+        tmp148.ID = 1;
+        await oprot.WriteFieldBeginAsync(tmp148, cancellationToken);
         await oprot.WriteI64Async(Cursor, cancellationToken);
         await oprot.WriteFieldEndAsync(cancellationToken);
-        tmp143.Name = "Limit";
-        tmp143.Type = TType.I32;
-        tmp143.ID = 2;
-        await oprot.WriteFieldBeginAsync(tmp143, cancellationToken);
+        tmp148.Name = "Limit";
+        tmp148.Type = TType.I32;
+        tmp148.ID = 2;
+        await oprot.WriteFieldBeginAsync(tmp148, cancellationToken);
         await oprot.WriteI32Async(Limit, cancellationToken);
         await oprot.WriteFieldEndAsync(cancellationToken);
-        tmp143.Name = "ContestID";
-        tmp143.Type = TType.I64;
-        tmp143.ID = 3;
-        await oprot.WriteFieldBeginAsync(tmp143, cancellationToken);
+        tmp148.Name = "ContestID";
+        tmp148.Type = TType.I64;
+        tmp148.ID = 3;
+        await oprot.WriteFieldBeginAsync(tmp148, cancellationToken);
         await oprot.WriteI64Async(ContestID, cancellationToken);
         await oprot.WriteFieldEndAsync(cancellationToken);
-        tmp143.Name = "MaxStoredTimestamp";
-        tmp143.Type = TType.I64;
-        tmp143.ID = 4;
-        await oprot.WriteFieldBeginAsync(tmp143, cancellationToken);
+        tmp148.Name = "MaxStoredTimestamp";
+        tmp148.Type = TType.I64;
+        tmp148.ID = 4;
+        await oprot.WriteFieldBeginAsync(tmp148, cancellationToken);
         await oprot.WriteI64Async(MaxStoredTimestamp, cancellationToken);
         await oprot.WriteFieldEndAsync(cancellationToken);
         if(__isset.NewSubmissionFirst)
         {
-          tmp143.Name = "NewSubmissionFirst";
-          tmp143.Type = TType.Bool;
-          tmp143.ID = 5;
-          await oprot.WriteFieldBeginAsync(tmp143, cancellationToken);
+          tmp148.Name = "NewSubmissionFirst";
+          tmp148.Type = TType.Bool;
+          tmp148.ID = 5;
+          await oprot.WriteFieldBeginAsync(tmp148, cancellationToken);
           await oprot.WriteBoolAsync(NewSubmissionFirst, cancellationToken);
           await oprot.WriteFieldEndAsync(cancellationToken);
         }
         if((Base != null) && __isset.@Base)
         {
-          tmp143.Name = "Base";
-          tmp143.Type = TType.Struct;
-          tmp143.ID = 255;
-          await oprot.WriteFieldBeginAsync(tmp143, cancellationToken);
+          tmp148.Name = "Base";
+          tmp148.Type = TType.Struct;
+          tmp148.ID = 255;
+          await oprot.WriteFieldBeginAsync(tmp148, cancellationToken);
           await Base.WriteAsync(oprot, cancellationToken);
           await oprot.WriteFieldEndAsync(cancellationToken);
         }
@@ -322,27 +322,27 @@ namespace CUGOJ.RPC.Gen.Services.Core
 
     public override string ToString()
     {
-      var tmp144 = new StringBuilder("GetContestSubmissionListRequest(");
-      tmp144.Append(", Cursor: ");
-      Cursor.ToString(tmp144);
-      tmp144.Append(", Limit: ");
-      Limit.ToString(tmp144);
-      tmp144.Append(", ContestID: ");
-      ContestID.ToString(tmp144);
-      tmp144.Append(", MaxStoredTimestamp: ");
-      MaxStoredTimestamp.ToString(tmp144);
+      var tmp149 = new StringBuilder("GetContestSubmissionListRequest(");
+      tmp149.Append(", Cursor: ");
+      Cursor.ToString(tmp149);
+      tmp149.Append(", Limit: ");
+      Limit.ToString(tmp149);
+      tmp149.Append(", ContestID: ");
+      ContestID.ToString(tmp149);
+      tmp149.Append(", MaxStoredTimestamp: ");
+      MaxStoredTimestamp.ToString(tmp149);
       if(__isset.NewSubmissionFirst)
       {
-        tmp144.Append(", NewSubmissionFirst: ");
-        NewSubmissionFirst.ToString(tmp144);
+        tmp149.Append(", NewSubmissionFirst: ");
+        NewSubmissionFirst.ToString(tmp149);
       }
       if((Base != null) && __isset.@Base)
       {
-        tmp144.Append(", Base: ");
-        Base.ToString(tmp144);
+        tmp149.Append(", Base: ");
+        Base.ToString(tmp149);
       }
-      tmp144.Append(')');
-      return tmp144.ToString();
+      tmp149.Append(')');
+      return tmp149.ToString();
     }
   }
 

@@ -70,17 +70,17 @@ namespace CUGOJ.RPC.Gen.Services.Core
 
     public GetUserDetailResponse DeepCopy()
     {
-      var tmp101 = new GetUserDetailResponse();
+      var tmp106 = new GetUserDetailResponse();
       if((User != null))
       {
-        tmp101.User = (global::CUGOJ.RPC.Gen.Common.UserStruct)this.User.DeepCopy();
+        tmp106.User = (global::CUGOJ.RPC.Gen.Common.UserStruct)this.User.DeepCopy();
       }
       if((BaseResp != null) && __isset.BaseResp)
       {
-        tmp101.BaseResp = (global::CUGOJ.RPC.Gen.Base.BaseResp)this.BaseResp.DeepCopy();
+        tmp106.BaseResp = (global::CUGOJ.RPC.Gen.Base.BaseResp)this.BaseResp.DeepCopy();
       }
-      tmp101.__isset.BaseResp = this.__isset.BaseResp;
-      return tmp101;
+      tmp106.__isset.BaseResp = this.__isset.BaseResp;
+      return tmp106;
     }
 
     public async global::System.Threading.Tasks.Task ReadAsync(TProtocol iprot, CancellationToken cancellationToken)
@@ -149,24 +149,24 @@ namespace CUGOJ.RPC.Gen.Services.Core
       oprot.IncrementRecursionDepth();
       try
       {
-        var tmp102 = new TStruct("GetUserDetailResponse");
-        await oprot.WriteStructBeginAsync(tmp102, cancellationToken);
-        var tmp103 = new TField();
+        var tmp107 = new TStruct("GetUserDetailResponse");
+        await oprot.WriteStructBeginAsync(tmp107, cancellationToken);
+        var tmp108 = new TField();
         if((User != null))
         {
-          tmp103.Name = "User";
-          tmp103.Type = TType.Struct;
-          tmp103.ID = 1;
-          await oprot.WriteFieldBeginAsync(tmp103, cancellationToken);
+          tmp108.Name = "User";
+          tmp108.Type = TType.Struct;
+          tmp108.ID = 1;
+          await oprot.WriteFieldBeginAsync(tmp108, cancellationToken);
           await User.WriteAsync(oprot, cancellationToken);
           await oprot.WriteFieldEndAsync(cancellationToken);
         }
         if((BaseResp != null) && __isset.BaseResp)
         {
-          tmp103.Name = "BaseResp";
-          tmp103.Type = TType.Struct;
-          tmp103.ID = 255;
-          await oprot.WriteFieldBeginAsync(tmp103, cancellationToken);
+          tmp108.Name = "BaseResp";
+          tmp108.Type = TType.Struct;
+          tmp108.ID = 255;
+          await oprot.WriteFieldBeginAsync(tmp108, cancellationToken);
           await BaseResp.WriteAsync(oprot, cancellationToken);
           await oprot.WriteFieldEndAsync(cancellationToken);
         }
@@ -204,19 +204,19 @@ namespace CUGOJ.RPC.Gen.Services.Core
 
     public override string ToString()
     {
-      var tmp104 = new StringBuilder("GetUserDetailResponse(");
+      var tmp109 = new StringBuilder("GetUserDetailResponse(");
       if((User != null))
       {
-        tmp104.Append(", User: ");
-        User.ToString(tmp104);
+        tmp109.Append(", User: ");
+        User.ToString(tmp109);
       }
       if((BaseResp != null) && __isset.BaseResp)
       {
-        tmp104.Append(", BaseResp: ");
-        BaseResp.ToString(tmp104);
+        tmp109.Append(", BaseResp: ");
+        BaseResp.ToString(tmp109);
       }
-      tmp104.Append(')');
-      return tmp104.ToString();
+      tmp109.Append(')');
+      return tmp109.ToString();
     }
   }
 

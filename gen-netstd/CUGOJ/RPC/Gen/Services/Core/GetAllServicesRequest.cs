@@ -63,13 +63,13 @@ namespace CUGOJ.RPC.Gen.Services.Core
 
     public GetAllServicesRequest DeepCopy()
     {
-      var tmp179 = new GetAllServicesRequest();
+      var tmp184 = new GetAllServicesRequest();
       if((Base != null) && __isset.@Base)
       {
-        tmp179.Base = (global::CUGOJ.RPC.Gen.Base.@Base)this.Base.DeepCopy();
+        tmp184.Base = (global::CUGOJ.RPC.Gen.Base.@Base)this.Base.DeepCopy();
       }
-      tmp179.__isset.@Base = this.__isset.@Base;
-      return tmp179;
+      tmp184.__isset.@Base = this.__isset.@Base;
+      return tmp184;
     }
 
     public async global::System.Threading.Tasks.Task ReadAsync(TProtocol iprot, CancellationToken cancellationToken)
@@ -121,15 +121,15 @@ namespace CUGOJ.RPC.Gen.Services.Core
       oprot.IncrementRecursionDepth();
       try
       {
-        var tmp180 = new TStruct("GetAllServicesRequest");
-        await oprot.WriteStructBeginAsync(tmp180, cancellationToken);
-        var tmp181 = new TField();
+        var tmp185 = new TStruct("GetAllServicesRequest");
+        await oprot.WriteStructBeginAsync(tmp185, cancellationToken);
+        var tmp186 = new TField();
         if((Base != null) && __isset.@Base)
         {
-          tmp181.Name = "Base";
-          tmp181.Type = TType.Struct;
-          tmp181.ID = 255;
-          await oprot.WriteFieldBeginAsync(tmp181, cancellationToken);
+          tmp186.Name = "Base";
+          tmp186.Type = TType.Struct;
+          tmp186.ID = 255;
+          await oprot.WriteFieldBeginAsync(tmp186, cancellationToken);
           await Base.WriteAsync(oprot, cancellationToken);
           await oprot.WriteFieldEndAsync(cancellationToken);
         }
@@ -162,16 +162,16 @@ namespace CUGOJ.RPC.Gen.Services.Core
 
     public override string ToString()
     {
-      var tmp182 = new StringBuilder("GetAllServicesRequest(");
-      int tmp183 = 0;
+      var tmp187 = new StringBuilder("GetAllServicesRequest(");
+      int tmp188 = 0;
       if((Base != null) && __isset.@Base)
       {
-        if(0 < tmp183++) { tmp182.Append(", "); }
-        tmp182.Append("Base: ");
-        Base.ToString(tmp182);
+        if(0 < tmp188++) { tmp187.Append(", "); }
+        tmp187.Append("Base: ");
+        Base.ToString(tmp187);
       }
-      tmp182.Append(')');
-      return tmp182.ToString();
+      tmp187.Append(')');
+      return tmp187.ToString();
     }
   }
 
