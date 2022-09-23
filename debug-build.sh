@@ -2,7 +2,11 @@
 
 sh generate.sh
 
-dotnet pack -o ./nupkgs/ -p:PackageVersion=0.0.1
+cd ./src
+
+dotnet pack -o ../nupkgs/ -p:PackageVersion=0.0.1
+
+cd ../
 
 rm -rf ~/.nuget/packages/cugoj_tools/0.0.1/
 
