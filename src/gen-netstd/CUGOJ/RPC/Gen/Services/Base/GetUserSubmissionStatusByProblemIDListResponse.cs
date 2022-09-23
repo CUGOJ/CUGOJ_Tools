@@ -31,14 +31,14 @@ using Thrift.Processor;
 #pragma warning disable CA1822   // empty DeepCopy() methods still non-static
 #pragma warning disable IDE0083  // pattern matching "that is not SomeType" requires net5.0 but we still support earlier versions
 
-namespace CUGOJ.RPC.Gen.Services.Core
+namespace CUGOJ.RPC.Gen.Services.Base
 {
 
-  public partial class LogupResponse : TBase
+  public partial class GetUserSubmissionStatusByProblemIDListResponse : TBase
   {
     private global::CUGOJ.RPC.Gen.Base.BaseResp _BaseResp;
 
-    public long UserID { get; set; }
+    public Dictionary<long, int> StatusMap { get; set; }
 
     public global::CUGOJ.RPC.Gen.Base.BaseResp BaseResp
     {
@@ -60,25 +60,28 @@ namespace CUGOJ.RPC.Gen.Services.Core
       public bool BaseResp;
     }
 
-    public LogupResponse()
+    public GetUserSubmissionStatusByProblemIDListResponse()
     {
     }
 
-    public LogupResponse(long UserID) : this()
+    public GetUserSubmissionStatusByProblemIDListResponse(Dictionary<long, int> StatusMap) : this()
     {
-      this.UserID = UserID;
+      this.StatusMap = StatusMap;
     }
 
-    public LogupResponse DeepCopy()
+    public GetUserSubmissionStatusByProblemIDListResponse DeepCopy()
     {
-      var tmp131 = new LogupResponse();
-      tmp131.UserID = this.UserID;
+      var tmp159 = new GetUserSubmissionStatusByProblemIDListResponse();
+      if((StatusMap != null))
+      {
+        tmp159.StatusMap = this.StatusMap.DeepCopy();
+      }
       if((BaseResp != null) && __isset.BaseResp)
       {
-        tmp131.BaseResp = (global::CUGOJ.RPC.Gen.Base.BaseResp)this.BaseResp.DeepCopy();
+        tmp159.BaseResp = (global::CUGOJ.RPC.Gen.Base.BaseResp)this.BaseResp.DeepCopy();
       }
-      tmp131.__isset.BaseResp = this.__isset.BaseResp;
-      return tmp131;
+      tmp159.__isset.BaseResp = this.__isset.BaseResp;
+      return tmp159;
     }
 
     public async global::System.Threading.Tasks.Task ReadAsync(TProtocol iprot, CancellationToken cancellationToken)
@@ -86,7 +89,7 @@ namespace CUGOJ.RPC.Gen.Services.Core
       iprot.IncrementRecursionDepth();
       try
       {
-        bool isset_UserID = false;
+        bool isset_StatusMap = false;
         TField field;
         await iprot.ReadStructBeginAsync(cancellationToken);
         while (true)
@@ -100,10 +103,22 @@ namespace CUGOJ.RPC.Gen.Services.Core
           switch (field.ID)
           {
             case 1:
-              if (field.Type == TType.I64)
+              if (field.Type == TType.Map)
               {
-                UserID = await iprot.ReadI64Async(cancellationToken);
-                isset_UserID = true;
+                {
+                  var _map160 = await iprot.ReadMapBeginAsync(cancellationToken);
+                  StatusMap = new Dictionary<long, int>(_map160.Count);
+                  for(int _i161 = 0; _i161 < _map160.Count; ++_i161)
+                  {
+                    long _key162;
+                    int _val163;
+                    _key162 = await iprot.ReadI64Async(cancellationToken);
+                    _val163 = await iprot.ReadI32Async(cancellationToken);
+                    StatusMap[_key162] = _val163;
+                  }
+                  await iprot.ReadMapEndAsync(cancellationToken);
+                }
+                isset_StatusMap = true;
               }
               else
               {
@@ -130,7 +145,7 @@ namespace CUGOJ.RPC.Gen.Services.Core
         }
 
         await iprot.ReadStructEndAsync(cancellationToken);
-        if (!isset_UserID)
+        if (!isset_StatusMap)
         {
           throw new TProtocolException(TProtocolException.INVALID_DATA);
         }
@@ -146,21 +161,30 @@ namespace CUGOJ.RPC.Gen.Services.Core
       oprot.IncrementRecursionDepth();
       try
       {
-        var tmp132 = new TStruct("LogupResponse");
-        await oprot.WriteStructBeginAsync(tmp132, cancellationToken);
-        var tmp133 = new TField();
-        tmp133.Name = "UserID";
-        tmp133.Type = TType.I64;
-        tmp133.ID = 1;
-        await oprot.WriteFieldBeginAsync(tmp133, cancellationToken);
-        await oprot.WriteI64Async(UserID, cancellationToken);
-        await oprot.WriteFieldEndAsync(cancellationToken);
+        var tmp164 = new TStruct("GetUserSubmissionStatusByProblemIDListResponse");
+        await oprot.WriteStructBeginAsync(tmp164, cancellationToken);
+        var tmp165 = new TField();
+        if((StatusMap != null))
+        {
+          tmp165.Name = "StatusMap";
+          tmp165.Type = TType.Map;
+          tmp165.ID = 1;
+          await oprot.WriteFieldBeginAsync(tmp165, cancellationToken);
+          await oprot.WriteMapBeginAsync(new TMap(TType.I64, TType.I32, StatusMap.Count), cancellationToken);
+          foreach (long _iter166 in StatusMap.Keys)
+          {
+            await oprot.WriteI64Async(_iter166, cancellationToken);
+            await oprot.WriteI32Async(StatusMap[_iter166], cancellationToken);
+          }
+          await oprot.WriteMapEndAsync(cancellationToken);
+          await oprot.WriteFieldEndAsync(cancellationToken);
+        }
         if((BaseResp != null) && __isset.BaseResp)
         {
-          tmp133.Name = "BaseResp";
-          tmp133.Type = TType.Struct;
-          tmp133.ID = 255;
-          await oprot.WriteFieldBeginAsync(tmp133, cancellationToken);
+          tmp165.Name = "BaseResp";
+          tmp165.Type = TType.Struct;
+          tmp165.ID = 255;
+          await oprot.WriteFieldBeginAsync(tmp165, cancellationToken);
           await BaseResp.WriteAsync(oprot, cancellationToken);
           await oprot.WriteFieldEndAsync(cancellationToken);
         }
@@ -175,16 +199,19 @@ namespace CUGOJ.RPC.Gen.Services.Core
 
     public override bool Equals(object that)
     {
-      if (!(that is LogupResponse other)) return false;
+      if (!(that is GetUserSubmissionStatusByProblemIDListResponse other)) return false;
       if (ReferenceEquals(this, other)) return true;
-      return global::System.Object.Equals(UserID, other.UserID)
+      return TCollections.Equals(StatusMap, other.StatusMap)
         && ((__isset.BaseResp == other.__isset.BaseResp) && ((!__isset.BaseResp) || (global::System.Object.Equals(BaseResp, other.BaseResp))));
     }
 
     public override int GetHashCode() {
       int hashcode = 157;
       unchecked {
-        hashcode = (hashcode * 397) + UserID.GetHashCode();
+        if((StatusMap != null))
+        {
+          hashcode = (hashcode * 397) + TCollections.GetHashCode(StatusMap);
+        }
         if((BaseResp != null) && __isset.BaseResp)
         {
           hashcode = (hashcode * 397) + BaseResp.GetHashCode();
@@ -195,16 +222,19 @@ namespace CUGOJ.RPC.Gen.Services.Core
 
     public override string ToString()
     {
-      var tmp134 = new StringBuilder("LogupResponse(");
-      tmp134.Append(", UserID: ");
-      UserID.ToString(tmp134);
+      var tmp167 = new StringBuilder("GetUserSubmissionStatusByProblemIDListResponse(");
+      if((StatusMap != null))
+      {
+        tmp167.Append(", StatusMap: ");
+        StatusMap.ToString(tmp167);
+      }
       if((BaseResp != null) && __isset.BaseResp)
       {
-        tmp134.Append(", BaseResp: ");
-        BaseResp.ToString(tmp134);
+        tmp167.Append(", BaseResp: ");
+        BaseResp.ToString(tmp167);
       }
-      tmp134.Append(')');
-      return tmp134.ToString();
+      tmp167.Append(')');
+      return tmp167.ToString();
     }
   }
 
